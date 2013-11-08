@@ -1,0 +1,9 @@
+.smart_table{
+	border-collapse:collapse;
+}
+.smart_table thead{
+	background:#b8e8f6;
+}
+.smart_table  td{
+	font-size: 13px;
+}

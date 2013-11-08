@@ -1,0 +1,91 @@
+.hide{
+	display:none;
+}
+.taCenter{
+	text-align: center !important;
+}
+.record .money{
+	text-align: right;
+	padding-right: 9px;
+}
+.text-center{
+	text-align: center !important;
+}
+.text-left{
+	text-align: left !important;
+}
+.text-right{
+	text-align: right !important;
+}
+.noBorderLeft{
+	border-left:none !important;
+}
+.noBorderRight{
+	border-right:none !important;
+}
+.pRight4px{
+	padding-right: 4px;
+}
+.p5px{
+	padding: 5px;
+}
+
+.table-center{
+	margin: auto ;
+}
+.center{
+	margin: auto ;
+}
+
+.mLeft1px{
+	margin-left: 1px !important;
+}
+.mLeft2px{
+	margin-left: 2px !important;
+}
+.mLeft3px{
+	margin-left: 3px !important;
+}
+
+.mLeft7px{
+	margin-left: 7px !important;
+}
+.pTop40px{
+	padding-top: 40px;
+}
+.pTop10px{
+	padding-top: 10px;
+}
+.money{
+	text-align: right !important;
+	padding-right: 9px !important;
+}
+
+/**Fonts**/
+.negative-number{
+	color: #b94a48 !important;
+}
+
+
+
+
+/**Simply Connect**/
+.overflowHidden{
+	width : 0%;
+	overflow : hidden;
+}
+/*******/
+.bgYellow{
+	background-color:yellow !important;
+}
+.bgBrown{
+	background-color:brown !important;
+}
+
+/*******simple table thead********/
+.simple thead th{
+	background-image: none !important;
+	background-color: white !important;
+	height: 2.5em !important;
+	border-bottom: none !important;
+}

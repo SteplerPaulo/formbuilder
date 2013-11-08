@@ -1,0 +1,75 @@
+h2.recordTitle{
+	font-size:13px;
+	padding:0px;
+	margin:0px;
+	padding-bottom:10px !important;
+}
+ul.recordDatagrid{
+	margin:0px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+ul.recordDatagrid  li {
+	display:block;
+	padding:0px;
+	background-image:none;
+}
+.fix h2.recordtitle{
+	margin-left: -5px;
+}
+div.recordHeader{
+	text-align: center;
+	font-weight: bold;
+	font-size: 12px;
+}
+div.recordHeader.btmShadow{
+	border-bottom: 1px solid #AFB6B9;
+	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	height: 20px;
+	z-index: 2;
+	width: 100%;
+}
+a.recordDelete,a.recordDelete:visited{
+	font-size: 15px;
+	text-align: center;
+	font-weight: bold;
+	color: #EEE;
+	text-decoration: none;
+	display: block;
+	text-shadow: 0px -1px 0px #DDD;
+}
+a.recordDelete:active{
+	color:#ef8192;
+	text-shadow: 0px -1px 0px #eabfc6;
+}
+a.recordDelete:hover{
+	color:#f4c7ce;
+	text-shadow: 0px -1px 0px #fda0af;
+}
+a.recordDelete:focus{
+	outline:none;
+}
+
+a.recordAdd,a.recordAdd:visited{
+	font-size: 15px;
+	text-align: center;
+	font-weight: bold;
+	color: #EEE;
+	text-decoration: none;
+	display: block;
+	text-shadow: 0px -1px 0px #DDD;
+}
+a.recordAdd:active{
+	color:#ef8192;
+	text-shadow: 0px -1px 0px #eabfc6;
+}
+a.recordAdd:hover{
+	color:#f4c7ce;
+	text-shadow: 0px -1px 0px #fda0af;
+}
+a.recordAdd:focus{
+	outline:none;
+}

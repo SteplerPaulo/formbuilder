@@ -1,0 +1,26 @@
+#home-brief, #register-user{
+	margin-top:90px;
+}
+#register-user{
+	margin-left:35px;
+	border-left: 1px dotted #ccc;
+}
+
+#register-user h4{
+padding:0px;
+margin:0px 5px;
+}
+.remember{
+	padding-top:8px;
+}
+.remember label{
+	font-size:13px !important;
+}
+.school_logo{
+	text-align: center;
+	padding: 3px;
+	margin-bottom:5px;
+}
+.homepage  div{
+	border:none !important;
+}

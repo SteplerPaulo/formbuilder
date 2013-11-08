@@ -1,0 +1,86 @@
+.iscrollWrapper {
+	position:absolute; z-index:1;
+	top:25px; bottom:0px; left:0;
+	width:100%;
+
+}
+
+.iscrollScroller {
+	position:absolute; z-index:1;
+/*	-webkit-touch-callout:none;*/
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	width:100%;
+	padding:0;
+}
+
+.iscrollWrapper ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+	width:100%;
+	text-align:left;
+}
+
+.iscrollWrapper li {
+	padding:0 10px;
+	height:24px;
+	line-height:24px;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #fff;
+	background-color:#fafafa;
+	font-size:14px;
+}
+.iscroll{
+	position:relative;
+	height:350px;
+}
+.iscrollWrapper ul.recordDatagrid{
+	height:100% !important;
+}
+.iscrollWrapper ul.recordDatagrid li{
+	height: 30px !important;
+}
+.iscrollWrapper ul.recordDatagrid li div.input{
+	height: 100%;
+}
+.iscrollWrapper ul.recordDatagrid li div.input{
+	height: 30px;
+	width:100%;
+	border-right:1px solid #dee7ea !important;
+}
+.iscrollWrapper ul.recordDatagrid li div.input select, .iscrollWrapper ul.recordDatagrid li div.input input{
+	height:100%;
+	width:100%;
+}
+.iscrollWrapper ul.recordDatagrid li div.input select{
+	border:none !important;
+} 
+.iscrollWrapper ul.recordDatagrid li div.input select {
+	background-color:#fafafa;
+	border:none;
+}
+.iscrollWrapper ul.recordDatagrid li input:focus:not([readonly="readonly"]),.iscrollWrapper ul.recordDatagrid li  select:focus{
+	outline:1px solid #aaa !important;
+    background-color: white !important;
+   box-shadow: inset 0px 0px 10px #eee;
+   text-shadow: 0 1px 0 #CCC;
+  
+}
+.iscrollwrapper ul.recordDatagrid li.clickInput:active{
+	background: #e6f5f9 !important;
+
+}
+.iscrollwrapper ul.recordDatagrid li.clickInput:active div.input{
+	border: 1px solid #dfeef2 !important;
+	border-left:none !important;
+	border-right:1px solid #a8d7e4 !important;
+	border-top:1px solid #a8d7e4 !important;
+}
+.iscrollwrapper ul.context-menu-active li.clickInput:not(.current):active div.input{
+	
+		background: #F9E3DC !important;
+}
+.iscrollwrapper ul.context-menu-active li.clickInput:not(.current) div.input input{
+	color: #52594F !important;
+	opacity:0.5;
+}

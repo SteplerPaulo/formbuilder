@@ -1,0 +1,64 @@
+#buyer_info div.classic{
+	margin-left: -116px;
+	margin-top: 10px
+}
+#buyer_info div.metro{
+	paddingt-top:7px;
+}
+.formneat .bigAmount div.input{
+	margin-bottom: 5px !important;
+
+}
+.formneat .bigAmount div.input input{
+	font-size: 20px !important;
+	color: #333 !important;
+}
+
+.formneat .money div.input input{
+	text-align: right;
+	padding-right: 13px;
+}
+
+.formneat .metro li div > div.text{
+	margin:-1px 0px !important;	
+}
+.formneat .metro li div > input{
+	border-bottom: none !important;
+}
+.formneat .qty div.input input{
+	text-align: center;
+}
+.formneat .itemCode div.input input{
+	text-align: center;
+}
+.formneat .txtr div.input input{
+	text-align: right;
+}
+
+.formneat .metro li {
+	margin:0px;	
+	border-bottom: 1px solid #CCC !important;
+	border-top: 1px solid white !important;
+	background-color: #FAFAFA !important;
+}
+.formneat .metro li:hover{
+	background: #fff !important
+}
+
+
+.formneat .metro ul.recordDatagrid{
+	background-color: #fefefe !important;
+}
+.formneat .metro li div > input{
+	border:none !important;
+}
+.formneat .metro.soft div.input input,.formneat .classic.soft div.input input, .formneat .classic.soft select{
+	border:1px solid #acafab !important;
+	border-radius:3px;
+}
+.formneat .metro.soft div.input, .formneat .classic.soft div.input input, .formneat .classic.soft div.input select , .formneat .metro.soft div.input select{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #C1CEB4), color-stop(0.05, white), color-stop(1, #f8f8f8));
+}
+.formneat .classic .input label{
+	font-size:10.5px;
+}

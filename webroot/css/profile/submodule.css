@@ -1,0 +1,30 @@
+ul.submodules{
+	list-style: none;
+	text-align: left;
+	display: block;
+	padding:25px;
+	margin:0 auto;
+	width:100%;
+}
+li.submodule{
+	display: inline-block;
+	width: 9em;
+	text-align: center;	
+	vertical-align: top;
+}
+div.submodule-icon {
+	width: 9em;
+	height: 5em;
+	text-shadow: 0px 2px 2px rgba(175, 178, 184, 0.73);
+}
+div.submodule-icon > i{
+	color:#999;
+}
+div.submodule-icon i{
+	font-size: 5em;
+}
+span.submodule-name {
+	font-size: 1.2em;
+	height: 50px;
+	display: block;
+}

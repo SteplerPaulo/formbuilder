@@ -1,0 +1,50 @@
+.info-card{
+	border: 1px solid #ccc;
+	 background: white;
+	 min-height: 150px;
+	 margin-bottom: 20px;
+	 padding:0px 5px;
+}
+
+section.info-controls{
+	height: 150px;
+	padding-right: 10px;
+		
+}
+.control-number>.label:before{
+	content:'#';
+	margin-right: 1px;
+}
+.control-number{
+	height:50px;
+	text-align:right;
+	padding-top:20px;
+}
+.page-control{
+	height:200px;
+	text-align:right;
+	padding-top:10px;
+}
+.info-cards{
+	padding:0px;
+	margin-top:10px;
+}
+.info-spacer{
+	height:69px;
+}
+.info-spacer.hidden{
+	height:0px;
+}
+div.info-cards .profile-picture-wrap{
+	margin-top:15px;
+}
+div.info-card .profile-info{
+	margin-top:10px;
+}
+div.info-card .profile-info .meta{
+	font-size:11px;
+}
+div.info-card .profile-info h3,div.info-card .profile-info h5 {
+	line-height: 0px;
+	padding-top: 15px;
+}

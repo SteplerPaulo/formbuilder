@@ -1,0 +1,67 @@
+.scrollable{
+	margin: 0 auto;
+	border: 1px solid #ddd;
+	
+}
+.scrollable-head{
+	border: 1px solid #dddddd;
+	height: 40px;
+	width: 100%;
+}
+.scrollable-head thead th{
+	text-align:center;
+	font-weight:bold;
+	border: none;
+}
+.scrollable-body{
+	overflow: auto; 
+	height: 150px; 
+	width: 100%; 
+	font-size: 12px; 
+	margin:auto;
+	border:1px solid #dddddd;
+	width: 100%;
+}
+.scrollable-footer{
+	border: 1px solid #dddddd;
+	height: 50px;
+	width: 100%;
+}
+.scrollable-footer div{
+	padding: 10px 10px 0px 10px;
+}
+
+/*RECORD*/
+.record{
+	margin: auto;
+	border-collapse: separate;
+	border-left: 0;
+	width:100%;
+}
+
+.record th{
+	text-align: center;
+}
+.record td{
+	padding: 0px;
+	border: 1px solid #ccc;
+}
+.record  input,.record select{
+	margin: 0px;
+	position: relative;
+	width: 100%;
+	background: none;
+	border: 1px solid #BCC0BA;
+	border: none;
+	color: black;
+	padding: 4px 0px;
+	line-height: 27px !important;
+} 
+
+.record input:focus,.record select:focus {
+	outline-color:#AFB6B9 !important;
+}
+.btn-center{
+	display: block !important; 
+	margin: 0 auto !important;
+}

@@ -1,0 +1,27 @@
+.error{
+	background-color: #FFBABA;
+}
+.error-message{
+	display: inline-block;
+	width: auto;
+	margin-left: 3px;
+	font-weight:bold;
+	font-size:11px;
+}
+.validate-valid{
+	display:inline-block;
+	width:16px;
+	height:16px;
+	background-image: url('../img/icons/tick.png');
+	background-repeat: no-repeat;
+}
+.validate-invalid{
+	display:inline-block;
+	width:16px;
+	height:16px;
+	background-image: url('../img/icons/cross.png');
+	background-repeat: no-repeat;
+}
+.form  input,.form  select{
+	height:25px;
+}

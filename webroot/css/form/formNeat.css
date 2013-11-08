@@ -1,0 +1,239 @@
+.formNeat{
+	float:none;
+}
+.formNeat .metro div.input,.formNeat .metro div.select,.formNeat .metro div.checkbox{
+	display: block;
+	position: relative;
+	padding: 0px;
+	margin: 0px !important;
+}
+.formNeat .metro   div.input input{
+	position: relative;
+	width: 100%;
+	background: none;
+	border: 1px solid #5f645c;
+	
+}
+.formNeat .metro  div.input label{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	text-align:left;
+	margin-top:2px;
+	margin-left:4px;
+}
+.formNeat .classic .input label{
+	display: inline-block;
+	padding: 4px;
+	width: 110px;
+	text-align:right;
+	font-size:10px;
+	font-weight:bold;
+	
+}
+.formNeat .classic .input label::after{
+	content:":";
+}
+.formNeat .classic .input input{
+	display: inline-block;
+	width: 60%;
+	background: none;
+	border: 1px solid #5f645c;
+}
+.formNeat  div.input, .formNeat  div.input input{
+	height:25px;
+	font-size:12px;
+	padding: 2px 0px;
+}
+.formNeat  div.input input{
+	font-size:13px;
+	padding-left:4px;
+}
+ .formNeat .big div.input input{
+	width:604px;
+}
+.formNeat .submit{
+	display:inline-block;
+	margin:0px 2px;
+	
+}
+
+.formNeat .submit input, .formNeat .picker	 input {
+	background: #D1A91F;
+	border:1px solid #aa8a18;
+	color:#fffffe;
+	padding:0px 2px;
+	width:60px;
+	height:25px;
+	font-size:12px;
+	border-radius:3px;
+}
+.formNeat .picker .submit input {
+	width:90px !important;
+	border-radius:4px;
+	color:#fff;
+}
+.formNeat .picker  .submit input:hover{
+	background:#f8f4f1 ;
+	border:1px solid #ccc;
+	
+}
+.formNeat .picker  .submit  input.selected {
+	background:#d5dad2 ;
+	border:1px solid #b8c2b4;
+	color:#333;
+	
+} 
+/*Green Button*/
+.formNeat .picker .submit input{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, white), color-stop(0.05, whiteSmoke), color-stop(-3, white)) !important;
+	color: #777;
+	border: 1px solid #CCC;
+}
+.formNeat .picker .submit input:hover  {
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, whiteSmoke), color-stop(0.05, whiteSmoke), color-stop(-3, whiteSmoke)) !important;
+	color: #666;
+	border: 1px solid #bbb;
+	
+}
+.formNeat .picker  .submit  input.selected {
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, white), color-stop(0.05, whiteSmoke), color-stop(-3, whiteSmoke)) !important;
+	color: #555;
+	font-weight:bold;
+	border: 1px solid #aaa;
+}
+/*Yellow Button*/
+.formNeat .submit input{
+	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #f0d57a), color-stop(0.05, #eaca5b), color-stop(1, #D1A91F)) !important;
+}
+.formNeat .submit input:hover{
+	background:#c6760e ;
+	border:1px solid #aa8a18;
+}
+
+.formNeat .submit input[disabled="disabled"],.formNeat .submit input[disabled],.formNeat .submit input[disabled="disabled"]:hover,.formNeat .submit input[disabled="disabled"]:active{
+	background: #E7E9DE !important;
+	border: 1px solid #BBB !important;
+	color: #C2C7B3 !important;
+	border-color: #222 !important;
+	opacity: 0.75;
+}
+.formNeat .classic input[readonly="readonly"]{
+	border:0px;
+	margin-top:-5px;
+}
+.formneat .classic.fix div.input{
+	position: relative;
+}
+.formneat .classic.fix div.input label{
+	display: block;
+	position: absolute;
+	left: -122px;
+}
+.formneat .classic.fix div.input input	{
+	position: absolute;
+	left: -4px;
+	width:242px;
+}
+
+.formNeat .pearl .submit input{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #EBEDEB), color-stop(0.05, #F8FBF8), color-stop(1, #EBF1EB)) !important;
+	border: 1px solid #e6ece6  !important;
+	color: #333;
+}
+.formNeat .pearl .submit input:hover,.formNeat .pearl .submit input.noidle{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #e6e7e6), color-stop(0.05, #f7f9f7), color-stop(1, #e7ede7)) !important;
+	border: 1px solid #e1e6e1 !important;
+	color: #111;
+}
+.formNeat .pearl .submit input.selected,.formNeat .pearl .submit input:active{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, white), color-stop(0.05, #F0F4F0), color-stop(1, #DBDEDB )) !important;	
+	border: 1px solid #DBDEDB !important;
+	color: #333;
+}
+
+.formNeat .gold .submit  input{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #F7EECF), color-stop(0.05, #F4C81A), color-stop(1, #f3c923)) !important;
+	background:#E5B614 ;
+	border: 1px solid #bd9408!important;
+}
+.formNeat .gold .submit input:hover,.formNeat .gold .submit input.noidle {
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #F7DD82), color-stop(0.05, #f2c730), color-stop(1, #E5B614)) !important;
+	background:#E5B614 ;
+}
+
+.formNeat .emerald .submit input {
+	color:#fff !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #66e56d), color-stop(0.05, #5fc864), color-stop(1, #51ae55))!important;
+	background:#74b778 ;
+	border:1px solid #428046 !important;
+}
+.formNeat .emerald .submit input:hover,.formNeat .emerald .submit input.noidle {
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #208b25), color-stop(0.05, #44C04A), color-stop(1, #239929))!important;
+	background:#5dab61;
+}
+.formNeat .emerald  .submit  input.selected,.formNeat .emerald .submit input:active {
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #2ED537), color-stop(0.05, #1D9924), color-stop(1, #0b6f10)) !important;
+	background:509f55;
+	border: 1px solid #096e0e !important;
+}
+
+.formNeat .sapphire .submit input {
+	color:#fff !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #60a7c0), color-stop(0.05, #8EB5C3), color-stop(1, #4D98B3))!important;
+	background:#4c97b2 ;
+	border:1px solid #3f7b90 !important;
+}
+.formNeat .sapphire .submit input:hover,.formNeat .sapphire .submit input.noidle{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #3F7B90 ), color-stop(0.05, #60A7C0), color-stop(1, #0888B5))!important;
+	background:#478ca4 ;
+	border:1px solid #3f7b90 !important;
+}
+.formNeat .sapphire .submit input.selected,.formNeat .sapphire .submit input:active{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #A3DCF0), color-stop(0.05, #1F83A6), color-stop(1, #0b556f))!important;
+	background:#478ca4 ;
+	border:1px solid #386d80 !important;
+}
+.formNeat .topaz .submit input {
+	color:#fff !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #EC9037), color-stop(0.05, #F7BA7E), color-stop(1, #EF9339))!important;
+	background: #F7BA7E;
+	border: 1px solid #e08a34!important;
+}
+.formNeat .topaz .submit input:hover,.formNeat .topaz .submit input.noidle{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #EC9037), color-stop(0.05, #f8b26d), color-stop(1, #e88422))!important;
+	background:#d17620 ;
+	border: 1px solid #d47a20!important;
+}
+.formNeat .topaz .submit input.selected,.formNeat .topaz .submit input:active{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #FDA136), color-stop(0.05, #FF6103), color-stop(1, #F15801))!important;
+	background: #FF6103;
+	border: 1px solid #e04f01 !important;
+}
+.formNeat .ruby .submit input {
+	color:#fff !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #FAA29A), color-stop(0.05, #fb7265), color-stop(1, #df5042))!important;
+	border:1px solid #993a32 !important;
+}
+.formNeat .ruby .submit input:hover,.formNeat .ruby .submit input.noidle{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #e3766c), color-stop(0.05, #FC6051), color-stop(1, #cf260b))!important;
+	background:#FC6051 ;	
+}
+.formNeat .ruby .submit input.selected,.formNeat .ruby .submit input:active{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.01, #f7b1a3), color-stop(0.05, #FA0F0F), color-stop(1, #C50F0F))!important;
+	background:#f70f0f ;
+	border: 1px solid #c40101!important;
+}
+
+.formNeat .picker .submit input.wideButton,.formNeat .submit input.widerButton{
+	width: 125px !important;
+}
+
+.formNeat .picker .submit input.wideButton,.formNeat .submit input.wideButton{
+	width: 111px  !important;
+}
+
+.notBold{
+	font-weight:normal;
+}

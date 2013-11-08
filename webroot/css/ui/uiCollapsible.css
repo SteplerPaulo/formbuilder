@@ -1,0 +1,38 @@
+.tab{
+	border:2px solid #ddd;
+	margin:2px;
+	display:none;
+}
+.tab-content{
+	margin:10px 0px;
+}
+.on .tab-content{
+	display:block;
+}
+.off.tab-content{
+	display:none;
+}
+.tab-content .tab{
+	margin-left:30px;
+
+}
+.tab-content .tab .tab-header{
+	background:#ddd url(../../img/buttonbg.png) center;
+	border-bottom:1px solid #aaa;
+}
+
+.tab-header{
+	height:20px;
+	margin:2px;
+	padding:4px;
+	background:#6CF url(../../img/buttonbg.png) center;
+	border-bottom:1px solid #6CF;
+	cursor:pointer;
+	font-weight:bold;
+}
+.tab .indicator{
+	font-size: 16px;
+	margin-left: -6px;
+	display: inline-block;
+	margin-right: 11px;
+}

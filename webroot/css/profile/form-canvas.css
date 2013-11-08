@@ -1,0 +1,10 @@
+.form-canvas label{
+	display: inline-block;
+	width: 110px;
+	text-align: right;
+	
+}
+
+.form-canvas select{
+	 margin-bottom: 0px;
+}

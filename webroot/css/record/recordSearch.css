@@ -1,0 +1,29 @@
+.recordSearch span.label{
+	font-weight:bold;
+	font-size:10px;
+
+}
+.recordSearch a.criteria_action{
+	font-size: 22px;
+	cursor: pointer;
+	text-decoration: none;
+	color: #52594F;
+}
+.recordSearch  th.txt-small{
+	font-size: 12px;
+}
+.recordSearch  td.txtc{
+	text-align: center;
+}
+.recordSearch  td,tr.xlarge{
+	width: 270px;
+}
+.recordSearch  td,tr.small{
+	width: 120px;
+}
+.b1saqua{
+background-color: #1C97C0 !important;
+}
+.tcwhite {
+color: white !important;
+}
