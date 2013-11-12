@@ -55,15 +55,44 @@ class FormsController extends AppController {
 			$this->Form->recursive = 3;
 			$data = $this->Form->read(null, $form_id);
 
+			$curr_data =array();
 			foreach($data['FormDomain'] as $domain){
+		
+				$curr_data['FormDomain'][''.$domain['Domain']['name'].''] = array(
+										'id'=>$domain['Domain']['id'],
+										'name'=>$domain['Domain']['name'],
+										'description'=>$domain['Domain']['description'],
+									);
+			
 				foreach($data['Question'] as $question){
 					if($domain['domain_id'] == $question['domain_id']){
 						$data['DomainQuestion'][$question['Domain']['name']][$question['text']] = $question;
+						
+			
+						$curr_data['DomainQuestion'][''.$domain['Domain']['name'].''][''.$question['text'].''] = array(
+										'id'=>$question['id'],
+										'name'=>$question['text'],
+										'QuestionOption'=>$question['QuestionOption'],
+										'OptionType'=>array(
+														'id'=>$question['OptionType']['id'],
+														'name'=>$question['OptionType']['name'],
+														'description'=>$question['OptionType']['description']
+														),
+									);
+					
 					}
 				}
 			}
+			$curr_data['Form'] = $data['Form'];
+			$curr_data['FormType'] =array(
+									'id'=>$data['FormType']['id'],
+									'name'=>$data['FormType']['name'],
+									'description'=>$data['FormType']['description'],
+								);
+			//pr($curr_data['DomainQuestion']);exit;
 			
 			$this->set('form', $data);
+			$this->set('curr_data', $curr_data);
 			
 		
 		}else{

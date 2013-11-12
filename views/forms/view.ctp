@@ -1,6 +1,3 @@
-<?php //pr($form);exit;
-?>
-
 <div class="actions-container row-fluid animate">
 	 <div id="profile-navigation" class="span12 nav-marginTop">		
 		<div class="row-fluid">
@@ -45,7 +42,6 @@
 <div class="w90 center">
 	<div class="well">
 		<div class="well">
-		
 			<center>Description <i class="icon-hand-right"></i> <b><?php echo $form['Form']['description']; ?></b></center>
 			<center>Title <i class="icon-hand-right"> </i><b><?php echo $form['Form']['title']; ?></b></center>
 			<center>Type <i class="icon-hand-right"></i> <b><?php echo $form['FormType']['name']; ?></b></center>
@@ -56,18 +52,17 @@
 			<dl>
 				<dt class=""><? echo $domain; ?></dt><br/>
 			<? foreach($domain_data as $question => $question_data):?>
-				
-					<dd><? echo $question; ?>
+					<dd>
+						<? echo $question; ?> 
 						<dl>
 							<? foreach($question_data['QuestionOption'] as $option):?>
-							<dd>
+							<dd>	
 								<input type="<? echo $question_data['OptionType']['name'];?>" name="<? echo $question_data['id']; ?>" value="<? echo $option['Option']['value']; ?>">
 								<? echo $option['Option']['text']; ?>
 							</dd>
 							<? endforeach;?>
 						</dl>
 					</dd>
-				
 			<? endforeach;?>
 			</dl>
 		</div>

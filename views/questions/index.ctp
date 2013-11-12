@@ -63,15 +63,15 @@
 								<ul class="dropdown-menu pull-right">
 									<li>
 										<i class="icon-plus-sign"></i><b> ADD</b>
-										<a action="<? echo $_PROJECTNAME;?>/questions/add" class="form-builder-action">Options</a>
+										<a action="<? echo $_PROJECTNAME;?>/questions/add" class="fb-action">Options</a>
 									</li>
 									<li>
 										<i class="icon-pencil"></i><b> EDIT</b>
-										<a action="<? echo $_PROJECTNAME;?>/questions/edit" class="form-builder-action">Questions</a>
+										<a action="<? echo $_PROJECTNAME;?>/questions/edit" class="fb-action">Questions</a>
 									</li>		
 									<li>
 										<i class="icon-remove"></i><b> Delete</b>
-										<a action="<? echo $_PROJECTNAME;?>/questions/delete" class="form-builder-action">Questions</a>
+										<a action="<? echo $_PROJECTNAME;?>/questions/delete" class="fb-action">Questions</a>
 									</li>
 								</ul>
 							</div>

@@ -28,65 +28,58 @@
 					</div>
 				</div>
 			</div>
-			<div class="span6 text-right">
-				 <input class="span6 m-t-5 p" type="text" placeholder="Search">
-			</div>
 		</div>
 	</div>
  </div>
 
 <div class="row-fluid">
-<div class="domains form span8 offset2">
+	<div class="domains form span8 offset2">
+		<?php echo $this->Form->input('Form.id',array('type'=>'hidden','label'=>'Form Id'));?>
+				
+		<?php echo $this->Form->create('Domain',array(		
+						'action'=>'add','class'=>'form-horizontal',
+						'inputDefaults' => array('label'=>array('class'=>'control-label'),'div'=>array('class'=>'control-group')
+					)));?>
+		<fieldset>
+			<legend><center><?php echo __('Add Domain').' for <br/>'. $forms['Form']['title']; ?></center></legend>
+			<?php echo $this->Form->input('Form.id',array('type'=>'text','between'=>'<div class="controls">','after'=>'</div>'));?>
+			<?php echo $this->Form->input('name',array('required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('description',array('placeholder'=>'','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+		</fieldset>
+		<div class="control-group">
+			<div class="controls">
+			<?php echo $this->Form->button('Save',array('type'=>'button','class'=>'btn btn-primary fb-create-save-button'));?>
+			<?php echo $this->Form->button('Cancel',array('type'=>'button','class'=>'btn'));?>
+			</div>
+		</div>
+		<?php echo $this->Form->end();?>
+	</div>
+</div>
 
-<?php echo $this->Form->input('Form.id',array('type'=>'hidden','label'=>'Form Id'));?>
-		
-<?php echo $this->Form->create('Domain',array(		
-											'action'=>'add',
-											'class'=>'form-horizontal',
-																	'inputDefaults' => array( 	'label'=>array('class'=>'control-label'),
-																								'div'=>array('class'=>'control-group')
-																							)
-																	)
-											);?>
+<!--Action & Notification Modal-->
+<?php echo $this->Form->create('Questions',array('action'=>'create','parent-model'=>'Domain'));?>
+<div id="Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">Modal</h3>
+	</div>
+	<div class="modal-body">
+		<?php echo $this->Form->input('Form.id',array('id'=>'FormId','label'=>'Form Id','type'=>'hidden','class'=>'span11'));?>
+		<?php echo $this->Form->input('Domain.id',array('id'=>'DomainId','label'=>'Domain Id','type'=>'hidden','class'=>'span11'));?>
+
+		<div class="well" id="Notification"></div>
+		<div class="well"><a><i class='icon-info-sign'></i></a> Instruction here...</div>
+	</div>
 	
-	<fieldset>
-		<legend><center><?php echo __('Add Domain').' for <br/>'. $forms['Form']['title'].'<br/> Form' ?></center></legend>
-		<?php echo $this->Form->input('Form.id',array('type'=>'text','between'=>'<div class="controls">','after'=>'</div>'));?>
-	
-		<?php echo $this->Form->input('name',array('placeholder'=>'','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-		<?php echo $this->Form->input('description',array('placeholder'=>'','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-	</fieldset>
-	<div class="control-group">
-		<div class="controls">
-		<?php echo $this->Form->button('Save',array('type'=>'button','class'=>'btn btn-primary form-builder-save'));?>
-		<?php echo $this->Form->button('Cancel',array('type'=>'button','class'=>'btn'));?>
+	<div class="modal-footer">
+		<div class="btn-group">
+			<button class="btn" type="submit">Create Domain's Question</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Create Another Domain</button>
 		</div>
 	</div>
-	<?php echo $this->Form->end();?>
-	
-	
-	<!--Action & Notification Modal-->
-	<div id="Notification" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">Notification</h3>
-		</div>
-		<div class="modal-body">
-			<div class="action-response" style="display:"></div>
-			<div class="well">
-				Click continue to create domain's questions<br/>
-			</div>	
-		</div>
-		
-		<div class="modal-footer">
-			<button class="btn btn-primary">Continue</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Back</button>
-			
-		</div>
-	</div>
-	<!--End-->
 </div>
-</div>
+<?php echo $this->Form->end();?>
+<!--End-->
 <?php 
 	echo $this->Html->script(array('formbuilder/formbuilder'),array('inline'=>false));
 ?>

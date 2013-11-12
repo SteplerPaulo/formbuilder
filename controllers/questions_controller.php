@@ -31,25 +31,27 @@ class QuestionsController extends AppController {
 	}
 
 	function add() {
-		if (!empty($this->data)) {
+		if (!empty($this->data)) {			
 			$this->Question->create();
 			if ($this->Question->saveAll($this->data)) {
 				if($this->RequestHandler->isAjax()){
 					$response['status'] = 1;
-					$response['msg'] = '<img src="/lib/img/icons/tick.png" />&nbsp;Question has been saved.';
+					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Question has been saved.";
+					
 					$response['data'] = $this->data;
+					$response['data']['Form']['id'] = $this->data['Question']['form_id'];
+					$response['data']['Question']['id'] = $this->Question->id;
+					
 					echo json_encode($response);
 					exit();
 				}else{ 
 					$this->Session->setFlash(__('The question has been saved', true));
 					$this->redirect(array('action' => 'index'));
 				}
-				$this->redirect(array('action' => '../options/add'));
-				
 			} else {
 				if($this->RequestHandler->isAjax()){
 					$response['status'] = -1;
-					$response['msg'] = "<img src='/lib/img/icons/exclamation.png'/>&nbsp; The question could not be saved. Please, try again.";
+					$response['msg'] = "<a><i class='icon-warning-sign' /></i></a> The question could not be saved. Please, try again.";
 					$response['data'] = $this->data;
 					echo json_encode($response);
 					exit();
@@ -63,40 +65,50 @@ class QuestionsController extends AppController {
 	function create(){
 		$form_id = $this->data['Form']['id'];
 		if(!empty($form_id)){
-			$forms = $this->Question->Form->find('first',array(
-												'conditions'=>array('Form.id'=>$form_id)	
-											));
-												
-			$domains = $this->FormDomain->find('list',array(
+			$forms = $this->Question->Form->find('first',array('conditions'=>array('Form.id'=>$form_id)));
+			$option_types = $this->Question->OptionType->find('list',array('fields'=>array('OptionType.id','OptionType.description')));								
+			
+
+			//Domain List
+			if(isset($this->data['Domain']['id'])){						
+				$domains = $this->Question->Domain->find('list',array(
+									'conditions'=>array('Domain.id'=>$this->data['Domain']['id'])
+								));	
+			
+			}else{
+				$domains = $this->FormDomain->find('list',array(
 										'recursive'=>1,
 										'conditions'=>array('FormDomain.form_id'=>$form_id),
 										'fields'=>array('Domain.id','Domain.name')
 									));
-			$option_types = $this->Question->OptionType->find('list',array('fields'=>array('OptionType.id','OptionType.description')));
+			}
+					
 			$this->set(compact('forms','domains','option_types'));
 		}else{
 			$this->redirect(array('action' => '../forms/index'));
 		}
 	}
 
-	function edit($id = null) {
+	function edit() {
+		$id = $this->data['Form']['object_id'];
+		$form_id = $this->data['Form']['id'];
+		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid question', true));
-			$this->redirect(array('action' => 'index'));
+			$this->redirect(array('action' => '../forms'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Question->save($this->data)) {
 				$this->Session->setFlash(__('The question has been saved', true));
-				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The question could not be saved. Please, try again.', true));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->Question->read(null, $id);
-		}
+		
+		$this->data = $this->Question->read(null, $id);
+		$domains = $this->Question->Domain->find('list');
 		$forms = $this->Question->Form->find('list');
-		$this->set(compact('forms'));
+		$this->set(compact('forms','domains','id','form_id'));
 	}
 
 	function delete($id = null) {

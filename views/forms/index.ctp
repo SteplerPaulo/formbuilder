@@ -1,16 +1,3 @@
-<style>
-	.dropdown-menu li a{
-		padding-left: 31px !important;
-	}
-	.dropdown-menu li i{
-		padding-left: 9px !important;
-	}
-</style>
-
-<? 
-	$_URI = explode("/",$_SERVER['REQUEST_URI']);
-	$_PROJECTNAME = '/'.$_URI[1];
-?>
 <div class="actions-container row-fluid animate">
 	 <div id="profile-navigation" class="span12 nav-marginTop">		
 		<div class="row-fluid">
@@ -25,16 +12,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="span3 upAccount">
-					 <?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-chevron-left')).
-													$this->Html->tag('span', 'BACK', array('class' => 'action-label')),
-													'/pages/apps',array('escape' => false,'class'=>'btn btn-medium tree-back btn-block animate' ,'id'=>'intent-back')
-													); ?> 					
-					</div>
 					<div class="span3">
 					<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-plus icon-white')).
 														$this->Html->tag('span', 'CREATE', array('class' => 'action-label')),
-														array('action' => 'add'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate' ,'id'=>'')
+														array('action' => 'create'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate' ,'id'=>'')
 													);  ?>					
 					</div>
 				</div>
@@ -46,9 +27,9 @@
 	</div>
  </div>
 <div class="sub-content-container">
-
 	<div class="w90 center">
 		<table class="table table table-striped table-bordered  table-condensed RECORD tablesorter canvasTable advancedTable" id="FormTable" model="Form">
+			<caption>Forms List</caption>
 			<thead>
 				<tr>
 					<th class="w5 text-center"><a >Id</a></th>
@@ -73,22 +54,20 @@
 								<ul class="dropdown-menu pull-right">
 									<li>
 										<i class="icon-eye-open"></i><b> VIEW</b>
-										<a action='<? echo $_PROJECTNAME;?>/forms/view' class="form-builder-action">Form</a>
-										<a action='<? echo $_PROJECTNAME;?>/forms/questions_list' class="form-builder-action">Form Questions</a>
+										<a action='/formbuilder/forms/view' class="fb-action">Form</a>
 									</li>
 									<li>
 										<i class="icon-plus-sign"></i><b> ADD</b>
-										<a action="<? echo $_PROJECTNAME;?>/domains/create" class="form-builder-action">Form Domain</a>
-										<a action="<? echo $_PROJECTNAME;?>/questions/create" class="form-builder-action">Form Questions</a>
+										<a action="/formbuilder/domains/create" class="fb-action">Form Domain</a>
+										<a action="/formbuilder/questions/create" class="fb-action">Form Questions</a>
 									</li>
 									<li>
 										<i class="icon-pencil"></i><b> EDIT</b>
-										<a action="<? echo $_PROJECTNAME;?>/forms/edit" class="form-builder-action">Form</a>
-										<a action="<? echo $_PROJECTNAME;?>/questions/" class="form-builder-action">Form Questions</a>
+										<a action="/formbuilder/forms/workplace" class="fb-action">Form</a>
 									</li>		
 									<li>
 										<i class="icon-remove"></i><b> Delete</b>
-										<a action="<? echo $_PROJECTNAME;?>/forms/delete" class="form-builder-action">Form</a>
+										<a action="/formbuilder/forms/delete" class="fb-action">Form</a>
 									</li>
 								</ul>
 							</div>

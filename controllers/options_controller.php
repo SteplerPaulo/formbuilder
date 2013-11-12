@@ -17,15 +17,14 @@ class OptionsController extends AppController {
 	}
 
 	function add() {
-		//pr($this->data);exit;
-	
 		if (!empty($this->data)) {
 			$this->Option->create();
 			if ($this->Option->saveAll($this->data)) {
 				if($this->RequestHandler->isAjax()){
 					$response['status'] = 1;
-					$response['msg'] = '<img src="/lib/img/icons/tick.png" />&nbsp;Option has been saved.';
+					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Option has been saved.";
 					$response['data'] = $this->data;
+					$response['data']['Option']['id'] = $this->Option->id;
 					echo json_encode($response);
 					exit();
 				}else{ 
@@ -37,7 +36,7 @@ class OptionsController extends AppController {
 			} else {
 				if($this->RequestHandler->isAjax()){
 					$response['status'] = -1;
-					$response['msg'] = "<img src='/lib/img/icons/exclamation.png'/>&nbsp; Option could not be saved. Please, try again.";
+					$response['msg'] = "<a><i class='icon-warning-sign' /></i></a> Option could not be saved. Please, try again.";
 					$response['data'] = $this->data;
 					echo json_encode($response);
 					exit();
@@ -55,43 +54,72 @@ class OptionsController extends AppController {
 	}
 	
 	function create(){
-		$question_id = 103;//$this->data['Question']['id'];
-		$question = $this->Option->Question->find('first',array('conditions'=>array('Question.id'=>$question_id)));
-		
-		//pr($question);exit;
-		$this->set(compact('question'));
+		if(isset($this->data['Question']['id'])){
+			$question = $this->Option->Question->find('first',array(
+									'conditions'=>array(
+										'Question.id'=>$this->data['Question']['id']),
+									'fields'=>array(
+										'Question.id','Question.text'
+										)
+									));
+						
+			$question_list = $this->Option->Question->find('list',array(
+									'conditions'=>array(
+										'Question.id'=>$this->data['Question']['id']),
+									'fields'=>array(
+										'Question.id','Question.text'
+										)
+									));
+		}
+		$this->set(compact('question','question_list'));
 	}
 
-	function edit($id = null) {
+	function edit() {
+		$id = $this->data['Form']['object_id'];
+		$form_id = $this->data['Form']['id'];
+	
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid option', true));
-			$this->redirect(array('action' => 'index'));
+			$this->redirect(array('action' => '../forms'));
 		}
+		
 		if (!empty($this->data)) {
 			if ($this->Option->save($this->data)) {
 				$this->Session->setFlash(__('The option has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				//$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The option could not be saved. Please, try again.', true));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->Option->read(null, $id);
-		}
+		
+		$this->data = $this->Option->read(null, $id);
 		$questions = $this->Option->Question->find('list');
-		$this->set(compact('questions'));
+		$this->set(compact('questions','id','form_id'));
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for option', true));
-			$this->redirect(array('action'=>'index'));
+	function delete() {
+		$id = $this->data['Form']['object_id'];
+		
+		if(isset($id)) {
+			if ($this->Option->delete($id)) {
+				if($this->RequestHandler->isAjax()){
+					$response['status'] = 1;
+					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Option deleted.";
+					$response['data'] = $this->data;
+					echo json_encode($response);
+					exit();
+				}
+			}else{
+				if($this->RequestHandler->isAjax()){
+					$response['status'] = -1;
+					$response['msg'] = "<a><i class='icon-warning-sign' /></i></a> Option could not be deleted. Please, try again.";
+					$response['data'] = $this->data;
+					echo json_encode($response);
+					exit();
+				}
+			}
+		}else{
+			$this->redirect(array('action'=>'../forms'));
 		}
-		if ($this->Option->delete($id)) {
-			$this->Session->setFlash(__('Option deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Option was not deleted', true));
-		$this->redirect(array('action' => 'index'));
 	}
 }

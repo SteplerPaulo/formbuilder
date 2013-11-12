@@ -36,28 +36,40 @@
  </div>
 
 <div class="row-fluid">
-<div class="options form span6 offset3">
+	<div class="options form span6 offset3">
 
-<?php echo $this->Form->create('Option',array(	'class'=>'form-horizontal',
-																	'inputDefaults' => array( 	'label'=>array('class'=>'control-label'),
-																								'div'=>array('class'=>'control-group')
-																							)
-																	)
-											);?>
-	<fieldset>
-		<legend><?php __('Edit Option'); ?></legend>
-		<?php echo $this->Form->input('id',array('placeholder'=>'Id','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-		<?php echo $this->Form->input('text',array('placeholder'=>'Text','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-		<?php echo $this->Form->input('value',array('placeholder'=>'Value','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-		<?php echo $this->Form->input('is_correct',array('placeholder'=>'Is Correct','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-		<?php echo $this->Form->input('Question',array('placeholder'=>'Question','between'=>'<div class="controls">','after'=>'</div>'));?>
-	</fieldset>
-	<div class="control-group">
-		<div class="controls">
-		<?php echo $this->Form->button('Save',array('type'=>'submit','class'=>'btn btn-primary'));?>
-		<?php echo $this->Form->button('Cancel',array('type'=>'reset','class'=>'btn'));?>
+	<?php echo $this->Form->create('Option',array(	'class'=>'form-horizontal',
+																		'inputDefaults' => array( 	'label'=>array('class'=>'control-label'),
+																									'div'=>array('class'=>'control-group')
+																								)
+																		)
+												);?>
+		<fieldset>
+			<legend><?php __('Edit Option'); ?></legend>
+			<?php echo $this->Form->input('id',array('placeholder'=>'Id','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('text',array('placeholder'=>'Text','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('value',array('placeholder'=>'Value','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('is_correct',array('placeholder'=>'Is Correct','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<!--
+			<?php echo $this->Form->input('Question',array('placeholder'=>'Question','between'=>'<div class="controls">','after'=>'</div>'));?>
+			-->
+		</fieldset>
+		<div class="control-group">
+			<div class="controls">
+			<?php echo $this->Form->button('Save',array('type'=>'button','class'=>'btn btn-primary fb-edit-save-button'));?>
+			<?php echo $this->Form->button('Cancel',array('type'=>'reset','class'=>'btn'));?>
+			</div>
 		</div>
+		<?php echo $this->Form->end();?>
 	</div>
-	<?php echo $this->Form->end();?>
 </div>
-</div>
+
+<!--FORMACTION-->
+<?php echo $this->Form->create('Form',array('id'=>'FormAction'));?>
+	<? echo $this->Form->input('Form.id',array('id'=>'FormId','value'=>$form_id,'type'=>'text'));?>
+	<? echo $this->Form->input('object_id',array('id'=>'ObjectId','value'=>$id,'type'=>'text'));?>
+<?php echo $this->Form->end();?>
+
+<?php 
+	echo $this->Html->script(array('formbuilder/formbuilder'),array('inline'=>false));
+?>

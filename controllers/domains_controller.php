@@ -32,20 +32,19 @@ class DomainsController extends AppController {
 			if ($this->Domain->saveAll($this->data)) {
 				if($this->RequestHandler->isAjax()){
 					$response['status'] = 1;
-					$response['msg'] = '<img src="/lib/img/icons/tick.png" />&nbsp;Domain has been saved.';
+					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Domain has been saved.";
 					$response['data'] = $this->data;
+					$response['data']['Domain']['id'] = $this->Domain->id;
 					echo json_encode($response);
 					exit();
 				}else{ 
 					$this->Session->setFlash(__('Domain has been saved', true));
 					$this->redirect(array('action' => 'index'));
 				}
-				$this->redirect(array('action' => '../options/add'));
-				
 			} else {
 				if($this->RequestHandler->isAjax()){
 					$response['status'] = -1;
-					$response['msg'] = "<img src='/lib/img/icons/exclamation.png'/>&nbsp;Domain could not be saved. Please, try again.";
+					$response['msg'] = "<a><i class='icon-warning-sign' /></i></a> Domain could not be saved. Please, try again.";
 					$response['data'] = $this->data;
 					echo json_encode($response);
 					exit();
@@ -57,40 +56,38 @@ class DomainsController extends AppController {
 		
 		$forms = $this->Domain->Form->find('first',array('conditions'=>array('Form.id'=>$this->data['Form']['id'])));
 		$this->set(compact('forms'));
-	
 	}
 	
 	function create(){
 		$form_id = $this->data['Form']['id'];
-		
 		if(!empty($form_id)){
-			
 			$forms = $this->Domain->Form->find('first',array('conditions'=>array('Form.id' => $form_id)));
 			$this->set(compact('forms'));
-		
 		}else{
 			$this->redirect(array('action' => '../forms/index'));
 		}
 	}
 
-	function edit($id = null) {
+	function edit() {
+		$id = $this->data['Form']['object_id'];
+		$form_id = $this->data['Form']['id'];
+	
+	
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid domain', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->data)) {
+		if (!empty($this->data['Domain'])) {
 			if ($this->Domain->save($this->data)) {
 				$this->Session->setFlash(__('The domain has been saved', true));
-				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The domain could not be saved. Please, try again.', true));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->Domain->read(null, $id);
-		}
+		
+		$this->data = $this->Domain->read(null, $id);
 		$forms = $this->Domain->Form->find('list');
-		$this->set(compact('forms'));
+		$this->set(compact('forms','id','form_id'));
 	}
 
 	function delete($id = null) {

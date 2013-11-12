@@ -49,14 +49,26 @@
 		<?php echo $this->Form->input('id',array('placeholder'=>'Id','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 		<?php echo $this->Form->input('name',array('placeholder'=>'Name','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 		<?php echo $this->Form->input('description',array('placeholder'=>'Description','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+		<!--
 		<?php echo $this->Form->input('Form',array('placeholder'=>'Form','between'=>'<div class="controls">','after'=>'</div>'));?>
+		-->
 	</fieldset>
 	<div class="control-group">
 		<div class="controls">
-		<?php echo $this->Form->button('Save',array('type'=>'submit','class'=>'btn btn-primary'));?>
+		<?php echo $this->Form->button('Save',array('type'=>'button','class'=>'btn btn-primary fb-edit-save-button'));?>
 		<?php echo $this->Form->button('Cancel',array('type'=>'reset','class'=>'btn'));?>
 		</div>
 	</div>
 	<?php echo $this->Form->end();?>
 </div>
 </div>
+
+<!--FORMACTION-->
+<?php echo $this->Form->create('Form',array('id'=>'FormAction'));?>
+	<? echo $this->Form->input('Form.id',array('id'=>'FormId','value'=>$form_id,'type'=>'hidden'));?>
+	<? echo $this->Form->input('object_id',array('id'=>'ObjectId','value'=>$id,'type'=>'hidden'));?>
+<?php echo $this->Form->end();?>
+
+<?php 
+	echo $this->Html->script(array('formbuilder/formbuilder'),array('inline'=>false));
+?>
