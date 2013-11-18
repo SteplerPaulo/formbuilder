@@ -13,18 +13,10 @@
 						</div>
 					</div>
 					<div class="span3">
-					 <?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-plus icon-white')).
-														$this->Html->tag('span', 'CREATE', array('class' => 'action-label')),
-														array('action' => 'add'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate')
-													);  ?>					</div>
-					<div class="btn-group span3">
-					  <a class="btn btn-medium btn-block dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class=" icon-th-list"></i><span class="action-label">LINKS</span>	
-					  </a>
-					  <ul class="dropdown-menu">
-						<!-- dropdown menu links -->
-								<li><?php echo $this->Html->link(__('Forms', true), array('controller' => 'forms', 'action' => 'index')); ?> </li>
-					  </ul>
+						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-list-alt icon-white')).
+														$this->Html->tag('span', 'Form List', array('class' => 'action-label')),
+														array('action' => 'index'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate')
+													);  ?>					
 					</div>
 				</div>
 			</div>
@@ -61,23 +53,20 @@
 </div>
 
 <!--Action & Notification Modal-->
-<?php echo $this->Form->create('Form',array('action'=>'add','parent-model'=>'FormType'));?>
+<?php echo $this->Form->create('Form',array('action'=>'create','parent-model'=>'FormType'));?>
 <div id="Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3 id="myModalLabel">Modal</h3>
 	</div>
 	<div class="modal-body">
+		<div class="well" id="Notification">
 		
-		<?php echo $this->Form->input('Form.id',array('id'=>'FormId','label'=>'Form Id','type'=>'hidden','class'=>'span11'));?>
-		<?php echo $this->Form->input('FormType.id',array('id'=>'FormTypeId','label'=>'FormType Id','type'=>'hidden','class'=>'span11'));?>
-			
-		<div class="well" id="Notification"></div>
-		<div class="well"><a><i class='icon-info-sign'></i></a> Instruction here...</div>
+		</div>
 	</div>
-	
 	<div class="modal-footer">
 		<div class="btn-group">
+			<button class="btn" type="submit">Create Form</button>
 			<button class="btn" data-dismiss="modal" aria-hidden="true">Back</button>
 		</div>
 	</div>

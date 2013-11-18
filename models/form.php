@@ -1,8 +1,6 @@
 <?php
 class Form extends AppModel {
 	var $name = 'Form';
-	
-	
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
@@ -19,7 +17,7 @@ class Form extends AppModel {
 		'FormDomain' => array(
 			'className' => 'FormDomain',
 			'foreignKey' => 'form_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -32,7 +30,7 @@ class Form extends AppModel {
 		'Question' => array(
 			'className' => 'Question',
 			'foreignKey' => 'form_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

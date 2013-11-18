@@ -30,9 +30,10 @@ class FormsController extends AppController {
 	function view() {
 		if (isset($this->data['Form']['id'])) {
 			$form_id = $this->data['Form']['id'];
+			
 			$this->Form->recursive = 3;
 			$data = $this->Form->read(null, $form_id);
-			
+
 			foreach($data['FormDomain'] as $domain){
 				foreach($data['Question'] as $question){
 					if($domain['domain_id'] == $question['domain_id']){
@@ -40,37 +41,44 @@ class FormsController extends AppController {
 					}
 				}
 			}
-			
-			
+		
 			$this->set('form', $data);
 		}else{
 			$this->redirect(array('action'=>'index'));
 		}
 	}
 	
-	function workplace() {
-		if (isset($this->data['Form']['id'])) {
+	function worksheet() {
+		if (!empty($this->data['Form']['id'])) {
 			$form_id = $this->data['Form']['id'];
 			
 			$this->Form->recursive = 3;
 			$data = $this->Form->read(null, $form_id);
-
-			foreach($data['FormDomain'] as $domain){
-				foreach($data['Question'] as $question){
-					if($domain['domain_id'] == $question['domain_id']){
-						$data['DomainQuestion'][$question['Domain']['name']][$question['text']] = $question;
+			
+			
+			if(isset($data['FormDomain'])){
+				foreach($data['FormDomain'] as $domain){
+					foreach($data['Question'] as $question){
+						if($domain['domain_id'] == $question['domain_id']){
+							$data['DomainQuestion'][$question['Domain']['name']][$question['text']] = $question;
+						}
 					}
 				}
 			}
 			
-			$this->set('form', $data);
-			
+		//	pr($data);exit;
 		
+			$this->set('form', $data);
 		}else{
-			$this->redirect(array('action'=>'create'));
+			$this->redirect(array('action'=>'index'));
 		}
 	}
-
+	
+	function create(){
+		$formTypes = $this->Form->FormType->find('list');
+		$this->set(compact('formTypes'));
+	}
+	
 	function add() {
 		if (!empty($this->data)) {
 			$this->Form->create();
@@ -82,9 +90,6 @@ class FormsController extends AppController {
 					$response['data']['Form']['id'] = $this->Form->id;
 					echo json_encode($response);
 					exit();
-				}else{ 
-					$this->Session->setFlash(__('Form has been saved', true));
-					$this->redirect(array('action' => 'index'));
 				}
 			} else {
 				if($this->RequestHandler->isAjax()){
@@ -93,20 +98,13 @@ class FormsController extends AppController {
 					$response['data'] = $this->data;
 					echo json_encode($response);
 					exit();
-				}else{
-					$this->Session->setFlash(__('Form could not be saved. Please, try again.', true));
 				}
 			}
 		}else{
 			$this->redirect(array('action' => 'create'));
 		}
 	}
-	
-	function create(){
-		$formTypes = $this->Form->FormType->find('list');
-		$this->set(compact('formTypes'));
-	}
-	
+
 	function edit() {
 		$id = $this->data['Form']['object_id'];
 		$form_id = $this->data['Form']['id'];
@@ -115,7 +113,7 @@ class FormsController extends AppController {
 			$this->Session->setFlash(__('Invalid form', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->data)) {
+		if (!empty($this->data['Form']['title'])) {
 			if ($this->Form->save($this->data)) {
 				$this->Session->setFlash(__('The form has been saved', true));
 			} else {
@@ -130,17 +128,36 @@ class FormsController extends AppController {
 		$this->set(compact('formTypes','form','form_id','id'));
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for form', true));
-			$this->redirect(array('action'=>'index'));
+	function delete() {
+		$id = $this->data['Form']['object_id'];
+		
+		if(isset($id)) {
+			//pr($this->Form->find('all',array('conditions'=>array('Form.id'=>$id))));
+			//exit;
+			//&& $this->Question->delete(array('Question.form_id'=>$id),true)
+		
+			
+			if ($this->Form->delete($id,true)) {
+			
+				if($this->RequestHandler->isAjax()){
+					$response['status'] = 1;
+					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Form deleted.";
+					$response['data'] = $this->data;
+					echo json_encode($response);
+					exit();
+				}
+			}else{
+				if($this->RequestHandler->isAjax()){
+					$response['status'] = -1;
+					$response['msg'] = "<a><i class='icon-warning-sign' /></i></a> Form not deleted. Please, try again.";
+					$response['data'] = $this->data;
+					echo json_encode($response);
+					exit();
+				}
+			}
+		}else{
+			$this->redirect(array('action'=>'../forms'));
 		}
-		if ($this->Form->delete($id)) {
-			$this->Session->setFlash(__('Form deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Form was not deleted', true));
-		$this->redirect(array('action' => 'index'));
 	}
 
 	protected function api($params){

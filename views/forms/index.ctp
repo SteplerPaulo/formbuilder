@@ -53,21 +53,19 @@
 								<button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i><span class="caret"></span></button>
 								<ul class="dropdown-menu pull-right">
 									<li>
-										<i class="icon-eye-open"></i><b> VIEW</b>
-										<a action='/formbuilder/forms/view' class="fb-action">Form</a>
+										<a action='/formbuilder/forms/view' class="fb-action">
+											<i class="icon-eye-open"></i> Preview
+										</a>
 									</li>
 									<li>
-										<i class="icon-plus-sign"></i><b> ADD</b>
-										<a action="/formbuilder/domains/create" class="fb-action">Form Domain</a>
-										<a action="/formbuilder/questions/create" class="fb-action">Form Questions</a>
-									</li>
-									<li>
-										<i class="icon-pencil"></i><b> EDIT</b>
-										<a action="/formbuilder/forms/workplace" class="fb-action">Form</a>
+										<a action="/formbuilder/forms/worksheet" class="fb-action">
+											<i class="icon-edit"></i> Worksheet
+										</a>
 									</li>		
 									<li>
-										<i class="icon-remove"></i><b> Delete</b>
-										<a action="/formbuilder/forms/delete" class="fb-action">Form</a>
+										<a action="/formbuilder/forms/delete" class="fb-action">
+											<i class="icon-trash"></i> Delete
+										</a>
 									</li>
 								</ul>
 							</div>
@@ -89,7 +87,7 @@
 <?php echo $this->Form->end();?>
 
 <!--FORMACTION-->
-<?php echo $this->Form->create('FormAction',array('id'=>'FormAction','target'=>'_blank'));?>
+<?php echo $this->Form->create('FormAction',array('id'=>'FormAction'));?>
 	<? echo $this->Form->input('Form.id',array('id'=>'FormId'));?>
 <?php echo $this->Form->end();?>
 

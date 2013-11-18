@@ -1,11 +1,11 @@
 $(document).ready(function(){
-	//FB Action
+	
+	//FB Form Action
 	$(document).on('click','.fb-action',function(){
 		var action =$(this).attr('action');
 		var row =$(this).parents('tr:first');
 		var form_id =row.find('.form-id').text();
 		$('#FormId').val(form_id);
-		
 		
 		$('#FormAction').attr('action',action);
 		$('#FormAction').submit();
@@ -15,27 +15,13 @@ $(document).ready(function(){
 	$(document).on('click','.fb-more-action',function(){
 		var object_id =$(this).attr('object-id');
 		$('#FormId').val(object_id);
-		
 		var action =$(this).attr('action');
 		$('#FormAction').attr('action',action);
 		$('#FormAction').submit();
 	});
 	
-	//FB Add Action Link
-	$(document).on('click','.fb-add-action',function(){
-		var object_id =$(this).attr('object-id');
-		$('#ObjectId').val(object_id);
-		
-		var action =$(this).attr('action');
-		$('#FormAction').attr('action',action);
-		$('#FormAction').submit();
-	});
-	
-	
-	
-	
-	//Workplace Edit Link
-	$(document).on('click','.fb-workplace-edit',function(){
+	//Worksheet Add Link
+	$(document).on('click','.fb-worksheet-add',function(){
 		var object_id =$(this).attr('object-id');
 		$('#ObjectId').val(object_id);
 
@@ -44,34 +30,53 @@ $(document).ready(function(){
 		$('#FormAction').submit();
 	});
 	
-	//Workplace Delete Link
-	$(document).on('click','.fb-workplace-delete',function(){
-		$('#Modal').modal('show');
-		$('.fb-workplace-confirm-delete-button').removeAttr('disabled');
+	//Worksheet Edit Link
+	$(document).on('click','.fb-worksheet-edit',function(){
 		var object_id =$(this).attr('object-id');
+		$('#ObjectId').val(object_id);
+
 		var action =$(this).attr('action');
+		$('#FormAction').attr('action',action);
+		$('#FormAction').submit();
+	});
+	
+	//Worksheet Delete Link
+	$(document).on('click','.fb-worksheet-delete',function(){
+		delete_all_button_toggle($(this).attr('option'));
 		
-		$('.fb-workplace-confirm-delete-button').click(function(){
-			$('#ObjectId').val(object_id);
-			$('#FormAction').attr('action',action);
+		
+		$('#Modal').modal('show');
+		
+		var object_id =$(this).attr('object-id');
+		var question_option_id =$(this).attr('question-option-id');
+		var action =$(this).attr('action');
+		$('#ObjectId').val(object_id);
+		$('#QuestionOptionId').val(question_option_id);
+		$('#FormAction').attr('action',action);
+		
+		$('.fb-worksheet-confirm-delete-button').click(function(){
+			$('#DeleteType').val($(this).attr('delete-type'));
 			$('#FormAction').ajaxSubmit({
 				dataType:'json',
 				success:function(formReturn){
 					$('#Notification').html(formReturn.msg).slideDown().delay(5000).slideUp();
-					$('.fb-workplace-confirm-delete-button').attr('disabled','disabled');
+					
+					setTimeout(function(){
+						goto_worksheet();
+					},1000);
+					
 				}
 			});
+			
 		});
 	});
 	
-	
-	//Edit Files Save Button //Save & Return
+	//Edit Files Save Button
 	$(document).on('click','.fb-edit-save-button',function(){
 		var form = $(this).parents('form:first');
 		form.ajaxSubmit();
-		var action ='/formbuilder/forms/workplace';
-		$('#FormAction').attr('action',action);
-		$('#FormAction').submit();
+		
+		goto_worksheet();
 	});
 	
 	//Create Files Save Button
@@ -82,7 +87,12 @@ $(document).ready(function(){
 			form.ajaxSubmit({
 				dataType:'json',
 				success:function(formReturn){
-					console.log(formReturn);
+					
+					if(form.attr('id') =="FormAddForm"){
+						$('#FormId').val(formReturn.data.Form.id);
+						//console.log(form.attr('id') +' FormAddForm');
+						//console.log(formReturn.data.Form.id);
+					}
 					modal_builder(formReturn);
 					form[0].reset();
 				}
@@ -94,9 +104,36 @@ $(document).ready(function(){
 			});
 		}
 	});
+
+	//Go To Worksheet Event
+	$(document).on('click','.fb-goto-worksheet-button',function(){
+		goto_worksheet();
+	});
+
+	$(document).on('click','.fb-option-setting',function(){
+		var opt_cog = $(this).attr('option-cog');
+		$('#OptionCog').val(opt_cog);
+		
+		var action =$(this).attr('action');
+		$('#FormAction').attr('action',action);
+		$('#FormAction').submit();
+	});
 });
 
+function delete_all_button_toggle(is_option){
+	if(is_option){
+		$('.fb-worksheet-confirm-delete-button[delete-type="all"]').show();
+	}else{
+		$('.fb-worksheet-confirm-delete-button[delete-type="all"]').hide();
+	}
+	
+}
 
+function goto_worksheet(){
+		var action ='/formbuilder/forms/worksheet';
+		$('#FormAction').attr('action',action);
+		$('#FormAction').submit();
+}
 
 function modal_builder(formReturn){
 	var model = $('#Modal').parents('form:first').attr('parent-model');

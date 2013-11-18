@@ -13,18 +13,15 @@
 						</div>
 					</div>
 					<div class="span3">
-					 <?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-plus icon-white')).
-														$this->Html->tag('span', 'CREATE', array('class' => 'action-label')),
-														array('action' => 'add'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate')
-													);  ?>					</div>
+						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-list-alt icon-white')).
+														$this->Html->tag('span', 'Form List', array('class' => 'action-label')),
+														array('action' => 'index'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate')
+													);  ?>					
+					</div>
 					<div class="btn-group span3">
-					  <a class="btn btn-medium btn-block dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class=" icon-th-list"></i><span class="action-label">LINKS</span>	
-					  </a>
-					  <ul class="dropdown-menu">
-						<li><?php echo $this->Html->link(__('Forms', true), array('controller' => 'forms', 'action' => 'index')); ?> </li>
-						<li><?php echo $this->Html->link(__('Question Options', true), array('controller' => 'question_options', 'action' => 'index')); ?> </li>
-					  </ul>
+						<button class="btn fb-goto-worksheet-button">
+							<i class="icon-circle-arrow-left"></i> Go Back To Worksheet
+						</button>
 					</div>
 				</div>
 			</div>
@@ -48,7 +45,7 @@
 												);?>
 		
 		<fieldset>
-			<legend><center><?php echo __('Add Question').' for <br/>'. $forms['Form']['title']; ?></center></legend>
+			<legend><?php echo 'Form Title: '.$forms['Form']['title'].'<br/>'.'Add Question'; ?></legend>
 
 			<?php echo $this->Form->input('form_id',array('value'=>$forms['Form']['id'],'type'=>'text','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 			<?php echo $this->Form->input('domain_id',array('placeholder'=>'','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
@@ -74,25 +71,31 @@
 		<h3 id="myModalLabel">Notification</h3>
 	</div>
 	<div class="modal-body">
-		
 		<?php echo $this->Form->input('Form.id',array('id'=>'FormId','label'=>'Form Id','type'=>'hidden','class'=>'span11'));?>
 		<?php echo $this->Form->input('Question.id',array('id'=>'QuestionId','label'=>'Question Id','type'=>'hidden','class'=>'span11'));?>
 		
-		<div class="well" id="Notification"></div>
-		<div class="well"><a><i class='icon-info-sign'></i></a> Instruction here...</div>
+		<div class="well" id="Notification">
+		
+		</div>
 	</div>
 	
 	<div class="modal-footer">
 		<div class="btn-group">
-			<button class="btn" type="submit">Create Question's Option</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Create Another Question</button>
+			<button class="btn fb-goto-worksheet-button" type="button">Go Back to Worksheet</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Exit</button>
 		</div>
 	</div>
 </div>
 <?php echo $this->Form->end();?>
- 
+<!--End-->
+
+<!--FORMACTION-->
+<?php echo $this->Form->create('Form',array('id'=>'FormAction'));?>
+	<? echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'hidden'));?>
+	<? echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'hidden'));?>
+<?php echo $this->Form->end();?>
 
 
-<?php
+<?php 
 	echo $this->Html->script(array('formbuilder/formbuilder'),array('inline'=>false));
 ?>

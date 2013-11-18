@@ -17,6 +17,8 @@ class QuestionsController extends AppController {
 			echo json_encode($data);
 			exit;
 		}else{
+			$this->redirect(array('action' => '../forms'));
+		
 			$this->Question->recursive = 0;
 			$this->set('questions', $this->paginate());
 		}	
@@ -30,6 +32,35 @@ class QuestionsController extends AppController {
 		$this->set('question', $this->Question->read(null, $id));
 	}
 
+	function create(){
+	
+
+		$form_id = $this->data['Form']['id'];
+		if(!empty($form_id)){
+			$forms = $this->Question->Form->find('first',array('conditions'=>array('Form.id'=>$form_id)));
+			$option_types = $this->Question->OptionType->find('list',array('fields'=>array('OptionType.id','OptionType.description')));								
+			
+
+			//Domain List
+			if(isset($this->data['Form']['object_id'])){						
+				$domains = $this->Question->Domain->find('list',array(
+									'conditions'=>array('Domain.id'=>$this->data['Form']['object_id'])
+								));	
+			
+			}else{
+				$domains = $this->FormDomain->find('list',array(
+										'recursive'=>1,
+										'conditions'=>array('FormDomain.form_id'=>$form_id),
+										'fields'=>array('Domain.id','Domain.name')
+									));
+			}
+					
+			$this->set(compact('forms','domains','option_types'));
+		}else{
+			$this->redirect(array('action' => '../forms/index'));
+		}
+	}
+	
 	function add() {
 		if (!empty($this->data)) {			
 			$this->Question->create();
@@ -62,66 +93,65 @@ class QuestionsController extends AppController {
 		}
 	}
 	
-	function create(){
-		$form_id = $this->data['Form']['id'];
-		if(!empty($form_id)){
-			$forms = $this->Question->Form->find('first',array('conditions'=>array('Form.id'=>$form_id)));
-			$option_types = $this->Question->OptionType->find('list',array('fields'=>array('OptionType.id','OptionType.description')));								
-			
-
-			//Domain List
-			if(isset($this->data['Domain']['id'])){						
-				$domains = $this->Question->Domain->find('list',array(
-									'conditions'=>array('Domain.id'=>$this->data['Domain']['id'])
-								));	
-			
-			}else{
-				$domains = $this->FormDomain->find('list',array(
-										'recursive'=>1,
-										'conditions'=>array('FormDomain.form_id'=>$form_id),
-										'fields'=>array('Domain.id','Domain.name')
-									));
-			}
-					
-			$this->set(compact('forms','domains','option_types'));
-		}else{
-			$this->redirect(array('action' => '../forms/index'));
-		}
-	}
-
 	function edit() {
 		$id = $this->data['Form']['object_id'];
 		$form_id = $this->data['Form']['id'];
 		
+		//pr($this->data);exit;
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid question', true));
 			$this->redirect(array('action' => '../forms'));
 		}
-		if (!empty($this->data)) {
-			if ($this->Question->save($this->data)) {
+		if (!empty($this->data['Question'])) {
+			
+		
+			if ($this->Question->saveAll($this->data)) {
 				$this->Session->setFlash(__('The question has been saved', true));
 			} else {
 				$this->Session->setFlash(__('The question could not be saved. Please, try again.', true));
 			}
 		}
 		
+		
+			
+		$domains = $this->FormDomain->find('list',array(
+										'recursive'=>1,
+										'conditions'=>array('FormDomain.form_id'=>$form_id),
+										'fields'=>array('Domain.id','Domain.name')
+									));
+		
 		$this->data = $this->Question->read(null, $id);
-		$domains = $this->Question->Domain->find('list');
 		$forms = $this->Question->Form->find('list');
-		$this->set(compact('forms','domains','id','form_id'));
+		$option_types = $this->Question->OptionType->find('list',array('fields'=>array('OptionType.id','OptionType.description')));								
+		
+		$this->set(compact('forms','domains','id','form_id','option_types'));
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for question', true));
-			$this->redirect(array('action'=>'index'));
+	function delete() {
+		
+		$id = $this->data['Form']['object_id'];
+		
+		if(isset($id)) {
+			if ($this->Question->delete($id,true)) {
+			
+				if($this->RequestHandler->isAjax()){
+					$response['status'] = 1;
+					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Question and its element deleted.";
+					$response['data'] = $this->data;
+					echo json_encode($response);
+					exit();
+				}
+			}else{
+				if($this->RequestHandler->isAjax()){
+					$response['status'] = -1;
+					$response['msg'] = "<a><i class='icon-warning-sign' /></i></a> Question not deleted. Please, try again.";
+					$response['data'] = $this->data;
+					echo json_encode($response);
+					exit();
+				}
+			}
+		}else{
+			$this->redirect(array('action'=>'../forms'));
 		}
-		if ($this->Question->delete($id)) {
-			$this->Session->setFlash(__('Question deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Question was not deleted', true));
-		$this->redirect(array('action' => 'index'));
 	}
 	
 	protected function api($params){

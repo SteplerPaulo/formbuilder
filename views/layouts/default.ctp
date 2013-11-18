@@ -27,7 +27,6 @@
 			echo $this->Html->css(array('ss/ssMetrics','ss/ssInterface','effects/animate'));
 			echo $this->Html->css(array('joyride/joyride-2.0.3'));
 			echo $this->Html->css(array('dataTable'));
-			echo $this->Html->css(array('formbuilder/formbuilder'));
 			echo $this->Html->script(array('jquery','jquery.dataTables'));
 			echo $this->Html->css(array('advancedTable'));
 		?>

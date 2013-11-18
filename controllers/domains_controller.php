@@ -13,6 +13,8 @@ class DomainsController extends AppController {
 			echo json_encode($data);
 			exit;
 		}else{
+			$this->redirect(array('action' => '../forms'));
+			
 			$this->Domain->recursive = 0;
 			$this->set('domains', $this->paginate());
 		}
@@ -52,7 +54,10 @@ class DomainsController extends AppController {
 					$this->Session->setFlash(__('Domain could not be saved. Please, try again.', true));
 				}
 			}
+		}else{
+			$this->redirect(array('action' => 'index'));
 		}
+	
 		
 		$forms = $this->Domain->Form->find('first',array('conditions'=>array('Form.id'=>$this->data['Form']['id'])));
 		$this->set(compact('forms'));
@@ -74,8 +79,7 @@ class DomainsController extends AppController {
 	
 	
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid domain', true));
-			$this->redirect(array('action' => 'index'));
+			$this->redirect(array('action' => '../forms'));
 		}
 		if (!empty($this->data['Domain'])) {
 			if ($this->Domain->save($this->data)) {
@@ -90,17 +94,31 @@ class DomainsController extends AppController {
 		$this->set(compact('forms','id','form_id'));
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for domain', true));
-			$this->redirect(array('action'=>'index'));
+	function delete() {
+		$id = $this->data['Form']['object_id'];
+		
+		if(isset($id)) {
+			if ($this->Domain->delete($id,true)) {
+				if($this->RequestHandler->isAjax()){
+					$response['status'] = 1;
+					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Domain and its element deleted.";
+					$response['data'] = $this->data;
+					echo json_encode($response);
+					exit();
+				}
+			}else{
+				if($this->RequestHandler->isAjax()){
+					$response['status'] = -1;
+					$response['msg'] = "<a><i class='icon-warning-sign' /></i></a> Domain not deleted. Please, try again.";
+					$response['data'] = $this->data;
+					echo json_encode($response);
+					exit();
+				}
+			}
+		}else{
+			$this->redirect(array('action'=>'../forms'));
 		}
-		if ($this->Domain->delete($id)) {
-			$this->Session->setFlash(__('Domain deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Domain was not deleted', true));
-		$this->redirect(array('action' => 'index'));
+		
 	}
 
 	protected function api($params){
