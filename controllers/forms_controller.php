@@ -132,11 +132,6 @@ class FormsController extends AppController {
 		$id = $this->data['Form']['object_id'];
 		
 		if(isset($id)) {
-			//pr($this->Form->find('all',array('conditions'=>array('Form.id'=>$id))));
-			//exit;
-			//&& $this->Question->delete(array('Question.form_id'=>$id),true)
-		
-			
 			if ($this->Form->delete($id,true)) {
 			
 				if($this->RequestHandler->isAjax()){
