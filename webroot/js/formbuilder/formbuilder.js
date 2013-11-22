@@ -44,9 +44,9 @@ $(document).ready(function(){
 	$(document).on('click','.fb-worksheet-delete',function(){
 		delete_all_button_toggle($(this).attr('option'));
 		
-		
 		$('#Modal').modal('show');
 		
+		var is_form_delete= $(this).attr('form');
 		var object_id =$(this).attr('object-id');
 		var question_option_id =$(this).attr('question-option-id');
 		var action =$(this).attr('action');
@@ -60,11 +60,13 @@ $(document).ready(function(){
 				dataType:'json',
 				success:function(formReturn){
 					$('#Notification').html(formReturn.msg).slideDown().delay(5000).slideUp();
-					
+					if(formReturn.status){
+						goto_formlist(is_form_delete);
+					}
+						
 					setTimeout(function(){
 						goto_worksheet();
 					},1000);
-					
 				}
 			});
 			
@@ -126,7 +128,15 @@ function delete_all_button_toggle(is_option){
 	}else{
 		$('.fb-worksheet-confirm-delete-button[delete-type="all"]').hide();
 	}
-	
+}
+
+function goto_formlist(is_form_delete){
+	if(is_form_delete){
+		setTimeout(function(){
+			location.reload();
+		},500);
+		return;
+	}
 }
 
 function goto_worksheet(){
