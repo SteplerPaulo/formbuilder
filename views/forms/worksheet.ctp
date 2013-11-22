@@ -37,7 +37,7 @@
 				<div class="pull-right">
 					<b>Form</b>
 					<a action="../forms/edit" class="fb-worksheet-edit" object-id="<? echo $form['Form']['id']?>"><i class="icon-edit"> Edit</i></a> |
-					<a action="../forms/delete" class="fb-worksheet-delete" object-id="<? echo $form['Form']['id']?>"><i class="icon-trash"> Delete</i></a> |
+					<a action="../forms/delete" class="fb-worksheet-delete" object-id="<? echo $form['Form']['id']?>" form="true"><i class="icon-trash"> Delete</i></a> |
 					<a action="../domains/create" class="fb-worksheet-add" object-id="<? echo $form['Form']['id']?>"><i class="icon-plus-sign"> Add Domain</i></a> 
 				</div><hr/>
 				<center><b><?php echo $form['Form']['title']; ?></center>
