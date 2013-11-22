@@ -58,33 +58,50 @@
 						</span>
 					</dt><hr/>
 					<? if(isset($form['DomainQuestion'][''.$domain['Domain']['name'].''])){ ;?>
-					<? foreach($form['DomainQuestion'][''.$domain['Domain']['name'].''] as $question => $question_data):?>
+						<? foreach($form['DomainQuestion'][''.$domain['Domain']['name'].''] as $question => $question_data):?>
 						
-					<dd>
-						<dl>
-							<? echo $question; ?>
-							<span class="pull-right">
-								<a action="../questions/edit" class="fb-worksheet-edit" object-id="<? echo $question_data['id'];?>"><i class="icon-edit"> Edit</i></a> |
-								<a action="../questions/delete" class="fb-worksheet-delete" object-id="<? echo $question_data['id'];?>"><i class="icon-trash"> Delete</i></a> |
-								<a action="../options/create" class="fb-worksheet-add" object-id="<? echo $question_data['id'];?>"><i class="icon-plus-sign"> Add Option</i></a> 
-							</span><br/>	
-						</dl>
-						<dl class="well">
-							<? if(isset($question_data['QuestionOption'])){ ;?>
-								<? foreach($question_data['QuestionOption'] as $option):?>
-								<dd>	
-									<input type="<? echo $question_data['OptionType']['name'];?>" name="<? echo $question_data['id']; ?>" value="<? echo $option['Option']['value']; ?>">
-									<? echo $option['Option']['text']; ?>
-									<span class="pull-right">
-										<a action="../options/edit" class="fb-worksheet-edit"  object-id="<? echo $option['Option']['id'];?>"><i class="icon-edit"> Edit</i></a>
-										<a action="../options/delete" class="fb-worksheet-delete" option="true" object-id="<? echo $option['Option']['id'];?>" question-option-id="<? echo $option['id'] ?>"><i class="icon-trash"> Delete</i></a>
-									</span>
-								</dd>
-								<? endforeach;?>
-							<? };?>
-						</dl>
-					</dd>
-					<? endforeach;?>
+						<? if($question_data['OptionType']['name'] == "textarea"){; ?>
+						<dd>
+							<dl>
+								<? echo $question; ?>
+								<span class="pull-right">
+									<a action="../questions/edit" class="fb-worksheet-edit" object-id="<? echo $question_data['id'];?>"><i class="icon-edit"> Edit</i></a> |
+									<a action="../questions/delete" class="fb-worksheet-delete" object-id="<? echo $question_data['id'];?>"><i class="icon-trash"> Delete</i></a>
+								</span><br/>	
+							</dl>
+							
+							
+							<textarea class="center w100" placeholder="Fill out this area..."></textarea>
+							
+						</dd>
+						
+						<? }else{; ?>
+						<dd>
+							<dl>
+								<? echo $question; ?>
+								<span class="pull-right">
+									<a action="../questions/edit" class="fb-worksheet-edit" object-id="<? echo $question_data['id'];?>"><i class="icon-edit"> Edit</i></a> |
+									<a action="../questions/delete" class="fb-worksheet-delete" object-id="<? echo $question_data['id'];?>"><i class="icon-trash"> Delete</i></a> |
+									<a action="../options/create" class="fb-worksheet-add" object-id="<? echo $question_data['id'];?>"><i class="icon-plus-sign"> Add Option</i></a> 
+								</span><br/>	
+							</dl>
+							<dl class="well">
+								<? if(isset($question_data['QuestionOption'])){ ;?>
+									<? foreach($question_data['QuestionOption'] as $option):?>
+									<dd>	
+										<input type="<? echo $question_data['OptionType']['name'];?>" name="<? echo $question_data['id']; ?>" value="<? echo $option['Option']['value']; ?>">
+										<? echo $option['Option']['text']; ?>
+										<span class="pull-right">
+											<a action="../options/edit" class="fb-worksheet-edit"  object-id="<? echo $option['Option']['id'];?>"><i class="icon-edit"> Edit</i></a>
+											<a action="../options/delete" class="fb-worksheet-delete" option="true" object-id="<? echo $option['Option']['id'];?>" question-option-id="<? echo $option['id'] ?>"><i class="icon-trash"> Delete</i></a>
+										</span>
+									</dd>
+									<? endforeach;?>
+								<? };?>
+							</dl>
+						</dd>
+						<? } ?>
+						<? endforeach;?>
 					<? };?>
 				</dl>
 			<? endforeach;?>
@@ -92,8 +109,6 @@
 		</div>
 	</div>
 </div>
-
-
 
 <!--Delete Warning-->
 <div id="Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -125,10 +140,10 @@
 
 <!--FORMACTION-->
 <?php echo $this->Form->create('Form',array('id'=>'FormAction'));?>
-	<? echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'text'));?>
-	<? echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'text'));?>
-	<? echo $this->Form->input('delete_type',array('id'=>'DeleteType','type'=>'text'));?>
-	<? echo $this->Form->input('question_option_id',array('id'=>'QuestionOptionId','type'=>'text'));?>
+	<? echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'hidden'));?>
+	<? echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'hidden'));?>
+	<? echo $this->Form->input('delete_type',array('id'=>'DeleteType','type'=>'hidden'));?>
+	<? echo $this->Form->input('question_option_id',array('id'=>'QuestionOptionId','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 
