@@ -29,8 +29,13 @@
 				<span class="submodule-name">Add App</span>
 			</li>
 			<li class="submodule">
-				<div class="submodule-icon"><a href="/formbuilder/forms"><i class="icon-pencil"></i></a></div>
-				<span class="submodule-name">Create Form</span>
+				<div class="submodule-icon"><a href="/formbuilder/forms/create"><i class="icon-pencil"></i></a></div>
+				<span class="submodule-name">Form Create</span>
+			</li>
+			
+			<li class="submodule">
+				<div class="submodule-icon"><a href="/formbuilder/forms"><i class="icon-list-alt icon-white"></i></a></div>
+				<span class="submodule-name">Form List</span>
 			</li>
 			
 			<?php for($i=1;$i<0;$i++): ?>
