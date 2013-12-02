@@ -141,7 +141,7 @@ $(document).ready(function(){
 		$(canvas).find('tfoot tr.preloader>td').html(args.html);
 	}).bind('update_async',function(evt,args){
 		var canvas = this;
-		var args =  args||{'percentage':100,'msg':'<i class="icon-cog icon-spin"></i> Generating preview'};
+		var args =  args||{'percentage':100,'msg':'<i class="icon-cog icon-spin"></i> Loading...'};
 		$(canvas).find('tfoot tr.preloader>td div.progress>div.bar').css({'width':(args.percentage+'%')});
 		
 		if(args.percentage==100){
