@@ -19,7 +19,7 @@
 													);  ?>					
 					</div>
 					<div class="span3">
-					<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-plus icon-white')).
+					 <?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-plus icon-white')).
 														$this->Html->tag('span', 'NEW FORM', array('class' => 'action-label')),
 														array('action' => 'add'), array('escape' => false,'class'=>'btn btn-medium btn-block animate')
 													);  ?>					
@@ -37,7 +37,6 @@
 				<center><b><?php echo $form['Form']['title']; ?></center>
 				<center><?php echo $form['Form']['description']; ?></center>
 				<center><?php echo $form['FormType']['name']; ?></b></center>
-				
 			</div>
 			
 			<? if(isset($form['FormDomain'])){ ;?>
@@ -47,10 +46,21 @@
 						<? echo $domain['Domain']['name']; ?>
 					</dt><hr/>
 					<? if(isset($form['DomainQuestion'][''.$domain['Domain']['name'].''])){ ;?>
-					<? foreach($form['DomainQuestion'][''.$domain['Domain']['name'].''] as $question => $question_data):?>
+						<? foreach($form['DomainQuestion'][''.$domain['Domain']['name'].''] as $question => $question_data):?>
 						
+						<? if($question_data['OptionType']['name'] == "textarea"){; ?>
 						<dd>
-							<? echo $question; ?>					
+							<dl>
+								<? echo $question; ?>
+							</dl>
+							<textarea class="center w100" placeholder="Fill out this area..."></textarea>
+						</dd><br/>
+						
+						<? }else{; ?>
+						<dd>
+							<dl>
+								<? echo $question; ?>
+							</dl>
 							<dl class="well">
 								<? if(isset($question_data['QuestionOption'])){ ;?>
 									<? foreach($question_data['QuestionOption'] as $option):?>
@@ -62,7 +72,8 @@
 								<? };?>
 							</dl>
 						</dd>
-					<? endforeach;?>
+						<? } ?>
+						<? endforeach;?>
 					<? };?>
 				</dl>
 			<? endforeach;?>
@@ -72,35 +83,10 @@
 </div>
 
 
-
-<!--Delete Warning-->
-<div id="Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="myModalLabel">Warning</h3>
-	</div>
-	<div class="modal-body">
-		<div class="well">
-			<span class="label label-warning">Important</span>
-			Once Deleted It Cannot Undo
-		</div>
-		
-		<div class="well" id="Notification" style="display:none"></div>
-	</div>
-	
-	<div class="modal-footer">
-		<div class="btn-group">
-			<button class="btn fb-worksheet-confirm-delete-button" type="button">Confirm Delete</button>
-			<button class="btn fb-worksheet-exit-button" data-dismiss="modal" aria-hidden="true">Exit</button>
-		</div>
-	</div>
-</div>
-<!--End-->
-
 <!--FORMACTION-->
 <?php echo $this->Form->create('Form',array('id'=>'FormAction'));?>
-	<? echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'text'));?>
-	<? echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'text'));?>
+	<? echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'hidden'));?>
+	<? echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 
