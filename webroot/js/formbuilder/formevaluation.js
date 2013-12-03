@@ -1,8 +1,7 @@
 $(document).ready(function(){
-	
 	//LOGIN EVENT
 	$(document).on('click','#LogInButton',function(){
-		$('#EvaluationLogInForm').ajaxSubmit({
+		$('#EvaluationLoginForm').ajaxSubmit({
 			dataType:'json',
 			success:function(formReturn){
 				
@@ -28,7 +27,7 @@ $(document).ready(function(){
 					$('#Modal').modal('show'); 
 					if(formReturn.status){
 						setTimeout(function(){
-							var action ='/formbuilder/evaluations/log_in';
+							var action ='/formbuilder/evaluations/login';
 							$('#FormAction').attr('action',action);
 							$('#FormAction').submit();
 						},1500);
@@ -37,15 +36,4 @@ $(document).ready(function(){
 				}
 		});
 	});
-	
-
-
-	
-
-	//FORM SUBMIT EVENT
-	$(document).on('click','.test',function(){
-		
-		$('#EvaluationFormTest').ajaxSubmit();
-	});
-	
 });
