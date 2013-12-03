@@ -11,86 +11,58 @@
 														);  ?>							</div>
 						</div>
 					</div>
-					<div class="span3">
-					 <?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-plus icon-white')).
-														$this->Html->tag('span', 'CREATE', array('class' => 'action-label')),
-														array('action' => 'add'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate')
-													);  ?>					</div>
-					<div class="btn-group span3">
-					  <a class="btn btn-medium btn-block dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class=" icon-th-list"></i><span class="action-label">LINKS</span>	
-					  </a>
-					  <ul class="dropdown-menu">
-						<!-- dropdown menu links -->
-								<li><?php echo $this->Html->link(__('Keys', true), array('controller' => 'keys', 'action' => 'index')); ?> </li>
-					  </ul>
-					</div>
 				</div>
-			</div>
-			<div class="span6 text-right">
-				 <input class="span6 m-t-5 p" type="text" placeholder="Search">
 			</div>
 		</div>
 	</div>
  </div>
+<? 
+	//pr($keyHeader);exit;
+?>
 
-
- <div class="row-fluid">
-<div class="span6">
-<div class="keyHeaders view">
-<h2><?php  __('Key Header');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $keyHeader['KeyHeader']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $keyHeader['KeyHeader']['created']; ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-</div>
-<div class="span6">
-<div class="related">
-	<h3><?php __('Related Keys');?></h3>
-	<?php if (!empty($keyHeader['Key'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Key Header Id'); ?></th>
-		<th><?php __('Status'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($keyHeader['Key'] as $key):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-		<tr<?php echo $class;?>>
-			<td><?php echo $key['id'];?></td>
-			<td><?php echo $key['key_header_id'];?></td>
-			<td><?php echo $key['status'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'keys', 'action' => 'view', $key['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'keys', 'action' => 'edit', $key['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'keys', 'action' => 'delete', $key['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $key['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Key', true), array('controller' => 'keys', 'action' => 'add'));?> </li>
-		</ul>
+<div class="sub-content-container">
+	<div class="row-fluid">
+		<div class="w70 center">
+			<div><b>Key Header ID : <? echo $keyHeader['KeyHeader']['id'];?></b></div>
+			<div>
+				<b>
+					Form Title : <? echo $keyHeader['Form']['title'];?>
+					<span class="pull-right">
+						<a action='/formbuilder/key_headers/print_keys' class="fb-print-action">
+							Print <i class="icon-print"></i>
+						</a>
+					</span>
+				</b>
+			</div>
+			
+			<hr/>
+			<table class="table table table-striped table-bordered  table-condensed">
+				
+				<thead>
+					<th class="w80 text-center"><a>Key</a></th>
+					<th class="w10 text-center"><a>Status</a></th>
+				</thead>
+				<tbody>
+					<? foreach($keyHeader['Key'] as $key): ?>
+					<tr>
+						<td><? echo $key['value']; ?></td>
+						<td class="text-center"><? echo $key['status_str']; ?></td>
+					</tr>
+					<? endforeach;?>
+				</tbody>
+			</table>	
+		</div>
 	</div>
 </div>
-</div>
-</div>
+	
+<!--FORMACTION-->
+<?php echo $this->Form->create('KeyHeaderAction',array('id'=>'KeyHeaderAction'));?>
+	<? echo $this->Form->input('KeyHeader.id',array('id'=>'KeyHeader','type'=>'hidden'));?>
+<?php echo $this->Form->end();?>
+
+
+
+<?php 
+	echo $this->Html->script(array('ui/uiTable1.1','utils/canvasTable'),array('inline'=>false));
+	echo $this->Html->script(array('formbuilder/formkey'),array('inline'=>false));
+?>
