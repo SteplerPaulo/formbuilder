@@ -30,12 +30,28 @@
 			</li>
 			<li class="submodule">
 				<div class="submodule-icon"><a href="/formbuilder/forms/create"><i class="icon-pencil"></i></a></div>
-				<span class="submodule-name">Form Create</span>
+				<span class="submodule-name">Create Form</span>
 			</li>
 			
 			<li class="submodule">
 				<div class="submodule-icon"><a href="/formbuilder/forms"><i class="icon-list-alt icon-white"></i></a></div>
 				<span class="submodule-name">Form List</span>
+			</li>
+			
+			<li class="submodule">
+				<div class="submodule-icon"><a href="/formbuilder/key_headers/generate_keys"><i class="icon-qrcode icon-white"></i></a></div>
+				<span class="submodule-name">Generate Key</span>
+			</li>
+			
+			<li class="submodule">
+				<div class="submodule-icon"><a href="/formbuilder/key_headers"><i class="icon-file icon-white"></i></a></div>
+				<span class="submodule-name">Key List</span>
+			</li>
+			
+			
+			<li class="submodule">
+				<div class="submodule-icon"><a href="/formbuilder/evaluations/login"><i class="icon-lock icon-white"></i></a></div>
+				<span class="submodule-name">Evaluation Login</span>
 			</li>
 			
 			<?php for($i=1;$i<0;$i++): ?>
