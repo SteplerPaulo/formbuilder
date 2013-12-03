@@ -28,7 +28,7 @@ class FormsController extends AppController {
 	}
 
 	function view() {
-		if (isset($this->data['Form']['id']) || empty($this->data['Form']['id']) ) {
+		if (isset($this->data['Form']['id'])) {
 			$form_id = $this->data['Form']['id'];
 			
 			$this->Form->recursive = 3;
