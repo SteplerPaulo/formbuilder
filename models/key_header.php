@@ -2,8 +2,8 @@
 class KeyHeader extends AppModel {
 	var $name = 'KeyHeader';
 	var $useDbConfig = 'evaluation';
+	
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
 	var $hasMany = array(
 		'Key' => array(
 			'className' => 'Key',
@@ -19,5 +19,14 @@ class KeyHeader extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
+	
+	var $belongsTo = array(
+		'Form' => array(
+			'className' => 'Form',
+			'foreignKey' => 'form_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 }
