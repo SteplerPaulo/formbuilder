@@ -1,11 +1,20 @@
 <?php
 class KeysController extends AppController {
-
 	var $name = 'Keys';
 
 	function index() {
-		$this->Key->recursive = 0;
-		$this->set('keys', $this->paginate());
+		if ($this->Rest->isActive()) {	
+			$data = $this->api($_GET);
+			$this->set('data',$data);
+		}
+		else if($this->RequestHandler->isAjax()){	
+			$data = $this->Key->find('all');
+			echo json_encode($data);
+			exit;
+		}else{
+			$this->Key->recursive = 0;
+			$this->set('keys', $this->paginate());
+		}
 	}
 
 	function view($id = null) {
@@ -62,4 +71,44 @@ class KeysController extends AppController {
 		$this->Session->setFlash(__('Key was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
+	protected function api($params){
+		$schema = $this->Key->schema();
+		$conditions = array();
+		$fields = array();
+		$group = array();
+		$type = 'all';
+		$page = 1;
+		$limit = $this->Rest->limit;
+		foreach($params as $key => $val){
+			switch($key){
+				case 'fields':
+					foreach(explode(',',$val) as $f){
+						if(isset($schema[$f])){
+							array_push($fields,'Key.'.$f);
+						}else{
+							return $this->Rest->abort(array('status' => '404', 'error' => 'Invalid field '.$f.' supplied'));
+						}
+					}
+				break;
+				
+				case 'page':
+					$page = $val;
+				break;
+				case 'limit':
+					$limit = $val;
+				break;
+				default:
+					if(isset($schema[$key])){
+						$conditions['Key.'.$key.' LIKE']=$val;
+					}else if($key!='url'){
+						return $this->Rest->abort(array('status' => '404', 'error' => 'Invalid keyword '.$key.' supplied'));
+					}	
+				break;
+			}
+		}
+		$this->Key->recursive = 1;
+		return $this->Key->find($type,array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy ASC'=>'id'));
+	}
+	
 }
