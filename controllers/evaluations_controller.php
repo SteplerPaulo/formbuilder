@@ -5,8 +5,18 @@ class EvaluationsController extends AppController {
 	var $uses = array('Evaluation','Key','Form');
 
 	function index() {
-		$this->Evaluation->recursive = 0;
-		$this->set('evaluations', $this->paginate());
+		if ($this->Rest->isActive()) {	
+			$curr_data = $this->api($_GET);
+			$this->set('data',$curr_data);
+		}
+		else if($this->RequestHandler->isAjax()){	
+			$data = $this->Evaluation->find('all');
+			echo json_encode($data);
+			exit;
+		}else{
+			$this->Evaluation->recursive = 0;
+			$this->set('evaluations', $this->paginate());
+		}
 	}
 
 	function view($id = null) {
@@ -87,7 +97,7 @@ class EvaluationsController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 
-	function log_in() {
+	function login() {
 		if ($this->RequestHandler->isAjax()) {
 			$key_value = $this->data['Evaluation']['key'];
 			
@@ -100,7 +110,7 @@ class EvaluationsController extends AppController {
 	}
 	
 	function form(){
-		if (isset($this->data['Form']['id']) || empty($this->data['Form']['id']) ) {
+		if (isset($this->data['Form']['id'])) {
 			$form_id = $this->data['Form']['id'];
 			
 			$this->Form->recursive = 3;
@@ -116,7 +126,47 @@ class EvaluationsController extends AppController {
 		
 			$this->set('form', $data);
 		}else{
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action'=>'login'));
 		}
 	}
+	
+	protected function api($params){
+		$schema = $this->Evaluation->schema();
+		$conditions = array();
+		$fields = array();
+		$group = array();
+		$type = 'all';
+		$page = 1;
+		$limit = $this->Rest->limit;
+		foreach($params as $key => $val){
+			switch($key){
+				case 'fields':
+					foreach(explode(',',$val) as $f){
+						if(isset($schema[$f])){
+							array_push($fields,'Evaluation.'.$f);
+						}else{
+							return $this->Rest->abort(array('status' => '404', 'error' => 'Invalid field '.$f.' supplied'));
+						}
+					}
+				break;
+				
+				case 'page':
+					$page = $val;
+				break;
+				case 'limit':
+					$limit = $val;
+				break;
+				default:
+					if(isset($schema[$key])){
+						$conditions['Evaluation.'.$key.' LIKE']=$val;
+					}else if($key!='url'){
+						return $this->Rest->abort(array('status' => '404', 'error' => 'Invalid keyword '.$key.' supplied'));
+					}	
+				break;
+			}
+		}
+		$this->Evaluation->recursive = 1;
+		return $this->Evaluation->find($type,array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy ASC'=>'id'));
+	}
 }
+
