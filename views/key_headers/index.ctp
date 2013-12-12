@@ -33,8 +33,9 @@
 				<thead>
 					<tr>
 						<th class="w10 text-center"><a >Key Header Id</a></th>
-						<th class="w75 text-center"><a >Form Title</a></th>	 
-						<th class="w10 text-center"><a >Key Count</a></th>	 
+						<th class="w60 text-center"><a >Form Title</a></th>	 
+						<th class="w10 text-center"><a >Key Count</a></th>	
+						<th class="w15 text-center"><a >Date Created</a></th>	 
 						<th class="actions w5"><a >Actions</a></th>
 					</tr>
 				</thead>
@@ -43,6 +44,7 @@
 						<td  class="text-right"><span data-field="KeyHeader.id" class="keyheader-id"></span></td>
 						<td><span data-field="Form.title"></span></td>
 						<td  class="text-center"><span data-field="Key.count"></span></td>
+						<td><span data-field="KeyHeader.created"></span></td>
 						<td class="actions">
 							<div class="btn-group">
 								<div class="btn-group btn-center">
