@@ -4,13 +4,18 @@ $(document).ready(function(){
 		$('#EvaluationLoginForm').ajaxSubmit({
 			dataType:'json',
 			success:function(formReturn){
-				
 				if(formReturn.data){
 					$('#FormId').val(formReturn.data.KeyHeader.form_id);
-				
+					$('#ObjectId').val(formReturn.data.Key.id);
+
+					if(formReturn.data.Key.status == '1'){
+						alert('Key already used');
+						return;
+					}
 					var action ='/formbuilder/evaluations/form';
 					$('#FormAction').attr('action',action);
 					$('#FormAction').submit();
+					
 				}else{
 					alert('Invalid log in key');
 				}
