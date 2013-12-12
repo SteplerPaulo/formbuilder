@@ -1,12 +1,12 @@
 <?php
 class Key extends AppModel {
-	var $name = 'Key';
+	var $name = 'Key';							
+	var $useDbConfig = 'key';
 	var $virtualFields = array('status_str'=>"CASE status
-											WHEN '0' THEN 'Active'
-											WHEN '2' THEN 'Used'
-										END ");
-								
-	var $useDbConfig = 'evaluation';
+										WHEN '0' THEN 'Active'
+										WHEN '2' THEN 'Used'
+									END ");
+	
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
