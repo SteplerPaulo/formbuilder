@@ -1,7 +1,6 @@
 <?php
 class Key extends AppModel {
-	var $name = 'Key';							
-	var $useDbConfig = 'key';
+	var $name = 'Key';			
 	var $virtualFields = array('status_str'=>"CASE status
 										WHEN '0' THEN 'Active'
 										WHEN '2' THEN 'Used'
