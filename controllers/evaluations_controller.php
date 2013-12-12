@@ -2,7 +2,7 @@
 class EvaluationsController extends AppController {
 
 	var $name = 'Evaluations';
-	var $uses = array('Evaluation','Key','Form');
+	var $uses = array('Evaluation','Key','Form','Question');
 
 	function index() {
 		if ($this->Rest->isActive()) {	
@@ -28,7 +28,6 @@ class EvaluationsController extends AppController {
 	}
 
 	function add() {
-		
 		foreach($this->data['EvaluationDetail'] as $key => $detail){
 			if($detail['option_type']=='checkbox' || $detail['option_type']=='radio'){
 				if(!isset($detail['option_id'])){
@@ -44,6 +43,8 @@ class EvaluationsController extends AppController {
 
 		if (!empty($this->data)) {
 			$this->Evaluation->create();
+			$this->data['Key']['status'] = '1';
+			
 			if ($this->Evaluation->saveAll($this->data)) {
 				if($this->RequestHandler->isAjax()){
 					$response['status'] = 1;
@@ -114,20 +115,62 @@ class EvaluationsController extends AppController {
 			$form_id = $this->data['Form']['id'];
 			
 			$this->Form->recursive = 3;
-			$data = $this->Form->read(null, $form_id);
+			$form = $this->Form->read(null, $form_id);
 
-			foreach($data['FormDomain'] as $domain){
-				foreach($data['Question'] as $question){
+			foreach($form['FormDomain'] as $domain){
+				foreach($form['Question'] as $question){
 					if($domain['domain_id'] == $question['domain_id']){
-						$data['DomainQuestion'][$question['Domain']['name']][$question['text']] = $question;
+						$form['DomainQuestion'][$question['Domain']['name']][$question['text']] = $question;
 					}
 				}
 			}
 		
-			$this->set('form', $data);
+			$key = $this->data['Form']['object_id'];
+			$this->set(compact('form','key'));
 		}else{
 			$this->redirect(array('action'=>'login'));
 		}
+	}
+	
+	function result(){
+		//SUMMARY
+		$summary = $this->Evaluation->EvaluationDetail->getWeightedMean();
+		$this->set('summary',$summary);
+	
+		//DIVERGENT QUESTION
+		$form_id= 2;
+		$conditions = array('Evaluation.form_id'=>$form_id,
+							'EvaluationDetail.answer Not'=>'Null',
+							'Question.option_type_id'=>3
+						);
+		$fields	= array('Question.id','Question.text','EvaluationDetail.answer',
+						'COUNT(EvaluationDetail.id) AS count'
+						);
+		
+		$divergent_answer = $this->Evaluation->EvaluationDetail->find('all',array('recursive'=>0,
+												'conditions'=>$conditions,'fields'=>$fields,
+												'group'=>array('EvaluationDetail.answer')
+											));
+
+		$divergent_question  = array();
+		foreach($divergent_answer as $key => $answer){
+			$divergent_question[$answer['Question']['text']][$key]= $answer;
+		}
+		$this->set('divergent_question',$divergent_question);
+		
+		//DISTRIBUTION
+		$frequency = $this->Evaluation->EvaluationDetail-> getFrequency();
+		$distribution = array();
+		foreach($summary as $s){
+			foreach($frequency as $k=>$f){
+				if($s['Question']['text']==$f['Question']['text']){
+					$distribution[$s['Question']['text']]['weighted_mean']=$s['0']['weighted_mean'];
+					$distribution[$s['Question']['text']][$f['Option']['value']]=$f;
+				}
+			}
+		}
+		$this->set('distribution',$distribution);
+	
 	}
 	
 	protected function api($params){
