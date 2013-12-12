@@ -24,17 +24,15 @@
 	<div class="row-fluid">
 		<div class="w70 center">
 			<div><b>Key Header ID : <? echo $keyHeader['KeyHeader']['id'];?></b></div>
+			<div><b>Form Title : <? echo $keyHeader['Form']['title'];?></b></div>
 			<div>
-				<b>
-					Form Title : <? echo $keyHeader['Form']['title'];?>
-					<span class="pull-right">
-						<a action='/formbuilder/key_headers/print_keys' class="fb-print-action">
-							Print <i class="icon-print"></i>
-						</a>
-					</span>
-				</b>
+				<b>Form Type : <? echo $keyHeader['Form']['FormType']['name'];?></b>
+				<span class="pull-right">
+					<a action='/formbuilder/key_headers/print_keys' class="fb-print-action">
+						Print <i class="icon-print"></i>
+					</a>
+				</span>
 			</div>
-			
 			<hr/>
 			<table class="table table table-striped table-bordered  table-condensed">
 				
