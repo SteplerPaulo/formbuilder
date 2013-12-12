@@ -26,6 +26,7 @@
 			<dl class="well">
 				<? echo '<b><center>'.$form['Form']['title']. '<center/><center>'.$form['Form']['description'].'<center/><center>'.$form['FormType']['name'].'</center></b>'; ?>
 				<? echo $this->Form->input('Evaluation.form_id',array('type'=>'hidden','value'=>$form['Form']['id'])); ?>	
+				<? echo $this->Form->input('Key.id',array('type'=>'hidden','value'=>$key)); ?>	
 			</dl>
 			<!--DOMAIN FOREACH--->
 			<? foreach($form['FormDomain'] as $domain):?>
