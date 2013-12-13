@@ -12,10 +12,16 @@ $(document).ready(function(){
 						alert('Key already used');
 						return;
 					}
-					var action ='/formbuilder/evaluations/form';
-					$('#FormAction').attr('action',action);
-					$('#FormAction').submit();
 					
+					if(formReturn.data.KeyHeader.Form.form_type_id==3){
+						var action ='/formbuilder/evaluations/form';
+						$('#FormAction').attr('action',action);
+						$('#FormAction').submit();
+					}else if(formReturn.data.KeyHeader.Form.form_type_id==2){
+						alert('This key is use for survey form type which is under constraction.Please contact developer for more info.');
+					}else if(formReturn.data.KeyHeader.Form.form_type_id==1){
+						alert('This key is use for quiz form type which is under constraction.Please contact developer for more info.');
+					}
 				}else{
 					alert('Invalid log in key');
 				}
@@ -25,20 +31,24 @@ $(document).ready(function(){
 
 	//FORM SUBMIT EVENT
 	$(document).on('click','#EvaluationFormSubmitButton',function(){
-		$('#EvaluationForm').ajaxSubmit({
-				dataType:'json',
-				success:function(formReturn){
-					$('#Notification').html(formReturn.msg);
-					$('#Modal').modal('show'); 
-					if(formReturn.status){
-						setTimeout(function(){
-							var action ='/formbuilder/evaluations/login';
-							$('#FormAction').attr('action',action);
-							$('#FormAction').submit();
-						},1500);
-					
+		if($('#EvaluationEvaluatee').val() !=''){
+			$('#EvaluationForm').ajaxSubmit({
+					dataType:'json',
+					success:function(formReturn){
+						$('#Notification').html(formReturn.msg);
+						$('#Modal').modal('show'); 
+						if(formReturn.status){
+							setTimeout(function(){
+								var action ='/formbuilder/evaluations/login';
+								$('#FormAction').attr('action',action);
+								$('#FormAction').submit();
+							},1500);
+						
+						}
 					}
-				}
-		});
+			});
+			return;
+		}
+		$('#EvaluationEvaluatee').focus();
 	});
 });
