@@ -134,50 +134,62 @@ class EvaluationsController extends AppController {
 	}
 	
 	function result(){
-		//SUMMARY
-		$summary = $this->Evaluation->EvaluationDetail->getWeightedMean();
-		$this->set('summary',$summary);
-	
-		//DIVERGENT QUESTION/COMMENT
-		$form_id= 2;
-		$conditions = array('Evaluation.form_id'=>$form_id,
-							'EvaluationDetail.answer Not'=>'Null',
-							'Question.option_type_id'=>3
-						);
-		$fields	= array('Question.id','Question.text','EvaluationDetail.answer',
-						'COUNT(EvaluationDetail.id) AS count'
-						);
+		if (isset($this->data['Evalaution']['form_id']) && isset($this->data['Evalaution']['evalautee'])) {
+			$form_id= $this->data['Evalaution']['form_id'];
+			$evaluatee = $this->data['Evalaution']['evalautee'];
+			
+			$form = $this->Form->read(null, $form_id);
+			$this->set(compact('evaluatee','form'));
+			
+			//SUMMARY
+			$summary = $this->Evaluation->EvaluationDetail->getWeightedMean($form_id,$evaluatee);
+			$this->set('summary',$summary);
+			//END
 		
-		$divergent_answer = $this->Evaluation->EvaluationDetail->find('all',array('recursive'=>0,
-												'conditions'=>$conditions,'fields'=>$fields,
-												'group'=>array('EvaluationDetail.answer','EvaluationDetail.question_id')
-											));		
-		$divergent_question  = array();
-		foreach($divergent_answer as $key => $answer){
-			$divergent_question[$answer['Question']['text']][$key]= $answer;
-		}
-		$this->set('divergent_question',$divergent_question);
-		
-		//DISTRIBUTION
-		$frequency = $this->Evaluation->EvaluationDetail-> getFrequency();
-		$distribution = array();
-		foreach($summary as $s){
-			foreach($frequency as $k=>$f){
-				if($s['Question']['text']==$f['Question']['text']){
-					$distribution[$s['Question']['text']]['weighted_mean']=$s['0']['weighted_mean'];
-					$distribution[$s['Question']['text']][$f['Option']['value']]=$f;
+			//DIVERGENT QUESTIONS(COMMENT & SUGGESTION)
+			$conditions = array('Evaluation.form_id'=>$form_id,
+								'Evaluation.evaluatee'=>$evaluatee,
+								'EvaluationDetail.answer Not'=>'Null',
+								'Question.option_type_id'=>3
+							);
+			$fields	= array('Question.id','Question.text','EvaluationDetail.answer',
+							'COUNT(EvaluationDetail.id) AS count'
+							);
+			
+			$divergent_answer = $this->Evaluation->EvaluationDetail->find('all',array('recursive'=>0,
+													'conditions'=>$conditions,'fields'=>$fields,
+													'group'=>array('EvaluationDetail.answer','EvaluationDetail.question_id')
+												));		
+			$divergent_question  = array();
+			foreach($divergent_answer as $key => $answer){
+				$divergent_question[$answer['Question']['text']][$key]= $answer;
+			}
+			$this->set('divergent_question',$divergent_question);
+			//END
+			
+			//DISTRIBUTION
+			$frequency = $this->Evaluation->EvaluationDetail-> getFrequency($form_id,$evaluatee);
+			$distribution = array();
+			foreach($summary as $s){
+				foreach($frequency as $k=>$f){
+					if($s['Question']['text']==$f['Question']['text']){
+						$distribution[$s['Question']['text']]['weighted_mean']=$s['0']['weighted_mean'];
+						$distribution[$s['Question']['text']][$f['Option']['value']]=$f;
+					}
 				}
 			}
+			$this->set('distribution',$distribution);
+			//END
+		}else{
+			$this->redirect(array('action'=>'index'));
 		}
-		$this->set('distribution',$distribution);
-	
 	}
 	
 	protected function api($params){
 		$schema = $this->Evaluation->schema();
 		$conditions = array();
 		$fields = array();
-		$group = array();
+		$group = array('Evaluation.form_id','Evaluation.evaluatee');
 		$type = 'all';
 		$page = 1;
 		$limit = $this->Rest->limit;
@@ -209,7 +221,12 @@ class EvaluationsController extends AppController {
 			}
 		}
 		$this->Evaluation->recursive = 1;
-		return $this->Evaluation->find($type,array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy ASC'=>'id'));
+		$config =  array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy ASC'=>'id');
+		$data = $this->Evaluation->find($type,$config);
+		$data['count']=count($data);
+		return $data;
 	}
+	
+
 }
 
