@@ -1,3 +1,14 @@
+<style>
+label{
+	width:80px;
+	display: inline-block;
+	line-height: 4px;
+	margin-bottom: 6px;
+	text-align: right;
+	padding-right: 4px;
+}
+</style>
+
 <div class="actions-container row-fluid animate">
 	 <div id="profile-navigation" class="span12 nav-marginTop">		
 		<div class="row-fluid">
@@ -28,6 +39,12 @@
 				<? echo $this->Form->input('Evaluation.form_id',array('type'=>'hidden','value'=>$form['Form']['id'])); ?>	
 				<? echo $this->Form->input('Key.id',array('type'=>'hidden','value'=>$key)); ?>	
 			</dl>
+			
+			<dl class="well">	
+			<?php echo $this->Form->input('Evaluation.evaluator',array('class'=>'span7'));?>	
+			<?php echo $this->Form->input('Evaluation.evaluatee',array('class'=>'span7','required'=>'required'));?>
+		</dl>
+			
 			<!--DOMAIN FOREACH--->
 			<? foreach($form['FormDomain'] as $domain):?>
 			<dl class="well"> 
