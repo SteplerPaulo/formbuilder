@@ -37,6 +37,7 @@
 		<div class="tab-content">
 			<!--Summary-->
 			<div class="tab-pane fade in active" id="SummaryResult">
+			  <? if(!empty($summary)){ ?>
 			  <table class="table table table-striped table-bordered tablesorter" id="EvaluationTable">
 					<thead>
 						<tr>
@@ -53,6 +54,7 @@
 						<? endforeach;?>
 					</tbody>
 				</table>
+				<? }else{ ?> No Data Available  <? } ?>
 			</div>
 			<!--Divergent-->
 			<div class="tab-pane fade" id="CommentResult">
@@ -73,11 +75,11 @@
 					</tbody>
 				</table>
 				<? endforeach;?>
-				
 				<? }else{ ?> No Data Available  <? } ?>
 			</div>
 			<!--Distribution-->
 			<div class="tab-pane fade" id="DistributionResult">
+				<? if(!empty($distribution)){ ?>
 				<table class="table table table-striped table-bordered  RECORD tablesorter" id="EvaluationTable">
 					<thead>
 						<tr class="w100">
@@ -117,6 +119,7 @@
 						<? endforeach;?>
 					</tbody>
 				</table>
+				<? }else{ ?> No Data Available  <? } ?>
 			</div>
 		</div>
 	</div>
