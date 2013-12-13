@@ -768,7 +768,7 @@ Class RestComponent extends Object {
 		$this->Model = ClassRegistry::init($this->Controller->modelClass);
 		$page = isset($_GET['page'])?(int)$_GET['page']:1;
 		$limit = isset($_GET['limit'])?$_GET['limit']:$this->limit;
-		$count =$this->Model->find('count');
+		$count = isset($data['data']['count'])?$data['data']['count']:$this->Model->find('count');
 		$last = ceil($count/$limit);
 		$prev = $page==1||$page>$last?null:$page-1;
 		$next = $page<$last?$page+1:null;
@@ -793,6 +793,9 @@ Class RestComponent extends Object {
 		);
 		
 		foreach($data as $key=>$value){
+			if(isset($value['count'])){
+				unset($value['count']);
+			}
 			$response['data'] = $value;
 		}
 		if (!empty($this->_settings['version'])) {
