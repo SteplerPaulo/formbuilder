@@ -28,20 +28,21 @@ class EvaluationsController extends AppController {
 	}
 
 	function add() {
-		foreach($this->data['EvaluationDetail'] as $key => $detail){
-			if($detail['option_type']=='checkbox' || $detail['option_type']=='radio'){
-				if(!isset($detail['option_id'])){
-						unset($this->data['EvaluationDetail'][$key]);
-				}
-			}else{
-				if(empty($detail['answer'])){
-					$this->data['EvaluationDetail'][$key]['answer']='No Answer';
-					$this->data['EvaluationDetail'][$key]['option_id']='0';
+		if (!empty($this->data)) {
+			foreach($this->data['EvaluationDetail'] as $key => $detail){
+				if($detail['option_type']=='checkbox' || $detail['option_type']=='radio'){
+					if(!isset($detail['option_id'])){
+							unset($this->data['EvaluationDetail'][$key]);
+					}
+				}else{
+					if(empty($detail['answer'])){
+						$this->data['EvaluationDetail'][$key]['answer']='No Answer';
+					}
 				}
 			}
-		}
 
-		if (!empty($this->data)) {
+		
+		
 			$this->Evaluation->create();
 			$this->data['Key']['status'] = '1';
 			
@@ -102,8 +103,8 @@ class EvaluationsController extends AppController {
 		if ($this->RequestHandler->isAjax()) {
 			$key_value = $this->data['Evaluation']['key'];
 			
-			$result = $this->Key->find('first',array('conditions'=>array('Key.value'=>$key_value)));
-			
+			$result = $this->Key->find('first',array('recursive'=>2,'conditions'=>array('Key.value'=>$key_value)));
+		
 			$startTime =  date('h:i A');
 			echo json_encode(array('data'=>$result,'StartTime'=>$startTime));
 			exit;
@@ -137,7 +138,7 @@ class EvaluationsController extends AppController {
 		$summary = $this->Evaluation->EvaluationDetail->getWeightedMean();
 		$this->set('summary',$summary);
 	
-		//DIVERGENT QUESTION
+		//DIVERGENT QUESTION/COMMENT
 		$form_id= 2;
 		$conditions = array('Evaluation.form_id'=>$form_id,
 							'EvaluationDetail.answer Not'=>'Null',
@@ -149,9 +150,8 @@ class EvaluationsController extends AppController {
 		
 		$divergent_answer = $this->Evaluation->EvaluationDetail->find('all',array('recursive'=>0,
 												'conditions'=>$conditions,'fields'=>$fields,
-												'group'=>array('EvaluationDetail.answer')
-											));
-
+												'group'=>array('EvaluationDetail.answer','EvaluationDetail.question_id')
+											));		
 		$divergent_question  = array();
 		foreach($divergent_answer as $key => $answer){
 			$divergent_question[$answer['Question']['text']][$key]= $answer;
