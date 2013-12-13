@@ -22,17 +22,17 @@
  </div>
 <div class="sub-content-container">
 	<div class="w90 center">
+				
+		<div>Evaluatee Name:</b>  <? echo $evaluatee;?></div>
+		<div>Form Title:</b>  <? echo $form['Form']['title'];?></div>
+		<div>Respondent Count:</b>  <? echo $respondent_count['0']['0']['respondent_count'];?></div>
+		<hr/>
+	
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#SummaryResult" data-toggle="tab">Summary</a></li>
 			<li><a href="#CommentResult" data-toggle="tab">Divergent Question</a></li>
 			<li><a href="#DistributionResult" data-toggle="tab">Distribution</a></li>
 		</ul>
-		
-		
-		<div>Evaluatee Name:</b>  <? echo $evaluatee;?></div>
-		<div>Form Title:</b>  <? echo $form['Form']['title'];?></div>
-		<hr/>
-		
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<!--Summary-->
