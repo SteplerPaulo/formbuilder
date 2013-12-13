@@ -29,7 +29,7 @@
 												);?>
 		<fieldset>
 			<legend><?php __('Log In'); ?></legend>
-			<?php echo $this->Form->input('key',array('placeholder'=>'INSERT VALID KEY','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('key',array('required'=>'required','placeholder'=>'INSERT VALID KEY','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 		</fieldset>
 		<div class="control-group">
 			<div class="controls">
