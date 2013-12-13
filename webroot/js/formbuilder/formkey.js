@@ -17,8 +17,6 @@ $('document').ready(function(){
 		$('#KeyHeaderAction').submit();
 	});
 	
-	
-	
 	//Go Button 
 	$('#GoEncryptButton').click(function(){
 		var form_id = $('#KeyHeaderFormId').val();
@@ -64,13 +62,11 @@ $('document').ready(function(){
 				if(formReturn.status){
 					$('#GeneratedKeyTable tbody').fadeIn('slow').html('');
 				}
-				$('#Notification').html(formReturn.msg).slideDown().delay(5000).slideUp();
+				$('#Notification').html(formReturn.msg).slideDown().delay(4000).slideUp();
 				
 				
 			}
 		});
 	});
-	
-	
 });
 	 
