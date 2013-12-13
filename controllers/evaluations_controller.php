@@ -137,24 +137,19 @@ class EvaluationsController extends AppController {
 		if (isset($this->data['Evalaution']['form_id']) && isset($this->data['Evalaution']['evalautee'])) {
 			$form_id= $this->data['Evalaution']['form_id'];
 			$evaluatee = $this->data['Evalaution']['evalautee'];
-			
 			$form = $this->Form->read(null, $form_id);
-			$this->set(compact('evaluatee','form'));
+			$respondent_count = $this->Evaluation->EvaluationDetail->respondent_count($form_id,$evaluatee);
 			
 			//SUMMARY
 			$summary = $this->Evaluation->EvaluationDetail->getWeightedMean($form_id,$evaluatee);
-			$this->set('summary',$summary);
 			//END
 		
 			//DIVERGENT QUESTIONS(COMMENT & SUGGESTION)
-			$conditions = array('Evaluation.form_id'=>$form_id,
-								'Evaluation.evaluatee'=>$evaluatee,
-								'EvaluationDetail.answer Not'=>'Null',
-								'Question.option_type_id'=>3
+			$conditions = array('Evaluation.form_id'=>$form_id,'Evaluation.evaluatee'=>$evaluatee,
+								'EvaluationDetail.answer Not'=>'Null','Question.option_type_id'=>3
 							);
 			$fields	= array('Question.id','Question.text','EvaluationDetail.answer',
-							'COUNT(EvaluationDetail.id) AS count'
-							);
+							'COUNT(EvaluationDetail.id) AS count');
 			
 			$divergent_answer = $this->Evaluation->EvaluationDetail->find('all',array('recursive'=>0,
 													'conditions'=>$conditions,'fields'=>$fields,
@@ -164,7 +159,6 @@ class EvaluationsController extends AppController {
 			foreach($divergent_answer as $key => $answer){
 				$divergent_question[$answer['Question']['text']][$key]= $answer;
 			}
-			$this->set('divergent_question',$divergent_question);
 			//END
 			
 			//DISTRIBUTION
@@ -178,8 +172,11 @@ class EvaluationsController extends AppController {
 					}
 				}
 			}
-			$this->set('distribution',$distribution);
 			//END
+			
+			
+			
+			$this->set(compact('evaluatee','form','respondent_count','summary','divergent_question','distribution'));
 		}else{
 			$this->redirect(array('action'=>'index'));
 		}
