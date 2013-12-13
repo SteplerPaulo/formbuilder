@@ -1,8 +1,8 @@
 <?php
 class EvaluationDetail extends AppModel {
 	var $name = 'EvaluationDetail';
-	var $virtualFields = array('frequency'=>'COUNT(*)',
-								'weight'=>'COUNT(*) * Option.value');  
+	
+	//var $virtualFields = array('weight'=>'COUNT(*) * Option.value');  
 
 	var $belongsTo = array(
 		'Evaluation' => array(
@@ -28,7 +28,7 @@ class EvaluationDetail extends AppModel {
 		)
 	);
 	
-	public function getWeightedMean(){
+	public function getWeightedMean($form_id,$evaluatee){
 		return $this->query("SELECT 
 								text,
 								ROUND(SUM(mul) / SUM(frequency),2) AS weighted_mean
@@ -54,6 +54,8 @@ class EvaluationDetail extends AppModel {
 										`questions`.`id` = `evaluation_details`.`question_id`
 									  ) 
 								  WHERE `options`.`value` > 0 
+								  AND `evaluations`.`form_id`= '$form_id'
+								  AND `evaluations`.`evaluatee`= '$evaluatee'
 								  GROUP BY 
 									`evaluation_details`.`question_id`,
 									`evaluation_details`.`option_id`) AS Question 
@@ -61,10 +63,10 @@ class EvaluationDetail extends AppModel {
 			);
 	}
 
-	public function getFrequency(){
-		$conditions = array('Option.value >'=>0);
+	public function getFrequency($form_id,$evaluatee){
+		$conditions = array('Option.value >'=>0,'Evaluation.form_id'=>$form_id,'Evaluation.evaluatee'=>$evaluatee);
 		
-		$fields = array('EvaluationDetail.question_id','EvaluationDetail.frequency','Option.value','EvaluationDetail.weight','Question.text');
+		$fields = array('EvaluationDetail.question_id','COUNT(*) as frequency','Option.value','COUNT(*) * Option.value as weight','Question.text');
 		$group =array('EvaluationDetail.question_id','EvaluationDetail.option_id');
 	
 		return $this->find('all',compact('conditions','fields','group'));
