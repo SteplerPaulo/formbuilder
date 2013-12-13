@@ -54,6 +54,11 @@
 				<span class="submodule-name">Evaluation Login</span>
 			</li>
 			
+			<li class="submodule">
+				<div class="submodule-icon"><a href="/formbuilder/evaluations/result"><i class="icon-hdd icon-white"></i></a></div>
+				<span class="submodule-name">Evaluation</span>
+			</li>
+			
 			<?php for($i=1;$i<0;$i++): ?>
 			<li class="submodule">
 				<div class="submodule-icon"><a href="#/"><i class="icon-check-empty"></i></a></div>
