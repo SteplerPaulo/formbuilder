@@ -71,4 +71,13 @@ class EvaluationDetail extends AppModel {
 	
 		return $this->find('all',compact('conditions','fields','group'));
 	}
+	
+	public function respondent_count($form_id,$evaluatee){
+		return $this->query("SELECT
+			COUNT(*) AS respondent_count
+		FROM
+			`formbuilder`.`evaluations`
+		WHERE `evaluations`.`form_id`='2' AND `evaluations`.`evaluatee`='Ms. Unknown'"
+		);
+	}
 }
