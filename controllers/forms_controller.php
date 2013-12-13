@@ -51,11 +51,8 @@ class FormsController extends AppController {
 	function worksheet() {
 		if (!empty($this->data['Form']['id'])) {
 			$form_id = $this->data['Form']['id'];
-			
 			$this->Form->recursive = 3;
 			$data = $this->Form->read(null, $form_id);
-			
-			
 			if(isset($data['FormDomain'])){
 				foreach($data['FormDomain'] as $domain){
 					foreach($data['Question'] as $question){
@@ -65,9 +62,6 @@ class FormsController extends AppController {
 					}
 				}
 			}
-			
-		//	pr($data);exit;
-		
 			$this->set('form', $data);
 		}else{
 			$this->redirect(array('action'=>'index'));
