@@ -27,7 +27,12 @@
 			<li><a href="#CommentResult" data-toggle="tab">Divergent Question</a></li>
 			<li><a href="#DistributionResult" data-toggle="tab">Distribution</a></li>
 		</ul>
-
+		
+		
+		<div>Evaluatee Name:</b>  <? echo $evaluatee;?></div>
+		<div>Form Title:</b>  <? echo $form['Form']['title'];?></div>
+		<hr/>
+		
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<!--Summary-->
@@ -51,6 +56,7 @@
 			</div>
 			<!--Divergent-->
 			<div class="tab-pane fade" id="CommentResult">
+				<? if(!empty($divergent_question)){ ?>
 				<? foreach($divergent_question as $question => $data):?>
 				<table class="table table table-striped table-bordered RECORD tablesorter" id="EvaluationTable">
 					<thead>
@@ -67,6 +73,8 @@
 					</tbody>
 				</table>
 				<? endforeach;?>
+				
+				<? }else{ ?> No Data Available  <? } ?>
 			</div>
 			<!--Distribution-->
 			<div class="tab-pane fade" id="DistributionResult">
@@ -78,11 +86,11 @@
 							<th class="w10 text-center" rowspan="2"><a>Weighted Mean</a></th>
 						</tr>
 						<tr class="w100 text-center">
-							<th class="w5 text-center"><a>1</a></th>
-							<th class="w5 text-center"><a>2</a></th>
-							<th class="w5 text-center"><a>3</a></th>
-							<th class="w5 text-center"><a>4</a></th>
 							<th class="w5 text-center"><a>5</a></th>
+							<th class="w5 text-center"><a>4</a></th>
+							<th class="w5 text-center"><a>3</a></th>
+							<th class="w5 text-center"><a>2</a></th>
+							<th class="w5 text-center"><a>1</a></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -90,19 +98,19 @@
 						<tr>
 							<td><? echo $k; ?></td>
 							<td class="text-center">
-								<? echo (isset($d[1]))?$d[1]['EvaluationDetail']['frequency']:'0';?>
+								<? echo (isset($d[5]))?$d[5]['0']['frequency']:'0';?>
 							</td>
 							<td class="text-center">
-								<? echo (isset($d[2]))?$d[2]['EvaluationDetail']['frequency']:'0';?>
+								<? echo (isset($d[4]))?$d[4]['0']['frequency']:'0';?>
 							</td>
 							<td class="text-center">
-								<? echo (isset($d[3]))?$d[3]['EvaluationDetail']['frequency']:'0';?>
+								<? echo (isset($d[3]))?$d[3]['0']['frequency']:'0';?>
 							</td>
 							<td class="text-center">
-								<? echo (isset($d[4]))?$d[4]['EvaluationDetail']['frequency']:'0';?>
+								<? echo (isset($d[2]))?$d[2]['0']['frequency']:'0';?>
 							</td>
 							<td class="text-center">
-								<? echo (isset($d[5]))?$d[5]['EvaluationDetail']['frequency']:'0';?>
+								<? echo (isset($d[1]))?$d[1]['0']['frequency']:'0';?>
 							</td>
 							<td class="text-center"><? echo $d['weighted_mean']; ?></td>
 						</tr>
