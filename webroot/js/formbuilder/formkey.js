@@ -21,35 +21,40 @@ $('document').ready(function(){
 	
 	//Go Button 
 	$('#GoEncryptButton').click(function(){
-		$(document).trigger('collect_selected_option_value');
-		var form= $(this).parents("form:first");
+		var form_id = $('#KeyHeaderFormId').val();
 		var count= $('#KeyHeaderIntentKeyCount').val();
-		
-		$.ajax({
-			url:BASE_URL+'key_headers/login_key_encryption',
-			type:'post',
-			data:{'data':{'no_of_requested_key':count}},
-			success:function(data){
-					var json = $.parseJSON(data);
-					$('#GeneratedKeyTable tbody').hide().html('');
-					var row ='';
-					$.each(json, function(ctr,obj){
-						
-						if(ctr%2 == 0){
-							row +='<tr>';
-							row += '<td class="text-right">'+(ctr+1)+'</td><td>'+obj+'</td>';
-							row += '<td class="hide"><input value="'+obj+'" name="data[Key]['+ctr+'][value]"></input></td>';
-						}else{
-							row += '<td class="text-right">'+(ctr+1)+'</td><td>'+obj+'</td>';
-							row += '<td class="hide"><input value="'+obj+'" name="data[Key]['+ctr+'][value]"></input></td>';
-							row +='</tr>';
-						}
-						
-
-					});
-					$('#GeneratedKeyTable tbody').html(row).show();
-				}
-		});
+		if(form_id && count){
+			$.ajax({
+				url:BASE_URL+'key_headers/login_key_encryption',
+				type:'post',
+				data:{'data':{'no_of_requested_key':count}},
+				success:function(data){
+						var json = $.parseJSON(data);
+						$('#GeneratedKeyTable tbody').hide().html('');
+						var row ='';
+						$.each(json, function(ctr,obj){
+							if(ctr%2 == 0){
+								row +='<tr>';
+								row += '<td class="text-right">'+(ctr+1)+'</td><td>'+obj+'</td>';
+								row += '<td class="hide"><input value="'+obj+'" name="data[Key]['+ctr+'][value]"></input></td>';
+							}else{
+								row += '<td class="text-right">'+(ctr+1)+'</td><td>'+obj+'</td>';
+								row += '<td class="hide"><input value="'+obj+'" name="data[Key]['+ctr+'][value]"></input></td>';
+								row +='</tr>';
+							}
+						});
+						$('#GeneratedKeyTable tbody').html(row).show();
+					}
+			});
+		}else if(!form_id){
+			alert('Form is required');
+			$('#KeyHeaderFormId').focus();
+			return;
+		}else if(count){
+			alert('Intent key count is required');
+			$('#KeyHeaderIntentKeyCount').focus();
+			return;
+		}
 	});
 	
 	$('#Submit').click(function(){
