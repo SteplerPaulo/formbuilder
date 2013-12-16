@@ -31,12 +31,16 @@ class EvaluationDetail extends AppModel {
 	public function getWeightedMean($form_id,$evaluatee){
 		return $this->query("SELECT 
 								text,
-								ROUND(SUM(mul) / SUM(frequency),2) AS weighted_mean
+								ROUND(SUM(mul) / SUM(frequency),2) AS weighted_mean,
+								domain_name,
+								domain_id
 								FROM
 								  (SELECT 
 									`evaluation_details`.`question_id`,
 									`evaluations`.`form_id`,
 									`questions`.`text`,
+									`domains`.`name` AS domain_name,
+									`domains`.`id` AS domain_id,
 									COUNT(evaluations.`id`) AS frequency,
 									COUNT(`evaluation_details`.`option_id`) * `options`.`value` AS mul 
 								  FROM
@@ -52,6 +56,10 @@ class EvaluationDetail extends AppModel {
 									INNER JOIN `questions` 
 									  ON (
 										`questions`.`id` = `evaluation_details`.`question_id`
+									  ) 
+									INNER JOIN `domains` 
+									  ON (
+										`domains`.`id` = `questions`.`domain_id`
 									  ) 
 								  WHERE `options`.`value` > 0 
 								  AND `evaluations`.`form_id`= '$form_id'
