@@ -26,9 +26,13 @@ $('document').ready(function(){
 				url:BASE_URL+'key_headers/login_key_encryption',
 				type:'post',
 				data:{'data':{'no_of_requested_key':count}},
+				beforeSend: function(){
+					$('#GeneratedKeyTable tbody').hide().html('');
+					$('#GeneratedKeyTable tfoot td').html("<center>Generating... <img src='/formbuilder/img/icons/black-loader.gif' style='height: 25px' /><center>").fadeIn();
+				},
 				success:function(data){
 						var json = $.parseJSON(data);
-						$('#GeneratedKeyTable tbody').hide().html('');
+						$('#GeneratedKeyTable tfoot td').html('');
 						var row ='';
 						$.each(json, function(ctr,obj){
 							if(ctr%2 == 0){
@@ -45,11 +49,9 @@ $('document').ready(function(){
 					}
 			});
 		}else if(!form_id){
-			alert('Form is required');
 			$('#KeyHeaderFormId').focus();
 			return;
-		}else if(count){
-			alert('Intent key count is required');
+		}else if(!count){
 			$('#KeyHeaderIntentKeyCount').focus();
 			return;
 		}
