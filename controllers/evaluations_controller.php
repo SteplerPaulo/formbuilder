@@ -168,12 +168,13 @@ class EvaluationsController extends AppController {
 				foreach($frequency as $k=>$f){
 					if($s['Question']['text']==$f['Question']['text']){
 						$distribution[$s['Question']['text']]['weighted_mean']=$s['0']['weighted_mean'];
+						$distribution[$s['Question']['text']]['domain_id']=$s['Question']['domain_id'];
+						$distribution[$s['Question']['text']]['domain_name']=$s['Question']['domain_name'];
 						$distribution[$s['Question']['text']][$f['Option']['value']]=$f;
 					}
 				}
 			}
 			//END
-			
 			
 			
 			$this->set(compact('evaluatee','form','respondent_count','summary','divergent_question','distribution'));
