@@ -52,7 +52,7 @@
 									<ul class="dropdown-menu pull-right">	
 										<li>
 											<a action='/formbuilder/key_headers/view' class="fb-action">
-												<i class="icon-eye-open"></i> Details
+												<i class="icon-eye-open"></i> View
 											</a>
 										</li>
 										<li>
