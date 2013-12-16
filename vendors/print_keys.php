@@ -38,7 +38,7 @@ class KeysForm extends Formsheet{
 		$date = date_format($date, 'm/d/Y H:i:s');
 		
 		$this->leftText(1,1,'Form : '.$data['Form']['title'],'','');
-		$this->rightText(44,1,'Date Created : '.$date,'','');
+		$this->leftText(1,2,'Date Created : '.$date,'','');
 		$this->drawLine(4,'h',array(1,43));
 	
 		foreach($data['Key'] as $key){
