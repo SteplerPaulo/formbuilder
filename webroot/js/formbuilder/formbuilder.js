@@ -102,7 +102,7 @@ $(document).ready(function(){
 		}else{
 			$('#Notification').html("<img src='/lib/img/icons/exclamation.png'/>&nbsp;Please fill out required fields.");
 			$.each(form.find('[required="required"]'),function(i,o){
-				$(o).attr('placeholder','Please fill out this field').focus();
+				$(o).attr('placeholder','*Required').focus();
 			});
 		}
 	});

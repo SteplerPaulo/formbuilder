@@ -24,7 +24,7 @@
 						<ul class="dropdown-menu">
 							<li>
 								<a class="fb-option-setting" action="/formbuilder/options/create" option-cog="exclusive" > Exclusive Type</a>
-								<a class="fb-option-setting" action="/formbuilder/options/create" option-cog="multiple"> Multiple Type</a>
+								<a class="fb-option-setting" action="/formbuilder/options/create" option-cog="multiple"> Shared Type</a>
 							</li>
 						</ul>
 					</div>
@@ -47,7 +47,7 @@
 															)
 										));?>								
 		<fieldset>
-			<legend><?php echo __('Add Option').' to Question <br/>'. $q['Question']['text']; ?></legend>
+			<legend><?php echo __('Add Option'); ?></legend>
 			
 			
 			<?php 
@@ -92,7 +92,7 @@
 	<div class="modal-footer">
 		<div class="btn-group">
 			<button class="btn fb-goto-worksheet-button" type="button">Go to Worksheet</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Exit</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Back</button>
 		</div>
 	</div>
 </div>

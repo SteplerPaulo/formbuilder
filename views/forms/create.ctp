@@ -1,5 +1,5 @@
 <div class="actions-container row-fluid animate">
-	 <div id="profile-navigation" class="span12 nav-marginTop">		
+	<div id="profile-navigation" class="span12 nav-marginTop">		
 		<div class="row-fluid">
 			<div class="span6">		
 				<div class="row-fluid">
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 	</div>
- </div>
+</div>
 
 <div class="row-fluid">
 	<div class="forms form span6 offset3">
@@ -77,7 +77,7 @@
 	<div class="modal-footer">
 		<div class="btn-group">
 			<button class="btn fb-goto-worksheet-button" type="button">Go to Worksheet</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Exit</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Back</button>
 		</div>
 	</div>
 </div>

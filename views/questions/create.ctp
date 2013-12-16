@@ -32,10 +32,8 @@
 	</div>
  </div>
 
-<div class="row-fluid">
-	<div class="questions form span8 offset2">
-		<?php echo $this->Form->input('Form.id',array('type'=>'hidden','label'=>'Form Id'));?>
-			
+<div class="row-fluid"><br/>
+	<div class="questions form span8 offset2">	
 		<?php echo $this->Form->create('Question',array('action'=>'add',
 														'class'=>'form-horizontal',
 														'inputDefaults' => array( 	'label'=>array('class'=>'control-label'),
@@ -45,10 +43,9 @@
 												);?>
 		
 		<fieldset>
-			<legend><?php echo 'Form Title: '.$forms['Form']['title'].'<br/>'.'Add Question'; ?></legend>
-
-			<?php echo $this->Form->input('form_id',array('value'=>$forms['Form']['id'],'type'=>'text','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-			<?php echo $this->Form->input('domain_id',array('placeholder'=>'','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<legend><?php __('Add Question'); ?></legend>
+			<?php echo $this->Form->input('form_id',array('type'=>'hidden','value'=>$forms['Form']['id'],'between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('domain_id',array('between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 			<?php echo $this->Form->input('text',array('required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 			<?php echo $this->Form->input('option_type_id',array('options'=>$option_types,'between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 		</fieldset>
@@ -82,7 +79,7 @@
 	<div class="modal-footer">
 		<div class="btn-group">
 			<button class="btn fb-goto-worksheet-button" type="button">Go Back to Worksheet</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Exit</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Back</button>
 		</div>
 	</div>
 </div>

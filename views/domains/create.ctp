@@ -18,6 +18,11 @@
 														array('action' => 'index'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate')
 													);  ?>					
 					</div>
+					<div class="btn-group span3">
+						<button class="btn fb-goto-worksheet-button">
+							<i class="icon-circle-arrow-left"></i> Go Back To Worksheet
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -25,14 +30,14 @@
  </div>
 
 <div class="row-fluid">
-	<div class="domains form span8 offset2">	
+	<div class="domains form span8 offset2"><br/>
 		<?php echo $this->Form->create('Domain',array(		
 						'action'=>'add','class'=>'form-horizontal',
 						'inputDefaults' => array('label'=>array('class'=>'control-label'),'div'=>array('class'=>'control-group')
 					)));?>
 		<fieldset>
-			<legend><center><?php echo __('Add Domain').' for <br/>'. $forms['Form']['title']; ?></center></legend>
-			<?php echo $this->Form->input('Form.id',array('type'=>'text','between'=>'<div class="controls">','after'=>'</div>'));?>
+			<legend><?php __('Add Domain'); ?></legend>
+			<?php echo $this->Form->input('Form.id',array('between'=>'<div class="controls">','after'=>'</div>'));?>
 			<?php echo $this->Form->input('name',array('required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 			<?php echo $this->Form->input('description',array('placeholder'=>'','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 		</fieldset>
@@ -65,7 +70,7 @@
 	<div class="modal-footer">
 		<div class="btn-group">
 			<button class="btn fb-goto-worksheet-button" type="button">Go To Worksheet</button>
-			<button class="btn" data-dismiss="modal" aria-text="true">Exit</button>
+			<button class="btn" data-dismiss="modal" aria-text="true">Back</button>
 		</div>
 	</div>
 </div>
