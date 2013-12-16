@@ -89,7 +89,6 @@ class EvaluationDetail extends AppModel {
 		);
 	}
 
-	
 	public function getMean($form_id,$evaluatee){
 		return $this->query("SELECT 
 								  SUM(wgt_mean) / COUNT(question_id) AS mean 

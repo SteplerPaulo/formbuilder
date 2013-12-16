@@ -59,6 +59,8 @@
 					</tbody>
 				</table>
 				<? }else{ ?> No Data Available  <? } ?>
+				<? echo '<div><b>Mean: '.$mean.'</b></div>'; ?>
+				<? echo '<div><b>Spread Index: '.$spread_index.'</b></div>'; ?>
 			</div>
 			<!--DISTRIBUTION-->
 			<div class="tab-pane fade" id="DistributionResult">
@@ -110,9 +112,9 @@
 					</tbody>
 				</table>
 				<? }else{ ?> No Data Available  <? } ?>
+				<? echo '<div><b>Mean: '.$mean.'</b></div>'; ?>
+				<? echo '<div><b>Spread Index: '.$spread_index.'</b></div>'; ?>
 			</div>
-			<? echo '<div><b>Mean: '.$mean.'</b></div>'; ?>
-			<? echo '<div><b>Spread Index: '.$spread_index.'</b></div>'; ?>
 			<!--DIVERGENT-->
 			<div class="tab-pane fade" id="OpenEndedResult">
 				<? if(!empty($divergent_question)){ ?>
