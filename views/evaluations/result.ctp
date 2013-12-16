@@ -41,12 +41,19 @@
 			  <table class="table table table-striped table-bordered tablesorter" id="EvaluationTable">
 					<thead>
 						<tr>
-							<th class="w90 text-center"><a >Evaluation Item</a></th>
+							<th class="w90"><a >Evaluation Item</a></th>
 							<th class="w10 text-center"><a >Weighted Means</a></th>
 						</tr>
 					</thead>
 					<tbody>
+						<? $previous_domain_id = ''; ?>
 						<? foreach($summary as $smry):?>
+						<? if($smry['Question']['domain_id'] != $previous_domain_id){; ?>
+							<? $previous_domain_id = $smry['Question']['domain_id']; ?>
+							<tr>
+								<td colspan='2'><? echo '<center><b>'.$smry['Question']['domain_name'].'</b></center>'; ?></td>
+							</tr>
+						<? }; ?>
 						<tr>
 							<td><? echo $smry['Question']['text']; ?></td>
 							<td class="w10 text-center"><? echo $smry[0]['weighted_mean']; ?></td>
@@ -83,7 +90,7 @@
 				<table class="table table table-striped table-bordered  RECORD tablesorter" id="EvaluationTable">
 					<thead>
 						<tr class="w100">
-							<th class="w65 text-center" rowspan="2"><a>Evaluation Item</a></th>
+							<th class="w65" rowspan="2"><a>Evaluation Item</a></th>
 							<th colspan="5" class="w25 text-center"><a>Rating</a></th>
 							<th class="w10 text-center" rowspan="2"><a>Weighted Mean</a></th>
 						</tr>
@@ -96,7 +103,14 @@
 						</tr>
 					</thead>
 					<tbody>
+						<? $previous_domain_id = ''; ?>
 						<? foreach($distribution as $k=>$d):?>
+						<? if($d['domain_id'] != $previous_domain_id){; ?>
+							<? $previous_domain_id = $d['domain_id']; ?>
+							<tr>
+								<td colspan='7'><? echo '<center><b>'.$d['domain_name'].'</b></center>'; ?></td>
+							</tr>
+						<? }; ?>
 						<tr>
 							<td><? echo $k; ?></td>
 							<td class="text-center">
