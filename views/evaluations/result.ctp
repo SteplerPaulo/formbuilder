@@ -21,24 +21,21 @@
 	</div>
  </div>
 <div class="sub-content-container">
-	<div class="w90 center">
-				
-		<div>Evaluatee Name:</b>  <? echo $evaluatee;?></div>
-		<div>Form Title:</b>  <? echo $form['Form']['title'];?></div>
-		<div>Respondent Count:</b>  <? echo $respondent_count['0']['0']['respondent_count'];?></div>
+	<div class="w90 center">	
+		<? echo '<div><b>Evaluatee Name: '.$evaluatee.'</b></div>'; ?>
+		<? echo '<div><b>Form Title: '.$form['Form']['title'].'</b></div>'; ?>
+		<? echo '<div><b>Respondent Count: '.$respondent_count['0']['0']['respondent_count'].'</b></div>'; ?>	
 		<hr/>
-	
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#SummaryResult" data-toggle="tab">Summary</a></li>
-			<li><a href="#CommentResult" data-toggle="tab">Divergent Question</a></li>
 			<li><a href="#DistributionResult" data-toggle="tab">Distribution</a></li>
+			<li><a href="#OpenEndedResult" data-toggle="tab">Open-Ended</a></li>
 		</ul>
-		<!-- Tab panes -->
 		<div class="tab-content">
-			<!--Summary-->
+			<!--SUMMARY-->
 			<div class="tab-pane fade in active" id="SummaryResult">
 			  <? if(!empty($summary)){ ?>
-			  <table class="table table table-striped table-bordered tablesorter" id="EvaluationTable">
+			  <table class="table table table-striped table-bordered" id="EvaluationTable">
 					<thead>
 						<tr>
 							<th class="w90"><a >Evaluation Item</a></th>
@@ -50,7 +47,7 @@
 						<? foreach($summary as $smry):?>
 						<? if($smry['Question']['domain_id'] != $previous_domain_id){; ?>
 							<? $previous_domain_id = $smry['Question']['domain_id']; ?>
-							<tr>
+							<tr class="error">
 								<td colspan='2'><? echo '<center><b>'.$smry['Question']['domain_name'].'</b></center>'; ?></td>
 							</tr>
 						<? }; ?>
@@ -63,31 +60,10 @@
 				</table>
 				<? }else{ ?> No Data Available  <? } ?>
 			</div>
-			<!--Divergent-->
-			<div class="tab-pane fade" id="CommentResult">
-				<? if(!empty($divergent_question)){ ?>
-				<? foreach($divergent_question as $question => $data):?>
-				<table class="table table table-striped table-bordered RECORD tablesorter" id="EvaluationTable">
-					<thead>
-						<tr>
-							<th class="w90 text-left"><a ><? echo $question; ?></a></th>
-							<th class="w10 text-center"><a >Count</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<? foreach($data as $d):?><tr>
-							<td><? echo $d['EvaluationDetail']['answer']; ?></td>
-							<td class="text-center"><? echo $d[0]['count']; ?></td>
-						</tr><? endforeach;?>
-					</tbody>
-				</table>
-				<? endforeach;?>
-				<? }else{ ?> No Data Available  <? } ?>
-			</div>
-			<!--Distribution-->
+			<!--DISTRIBUTION-->
 			<div class="tab-pane fade" id="DistributionResult">
 				<? if(!empty($distribution)){ ?>
-				<table class="table table table-striped table-bordered  RECORD tablesorter" id="EvaluationTable">
+				<table class="table table table-striped table-bordered" id="EvaluationTable">
 					<thead>
 						<tr class="w100">
 							<th class="w65" rowspan="2"><a>Evaluation Item</a></th>
@@ -107,7 +83,7 @@
 						<? foreach($distribution as $k=>$d):?>
 						<? if($d['domain_id'] != $previous_domain_id){; ?>
 							<? $previous_domain_id = $d['domain_id']; ?>
-							<tr>
+							<tr class="error">
 								<td colspan='7'><? echo '<center><b>'.$d['domain_name'].'</b></center>'; ?></td>
 							</tr>
 						<? }; ?>
@@ -133,6 +109,29 @@
 						<? endforeach;?>
 					</tbody>
 				</table>
+				<? }else{ ?> No Data Available  <? } ?>
+			</div>
+			<? echo '<div><b>Mean: '.$mean.'</b></div>'; ?>
+			<? echo '<div><b>Spread Index: '.$spread_index.'</b></div>'; ?>
+			<!--DIVERGENT-->
+			<div class="tab-pane fade" id="OpenEndedResult">
+				<? if(!empty($divergent_question)){ ?>
+				<? foreach($divergent_question as $question => $data):?>
+				<table class="table table table-striped table-bordered" id="EvaluationTable">
+					<thead>
+						<tr>
+							<th class="w90 text-left"><a ><? echo $question; ?></a></th>
+							<th class="w10 text-center"><a >Count</a></th>
+						</tr>
+					</thead>
+					<tbody>
+						<? foreach($data as $d):?><tr>
+							<td><? echo $d['EvaluationDetail']['answer']; ?></td>
+							<td class="text-center"><? echo $d[0]['count']; ?></td>
+						</tr><? endforeach;?>
+					</tbody>
+				</table>
+				<? endforeach;?>
 				<? }else{ ?> No Data Available  <? } ?>
 			</div>
 		</div>

@@ -139,6 +139,7 @@ class EvaluationsController extends AppController {
 			$evaluatee = $this->data['Evalaution']['evalautee'];
 			$form = $this->Form->read(null, $form_id);
 			$respondent_count = $this->Evaluation->EvaluationDetail->respondent_count($form_id,$evaluatee);
+			$mean = $this->Evaluation->EvaluationDetail-> getMean($form_id,$evaluatee);
 			
 			//SUMMARY
 			$summary = $this->Evaluation->EvaluationDetail->getWeightedMean($form_id,$evaluatee);
@@ -149,8 +150,8 @@ class EvaluationsController extends AppController {
 								'EvaluationDetail.answer Not'=>'Null','Question.option_type_id'=>3
 							);
 			$fields	= array('Question.id','Question.text','EvaluationDetail.answer',
-							'COUNT(EvaluationDetail.id) AS count');
-			
+							'COUNT(EvaluationDetail.id) AS count'
+							);
 			$divergent_answer = $this->Evaluation->EvaluationDetail->find('all',array('recursive'=>0,
 													'conditions'=>$conditions,'fields'=>$fields,
 													'group'=>array('EvaluationDetail.answer','EvaluationDetail.question_id')
@@ -161,9 +162,13 @@ class EvaluationsController extends AppController {
 			}
 			//END
 			
-			//DISTRIBUTION
+			//DISTRIBUTION & SPREAD INDEX
 			$frequency = $this->Evaluation->EvaluationDetail-> getFrequency($form_id,$evaluatee);
 			$distribution = array();
+			$index_summation = 0.00;
+			$item_count = count($summary);
+			$index = 0;
+			$mean = round($mean[0][0]['mean'],2);
 			foreach($summary as $s){
 				foreach($frequency as $k=>$f){
 					if($s['Question']['text']==$f['Question']['text']){
@@ -173,11 +178,14 @@ class EvaluationsController extends AppController {
 						$distribution[$s['Question']['text']][$f['Option']['value']]=$f;
 					}
 				}
+				$weighted_mean = round($s[0]['weighted_mean'],2);
+				$index = pow(($weighted_mean-$mean), 2);
+				$index_summation += $index;
 			}
+			$spread_index = round($index_summation/($item_count-1),2);
 			//END
 			
-			
-			$this->set(compact('evaluatee','form','respondent_count','summary','divergent_question','distribution'));
+			$this->set(compact('evaluatee','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
 		}else{
 			$this->redirect(array('action'=>'index'));
 		}

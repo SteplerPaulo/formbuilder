@@ -88,4 +88,39 @@ class EvaluationDetail extends AppModel {
 		WHERE `evaluations`.`form_id`='$form_id' AND `evaluations`.`evaluatee`='$evaluatee'"
 		);
 	}
+
+	
+	public function getMean($form_id,$evaluatee){
+		return $this->query("SELECT 
+								  SUM(wgt_mean) / COUNT(question_id) AS mean 
+								FROM
+								  (SELECT 
+									question_id,
+									SUM(mul) / SUM(frequency) AS wgt_mean 
+								  FROM
+									(SELECT 
+									  `evaluation_details`.`question_id`,
+									  COUNT(evaluations.`id`) AS frequency,
+									  COUNT(
+										`evaluation_details`.`option_id`
+									  ) * `options`.`value` AS mul 
+									FROM
+									  `evaluation_details` 
+									  INNER JOIN `options` 
+										ON (
+										  `evaluation_details`.`option_id` = `options`.`id`
+										) 
+									  INNER JOIN `evaluations` 
+										ON (
+										  `evaluations`.`id` = `evaluation_details`.`evaluation_id`
+										) 
+									WHERE `options`.`value` > 0 
+											AND `evaluations`.`form_id`= '$form_id'
+											AND `evaluations`.`evaluatee`= '$evaluatee'
+									GROUP BY 
+									  `evaluation_details`.`question_id`,
+									  `evaluation_details`.`option_id`) AS f_tbl 
+								  GROUP BY f_tbl.question_id) AS w_tbl ");
+	}
+	
 }
