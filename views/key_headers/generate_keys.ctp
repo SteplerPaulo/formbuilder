@@ -25,7 +25,7 @@
  </div>
 
 <div class="row-fluid">
-<div class="span4 offset4">
+<div class="span6 offset3">
 
 	<?php echo $this->Form->create('KeyHeader',array(
 													'action'=>'add',
@@ -38,8 +38,9 @@
 		<fieldset>
 			<legend><?php __('Generate Key(s)'); ?></legend>
 				<?php echo $this->Form->input('form_id',array('options'=>$forms,'empty'=>'Select','required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span12'));?>
-				<?php echo $this->Form->input('intent_key_count',array('required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span12'));?>
+				<?php echo $this->Form->input('intent_key_count',array('required'=>'required','maxlength'=>3,'between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span12'));?>
 		</fieldset>
+
 		<div class="control-group">
 			<div class="controls pull-right">
 			<?php echo $this->Form->button('Go',array('type'=>'button','id'=>'GoEncryptButton','class'=>'btn btn-primary'));?>
@@ -58,7 +59,6 @@
 			</tbody>
 			<tfoot>
 				<td colspan="4"></td>
-
 			</tfoot>
 		</table>
 		<div class="pull-right">
