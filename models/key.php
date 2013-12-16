@@ -3,7 +3,7 @@ class Key extends AppModel {
 	var $name = 'Key';			
 	var $virtualFields = array('status_str'=>"CASE status
 										WHEN '0' THEN 'Active'
-										WHEN '2' THEN 'Used'
+										WHEN '1' THEN 'Used'
 									END ");
 	
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
