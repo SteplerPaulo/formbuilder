@@ -76,8 +76,8 @@ class EvaluationDetail extends AppModel {
 		return $this->query("SELECT
 			COUNT(*) AS respondent_count
 		FROM
-			`formbuilder`.`evaluations`
-		WHERE `evaluations`.`form_id`='2' AND `evaluations`.`evaluatee`='Ms. Unknown'"
+			`evaluations`
+		WHERE `evaluations`.`form_id`='$form_id' AND `evaluations`.`evaluatee`='$evaluatee'"
 		);
 	}
 }
