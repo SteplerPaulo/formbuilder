@@ -122,11 +122,10 @@ class FormsController extends AppController {
 	}
 
 	function delete() {
-		$id = $this->data['Form']['object_id'];
+		if(isset($this->data['Form']['object_id'])) {
 		
-		if(isset($id)) {
+			$id = $this->data['Form']['object_id'];
 			if ($this->Form->delete($id,true)) {
-			
 				if($this->RequestHandler->isAjax()){
 					$response['status'] = 1;
 					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Form deleted.";
