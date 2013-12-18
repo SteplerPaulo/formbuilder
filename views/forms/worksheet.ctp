@@ -34,16 +34,16 @@
 	<div class="w90 center">
 		<div class="well">
 			<div class="well">
+				<div class="pull-left">
+					<?php echo '<b>Form Type: </b>'.$form['FormType']['name']; ?>
+				</div>
 				<div class="pull-right">
-					<b>Form</b>
-					<a action="../forms/edit" class="fb-worksheet-edit" object-id="<? echo $form['Form']['id']?>"><i class="icon-edit"> Edit</i></a> |
-					<a action="../forms/delete" class="fb-worksheet-delete" object-id="<? echo $form['Form']['id']?>" form="true"><i class="icon-trash"> Delete</i></a> |
+					<a action="../forms/edit" class="fb-worksheet-edit" object-id="<? echo $form['Form']['id']?>"><i class="icon-edit"> Form Edit</i></a> |
+					<a action="../forms/delete" class="fb-worksheet-delete" object-id="<? echo $form['Form']['id']?>" form="true"><i class="icon-trash"> Form Delete</i></a> |
 					<a action="../domains/create" class="fb-worksheet-add" object-id="<? echo $form['Form']['id']?>"><i class="icon-plus-sign"> Add Domain</i></a> 
 				</div><hr/>
-				<center><b><?php echo $form['Form']['title']; ?></center>
-				<center><?php echo $form['Form']['description']; ?></center>
-				<center><?php echo $form['FormType']['name']; ?></b></center>
-				
+				<?php echo '<center><b>'.$form['Form']['title'].'</b></center>'; ?>
+				<?php echo '<center><b>'.$form['Form']['description'].'</b></center>'; ?>
 			</div>
 			
 			<? if(isset($form['FormDomain'])){ ;?>
