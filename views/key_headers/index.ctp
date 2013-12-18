@@ -32,8 +32,8 @@
 			<table class="table table table-striped table-bordered  table-condensed RECORD tablesorter canvasTable advancedTable" id="KeyHeaderTable" model="KeyHeader">
 				<thead>
 					<tr>
-						<th class="w10 text-center"><a >Key Header Id</a></th>
-						<th class="w60 text-center"><a >Form Title</a></th>	 
+						<th class="hide"><a >Key Header Id</a></th>
+						<th class="w70 text-center"><a >Form Title</a></th>	 
 						<th class="w10 text-center"><a >Key Count</a></th>	
 						<th class="w15 text-center"><a >Date Created</a></th>	 
 						<th class="actions w5"><a >Actions</a></th>
@@ -41,7 +41,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td  class="text-right"><span data-field="KeyHeader.id" class="keyheader-id"></span></td>
+						<td class="hide"><span data-field="KeyHeader.id" class="keyheader-id"></span></td>
 						<td><span data-field="Form.title"></span></td>
 						<td  class="text-center"><span data-field="Key.count"></span></td>
 						<td><span data-field="KeyHeader.created"></span></td>
@@ -56,7 +56,7 @@
 											</a>
 										</li>
 										<li>
-											<a action='/formbuilder/key_headers/print_keys' class="fb-action">
+											<a action='/formbuilder/key_headers/print_keys' class="fb-action" newtab="_blank">
 												<i class="icon-print"></i> Print
 											</a>
 										</li>
