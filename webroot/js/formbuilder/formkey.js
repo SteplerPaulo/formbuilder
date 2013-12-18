@@ -6,14 +6,14 @@ $('document').ready(function(){
 		var row =$(this).parents('tr:first');
 		var keyheader_id =row.find('.keyheader-id').text();
 		$('#KeyHeader').val(keyheader_id);
-		
+		($(this).attr('newtab'))?$('#KeyHeaderAction').attr('target','_blank'):$('#KeyHeaderAction').removeAttr('target');
 		$('#KeyHeaderAction').attr('action',action);
 		$('#KeyHeaderAction').submit();
 	});
 
 	$(document).on('click','.fb-print-action',function(){
 		var action =$(this).attr('action');
-		$('#KeyHeaderAction').attr('action',action);
+		$('#KeyHeaderAction').attr({'action':action,'target':'_blank'});
 		$('#KeyHeaderAction').submit();
 	});
 	
