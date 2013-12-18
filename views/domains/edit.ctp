@@ -25,36 +25,31 @@
 					</div>
 				</div>
 			</div>
-			<div class="span6 text-right">
-				 <input class="span6 m-t-5 p" type="text" placeholder="Search">
-			</div>
 		</div>
 	</div>
  </div>
-
 <div class="row-fluid">
-<div class="domains form span6 offset3">
-
-<?php echo $this->Form->create('Domain',array(	'class'=>'form-horizontal',
-																	'inputDefaults' => array( 	'label'=>array('class'=>'control-label'),
-																								'div'=>array('class'=>'control-group')
-																							)
-																	)
-											);?>
-	<fieldset>
-		<legend><?php __('Edit Domain'); ?></legend>
-		<?php echo $this->Form->input('id',array('placeholder'=>'Id','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-		<?php echo $this->Form->input('name',array('placeholder'=>'Name','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-		<?php echo $this->Form->input('description',array('placeholder'=>'Description','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-	</fieldset>
-	<div class="control-group">
-		<div class="controls">
-		<?php echo $this->Form->button('Save',array('type'=>'button','class'=>'btn btn-primary fb-edit-save-button'));?>
-		<?php echo $this->Form->button('Cancel',array('type'=>'reset','class'=>'btn'));?>
+	<div class="domains form span6 offset3">
+	<?php echo $this->Form->create('Domain',array(	'class'=>'form-horizontal',
+																		'inputDefaults' => array( 	'label'=>array('class'=>'control-label'),
+																									'div'=>array('class'=>'control-group')
+																								)
+																		)
+												);?>
+		<fieldset>
+			<legend><?php __('Edit Domain'); ?></legend>
+			<?php echo $this->Form->input('id',array('placeholder'=>'Id','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('name',array('placeholder'=>'Name','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('description',array('placeholder'=>'Description','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+		</fieldset>
+		<div class="control-group">
+			<div class="controls">
+			<?php echo $this->Form->button('Save',array('type'=>'button','class'=>'btn btn-primary fb-edit-save-button'));?>
+			<?php echo $this->Form->button('Cancel',array('type'=>'reset','class'=>'btn'));?>
+			</div>
 		</div>
+		<?php echo $this->Form->end();?>
 	</div>
-	<?php echo $this->Form->end();?>
-</div>
 </div>
 
 <!--FORMACTION-->
