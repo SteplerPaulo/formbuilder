@@ -12,12 +12,6 @@
 													);  ?>							</div>
 						</div>
 					</div>
-					<div class="span3">
-						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-list-alt icon-white')).
-														$this->Html->tag('span', 'Form List', array('class' => 'action-label')),
-														array('action' => 'index'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate')
-													);  ?>					
-					</div>
 					<div class="btn-group span3">
 						<button class="btn fb-goto-worksheet-button">
 							<i class="icon-circle-arrow-left"></i> Go Back To Worksheet
@@ -33,22 +27,19 @@
  </div>
 
 <div class="row-fluid">
-	<div class="options form span6 offset3">
-
+	<div class="options form span6 offset3"><br/>
 	<?php echo $this->Form->create('Option',array(	'class'=>'form-horizontal',
 																		'inputDefaults' => array( 	'label'=>array('class'=>'control-label'),
 																									'div'=>array('class'=>'control-group')
 																								)
 																		)
-												);?>
-							
+												);?>			
 		<fieldset>
 			<legend><?php __('Edit Option'); ?></legend>
 			<?php echo $this->Form->input('id',array('placeholder'=>'Id','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 			<?php echo $this->Form->input('text',array('placeholder'=>'Text','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 			<?php echo $this->Form->input('value',array('placeholder'=>'Value','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 			<?php echo $this->Form->input('is_correct',array('placeholder'=>'Is Correct','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-			
 			<?php echo $this->Form->input('Question',array('between'=>'<div class="controls">','after'=>'</div>','class'=>'span11'));?>
 		</fieldset>
 		<div class="control-group">
