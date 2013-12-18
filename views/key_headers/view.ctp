@@ -23,10 +23,12 @@
 <div class="sub-content-container">
 	<div class="row-fluid">
 		<div class="w70 center">
-			<div><b>Key Header ID : <? echo $keyHeader['KeyHeader']['id'];?></b></div>
-			<div><b>Form Title : <? echo $keyHeader['Form']['title'];?></b></div>
+			<? echo '<div><b>Key Header ID:</b> '.$keyHeader['KeyHeader']['id'].'</div>';?>
+			<? echo '<div><b>Form Title:</b>'.$keyHeader['Form']['title'].'</div>';?>
+			<? echo '<div><b>Form Type: </b>'.$keyHeader['Form']['FormType']['name'].'</div>';?>
+			
 			<div>
-				<b>Form Type : <? echo $keyHeader['Form']['FormType']['name'];?></b>
+				<? echo '<b>Key Count: </b>'.count($keyHeader['Key']);?>
 				<span class="pull-right">
 					<a action='/formbuilder/key_headers/print_keys' class="fb-print-action">
 						Print <i class="icon-print"></i>
@@ -35,7 +37,6 @@
 			</div>
 			<hr/>
 			<table class="table table table-striped table-bordered  table-condensed">
-				
 				<thead>
 					<th class="w80 text-center"><a>Key</a></th>
 					<th class="w10 text-center"><a>Status</a></th>
@@ -52,13 +53,10 @@
 		</div>
 	</div>
 </div>
-	
 <!--FORMACTION-->
 <?php echo $this->Form->create('KeyHeaderAction',array('id'=>'KeyHeaderAction'));?>
 	<? echo $this->Form->input('KeyHeader.id',array('id'=>'KeyHeader','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
-
-
 
 <?php 
 	echo $this->Html->script(array('ui/uiTable1.1','utils/canvasTable'),array('inline'=>false));
