@@ -102,11 +102,12 @@ class FormsController extends AppController {
 	function edit() {
 		$id = $this->data['Form']['object_id'];
 		$form_id = $this->data['Form']['id'];
-	
+
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid form', true));
 			$this->redirect(array('action' => 'index'));
 		}
+		
 		if (!empty($this->data['Form']['title'])) {
 			if ($this->Form->save($this->data)) {
 				$this->Session->setFlash(__('The form has been saved', true));
@@ -114,12 +115,10 @@ class FormsController extends AppController {
 				$this->Session->setFlash(__('The form could not be saved. Please, try again.', true));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->Form->read(null, $id);
-		}
-		$form = $this->Form->read(null, $form_id);
-		$formTypes = $this->Form->FormType->find('list');
-		$this->set(compact('formTypes','form','form_id','id'));
+		
+		$this->data = $this->Form->read(null, $form_id);
+		$form_types = $this->Form->FormType->find('list',array('fields'=>array('FormType.id','FormType.name')));
+		$this->set(compact('form_types','form_id','id'));
 	}
 
 	function delete() {
