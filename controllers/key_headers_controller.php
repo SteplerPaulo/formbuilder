@@ -6,20 +6,17 @@ class KeyHeadersController extends AppController {
 	function index() {
 		if ($this->Rest->isActive()) {	
 			$curr_data = $this->api($_GET);
-			
 			foreach($curr_data as $key=>$val){
 				$curr_data[$key]['Key']['count'] = count($val['Key']);
 			}
-			
 			$this->set('data',$curr_data);
-		}
-		else if($this->RequestHandler->isAjax()){	
-			$data = $this->KeyHeader->find('all');
+			
+		}else if($this->RequestHandler->isAjax()){	
+			$curr_data = $this->KeyHeader->find('all');
 			
 			foreach($curr_data as $key=>$val){
 				$curr_data[$key]['Key']['count'] = count($val['Key']);
 			}
-		
 			echo json_encode($data);
 			exit;
 		}else{
@@ -29,14 +26,10 @@ class KeyHeadersController extends AppController {
 	}
 
 	function view() {
-		
-	
 		if (isset($this->data['KeyHeader']['id']) ) {
 			$id = $this->data['KeyHeader']['id'];
-			
 			$this->KeyHeader->recursive = 3;
 			$data = $this->KeyHeader->read(null, $id);
-
 			$this->set('keyHeader', $data);
 		}else{
 			$this->redirect(array('action'=>'index'));
@@ -126,10 +119,8 @@ class KeyHeadersController extends AppController {
 	function print_keys() {
 		if (isset($this->data['KeyHeader']['id']) || empty($this->data['KeyHeader']['id']) ) {
 			$id = $this->data['KeyHeader']['id'];
-			
 			$this->KeyHeader->recursive = 1;
 			$data = $this->KeyHeader->read(null, $id);
-
 			$this->set(compact('data'));
 			$this->layout='pdf';
 			$this->render();
