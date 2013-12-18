@@ -22,9 +22,11 @@
  </div>
 <div class="sub-content-container">
 	<div class="w90 center">	
-		<? echo '<div><b>Evaluatee Name: '.$evaluatee.'</b></div>'; ?>
-		<? echo '<div><b>Form Title: '.$form['Form']['title'].'</b></div>'; ?>
-		<? echo '<div><b>Respondent Count: '.$respondent_count['0']['0']['respondent_count'].'</b></div>'; ?>	
+		<? echo '<div class="pull-left"><div><b>Evaluatee Name:</b> '.$evaluatee.'</div>'; ?>
+		<? echo '<div><b>Form Title:</b> '.$form['Form']['title'].'</div>'; ?>
+		<? echo '<div><b>Respondent Count:</b> '.$respondent_count['0']['0']['respondent_count'].'</div></div>'; ?>	
+		<? echo '<div class="pull-right"><div><b>Mean:</b> '.$mean.'</div>'; ?>
+		<? echo '<div ><b>Spread Index:</b> '.$spread_index.'</div></div><div class="clear"></div>'; ?>
 		<hr/>
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#SummaryResult" data-toggle="tab">Summary</a></li>
@@ -59,8 +61,6 @@
 					</tbody>
 				</table>
 				<? }else{ ?> No Data Available  <? } ?>
-				<? echo '<div><b>Mean: '.$mean.'</b></div>'; ?>
-				<? echo '<div><b>Spread Index: '.$spread_index.'</b></div>'; ?>
 			</div>
 			<!--DISTRIBUTION-->
 			<div class="tab-pane fade" id="DistributionResult">
@@ -112,8 +112,6 @@
 					</tbody>
 				</table>
 				<? }else{ ?> No Data Available  <? } ?>
-				<? echo '<div><b>Mean: '.$mean.'</b></div>'; ?>
-				<? echo '<div><b>Spread Index: '.$spread_index.'</b></div>'; ?>
 			</div>
 			<!--DIVERGENT-->
 			<div class="tab-pane fade" id="OpenEndedResult">
