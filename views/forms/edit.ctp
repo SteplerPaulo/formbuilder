@@ -12,12 +12,12 @@
 													);  ?>							</div>
 						</div>
 					</div>
-					<div class="span3">
-					<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-plus icon-white')).
-														$this->Html->tag('span', 'CREATE', array('class' => 'action-label')),
-														array('action' => 'add'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate')
-													);  ?>					
+					<div class="btn-group span3">
+						<button class="btn fb-goto-worksheet-button">
+							<i class="icon-circle-arrow-left"></i> Go Back To Worksheet
+						</button>
 					</div>
+					<!--
 					<div class="btn-group span3">
 						<a class="btn btn-medium btn-block dropdown-toggle" data-toggle="dropdown" href="#">
 							<i class="icon-circle-arrow-down"></i><span class="action-label">More Action</span>	
@@ -29,17 +29,15 @@
 							</li>
 						</ul>
 					</div>
+					-->
 				</div>
-			</div>
-			<div class="span6 text-right">
-				 <input class="span6 m-t-5 p" type="text" placeholder="Search">
 			</div>
 		</div>
 	</div>
  </div>
 
 <div class="row-fluid">
-	<div class="forms form span6 offset3">
+	<div class="forms form span6 offset3"><br/>
 	<?php echo $this->Form->create('Form',array(
 												'class'=>'form-horizontal',
 																		'inputDefaults' => array( 	'label'=>array('class'=>'control-label'),
@@ -49,10 +47,10 @@
 												);?>
 		<fieldset>
 			<legend><?php __('Edit Form'); ?></legend>
-			<?php echo $this->Form->input('id',array('type'=>'text','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-			<?php echo $this->Form->input('title',array('value'=>$form['Form']['title'],'required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-			<?php echo $this->Form->input('description',array('value'=>$form['Form']['description'],'between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-			<?php echo $this->Form->input('form_type_id',array('between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('id',array('type'=>'hidden','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('title',array('required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('description',array('between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('form_type_id',array('options'=>$form_types,'between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 		</fieldset>
 		<div class="control-group">
 			<div class="controls">
