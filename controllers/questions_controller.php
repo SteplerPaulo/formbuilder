@@ -97,13 +97,10 @@ class QuestionsController extends AppController {
 		$id = $this->data['Form']['object_id'];
 		$form_id = $this->data['Form']['id'];
 		
-		//pr($this->data);exit;
 		if (!$id && empty($this->data)) {
 			$this->redirect(array('action' => '../forms'));
 		}
 		if (!empty($this->data['Question'])) {
-			
-		
 			if ($this->Question->saveAll($this->data)) {
 				$this->Session->setFlash(__('The question has been saved', true));
 			} else {
