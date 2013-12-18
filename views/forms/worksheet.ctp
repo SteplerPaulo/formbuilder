@@ -124,12 +124,9 @@
 	
 	<div class="modal-footer">
 		<div class="btn-group">
-			<!--
-			<button class="btn fb-worksheet-confirm-delete-button" type="button">Confirm Delete</button>
-			-->
 			<button class="btn fb-worksheet-confirm-delete-button" delete-type="one" type="button">Delete</button>
 			<button class="btn fb-worksheet-confirm-delete-button" delete-type="all" type="button">Delete All</button>
-			<button class="btn fb-worksheet-exit-button" data-dismiss="modal" aria-hidden="true">Exit</button>
+			<button class="btn fb-worksheet-exit-button" data-dismiss="modal" aria-hidden="true">Cancel</button>
 		</div>
 	</div>
 </div>
