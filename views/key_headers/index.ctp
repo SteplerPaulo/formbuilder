@@ -51,7 +51,7 @@
 									<button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i><span class="caret"></span></button>
 									<ul class="dropdown-menu pull-right">	
 										<li>
-											<a action='/formbuilder/key_headers/view' class="fb-action">
+											<a action='/formbuilder/key_headers/view' class="fb-action" newtab="_blank">
 												<i class="icon-eye-open"></i> View
 											</a>
 										</li>
