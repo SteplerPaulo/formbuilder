@@ -15,11 +15,7 @@
 			</div>
 		</div>
 	</div>
- </div>
-<? 
-	//pr($keyHeader);exit;
-?>
-
+</div>
 <div class="sub-content-container">
 	<div class="row-fluid">
 		<div class="w70 center">
@@ -38,15 +34,28 @@
 			<hr/>
 			<table class="table table table-striped table-bordered  table-condensed">
 				<thead>
-					<th class="w80 text-center"><a>Key</a></th>
+					<th class="w5"><a>No</a></th>
+					<th class="w34 text-center"><a>Key</a></th>
+					<th class="w10 text-center"><a>Status</a></th>
+					<th class="w1"></th>
+					<th class="w5"><a>No</a></th>
+					<th class="w35 text-center"><a>Key</a></th>
 					<th class="w10 text-center"><a>Status</a></th>
 				</thead>
 				<tbody>
-					<? foreach($keyHeader['Key'] as $key): ?>
-					<tr>
-						<td><? echo $key['value']; ?></td>
-						<td class="text-center"><? echo $key['status_str']; ?></td>
-					</tr>
+					<? foreach($keyHeader['Key'] as $index=>$key): ?>
+					<? if($index%2 == 0){ ?>
+						<tr>
+							<td class="text-right"><? echo $index+1;?></td>
+							<td><? echo $key['value'];?></td>
+							<td class="text-center"><? echo $key['status_str'];?></td>
+							<td></td>
+					<?}else{?>
+							<td class="text-right"><? echo $index+1;?></td>
+							<td><? echo $key['value'];?></td>
+							<td class="text-center"><? echo $key['status_str'];?></td>
+						</tr>
+					<?}?>
 					<? endforeach;?>
 				</tbody>
 			</table>	
