@@ -53,7 +53,7 @@
 								<button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i><span class="caret"></span></button>
 								<ul class="dropdown-menu pull-right">
 									<li>
-										<a action='/formbuilder/forms/view' class="fb-action">
+										<a action='/formbuilder/forms/view' class="fb-action" newtab='_target'>
 											<i class="icon-eye-open"></i> Preview
 										</a>
 									</li>
@@ -62,11 +62,11 @@
 											<i class="icon-edit"></i> Worksheet
 										</a>
 									</li>		
-									<li>
+									<!--<li>
 										<a action="/formbuilder/forms/delete" class="fb-action">
 											<i class="icon-trash"></i> Delete
 										</a>
-									</li>
+									</li>-->
 								</ul>
 							</div>
 						</div>
