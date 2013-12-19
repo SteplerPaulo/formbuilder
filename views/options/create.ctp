@@ -54,13 +54,14 @@
 				if(isset($questions)){
 					echo $this->Form->input('Question',array('required'=>'required','between'=>'<div class="controls">','after'=>'</div>','class'=>'span11'));
 				}else{
-					echo $this->Form->input('Question',array('value'=>$q['Question']['id'],'type'=>'text','between'=>'<div class="controls">','after'=>'</div>','class'=>'span11'));
+					echo $this->Form->input('Question',array('value'=>$q['Question']['id'],'type'=>'hidden','between'=>'<div class="controls">','after'=>'</div>','class'=>'span11'));
+					echo $this->Form->input('Question.text',array('value'=>$q['Question']['text'],'readonly'=>'readonly','between'=>'<div class="controls">','after'=>'</div>','class'=>'span11'));
 				}
 			?>
 			
 			
 			<?php echo $this->Form->input('text',array('required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
-			<?php echo $this->Form->input('value',array('required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('value',array('required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11 numeric'));?>
 			<?php echo $this->Form->input('is_correct',array('placeholder'=>'','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 		</fieldset>
 		<div class="control-group">
