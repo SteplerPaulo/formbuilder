@@ -6,7 +6,7 @@ $(document).ready(function(){
 		var row =$(this).parents('tr:first');
 		var form_id =row.find('.form-id').text();
 		$('#FormId').val(form_id);
-		
+		($(this).attr('newtab'))?$('#FormAction').attr('target','_blank'):$('#FormAction').removeAttr('target');
 		$('#FormAction').attr('action',action);
 		$('#FormAction').submit();
 	});
@@ -76,9 +76,14 @@ $(document).ready(function(){
 	//Edit Files Save Button
 	$(document).on('click','.fb-edit-save-button',function(){
 		var form = $(this).parents('form:first');
-		form.ajaxSubmit();
-		
-		goto_worksheet();
+		if (form[0].checkValidity()) {
+			form.ajaxSubmit();
+			goto_worksheet();
+		}else{
+			$.each(form.find('[required="required"]'),function(i,o){
+				$(o).attr('placeholder','*Required').focus();
+			});
+		}
 	});
 	
 	//Create Files Save Button
