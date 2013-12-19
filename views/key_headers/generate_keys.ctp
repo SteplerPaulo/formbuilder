@@ -38,7 +38,7 @@
 		<fieldset>
 			<legend><?php __('Generate Key(s)'); ?></legend>
 				<?php echo $this->Form->input('form_id',array('options'=>$forms,'empty'=>'Select','required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span12'));?>
-				<?php echo $this->Form->input('intent_key_count',array('required'=>'required','maxlength'=>3,'between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span12'));?>
+				<?php echo $this->Form->input('intent_key_count',array('required'=>'required','maxlength'=>2,'between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span12 numeric'));?>
 		</fieldset>
 
 		<div class="control-group">
