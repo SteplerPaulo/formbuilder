@@ -99,18 +99,6 @@ class EvaluationsController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 
-	function login() {
-		if ($this->RequestHandler->isAjax()) {
-			$key_value = $this->data['Evaluation']['key'];
-			
-			$result = $this->Key->find('first',array('recursive'=>2,'conditions'=>array('Key.value'=>$key_value)));
-		
-			$startTime =  date('h:i A');
-			echo json_encode(array('data'=>$result,'StartTime'=>$startTime));
-			exit;
-		}
-	}
-	
 	function form(){
 		if (isset($this->data['Form']['id'])) {
 			$form_id = $this->data['Form']['id'];
