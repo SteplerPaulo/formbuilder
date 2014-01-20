@@ -3,25 +3,25 @@ $(document).ready(function(){
 	$(document).on('click','#EvaluationFormSubmitButton',function(){
 		if($('#EvaluationEvaluatee').val() !=''){
 			$('#EvaluationForm').ajaxSubmit({
-					dataType:'json',
-					success:function(formReturn){
-						$('#Notification').html(formReturn.msg);
-						$('#Modal').modal('show'); 
-						if(formReturn.status){
-							setTimeout(function(){
-								var action ='/formbuilder/evaluations/login';
-								$('#FormAction').attr('action',action);
-								$('#FormAction').submit();
-							},1500);
-						}
+				dataType:'json',
+				success:function(formReturn){
+					$('#Notification').html(formReturn.msg);
+					$('#Modal').modal('show'); 
+					if(formReturn.status){
+						setTimeout(function(){
+							var action ='/formbuilder/forms/login';
+							$('#FormAction').attr('action',action);
+							$('#FormAction').submit();
+						},1500);
 					}
+				}
 			});
 			return;
 		}
 		$('#EvaluationEvaluatee').focus();
 	});
 	
-	//View Evaluation Result
+	//VIEW EVALUATION RESULT
 	$(document).on('click','.fe-result',function(){
 		var action =$(this).attr('action');
 		var row =$(this).parents('tr:first');
