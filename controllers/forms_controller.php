@@ -2,7 +2,7 @@
 class FormsController extends AppController {
 
 	var $name = 'Forms';
-	var $uses = array('Form','Question');
+	var $uses = array('Form','Question','Key');
 
 	function index() {
 		if ($this->Rest->isActive()) {	
@@ -48,7 +48,7 @@ class FormsController extends AppController {
 		}
 	}
 	
-	function worksheet() {
+	function sortable_worksheet() {
 		if (!empty($this->data['Form']['id'])) {
 			$form_id = $this->data['Form']['id'];
 			$this->Form->recursive = 3;
@@ -62,6 +62,30 @@ class FormsController extends AppController {
 					}
 				}
 			}
+			$this->set('form', $data);
+		}else{
+			$this->redirect(array('action'=>'index'));
+		}
+	}
+	
+	function worksheet() {
+		if (!empty($this->data['Form']['id'])) {
+			$form_id = $this->data['Form']['id'];
+			$this->Form->recursive = 3;
+			$data = $this->Form->read(null, $form_id);
+			
+			unset($data['FormType']['Form']);
+			
+			if(isset($data['FormDomain'])){
+				foreach($data['FormDomain'] as $domain){
+					foreach($data['Question'] as $question){
+						if($domain['domain_id'] == $question['domain_id']){
+							$data['DomainQuestion'][$question['Domain']['name']][$question['text']] = $question;
+						}
+					}
+				}
+			}		
+
 			$this->set('form', $data);
 		}else{
 			$this->redirect(array('action'=>'index'));
@@ -146,7 +170,19 @@ class FormsController extends AppController {
 			$this->redirect(array('action'=>'../forms'));
 		}
 	}
-
+	
+	function login() {
+		if ($this->RequestHandler->isAjax()) {
+			$key_value = $this->data['Form']['key'];
+			
+			$result = $this->Key->find('first',array('recursive'=>2,'conditions'=>array('Key.value'=>$key_value)));
+		
+			$startTime =  date('h:i A');
+			echo json_encode(array('data'=>$result,'StartTime'=>$startTime));
+			exit;
+		}
+	}
+	
 	protected function api($params){
 		$schema = $this->Form->schema();
 		$conditions = array();
