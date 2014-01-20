@@ -2,9 +2,9 @@
 class QuizzesController extends AppController {
 
 	var $name = 'Quizzes';
+	var $uses = array('Quiz','Form');
 
 	function index() {
-		
 		if ($this->Rest->isActive()) {	
 			$curr_data = $this->api($_GET);
 			$this->set('data',$curr_data);
@@ -29,17 +29,38 @@ class QuizzesController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
+			foreach($this->data['QuizDetail'] as $key => $detail){
+				if($detail['option_type']=='checkbox' || $detail['option_type']=='radio'){
+					if(!isset($detail['option_id'])){
+							unset($this->data['QuizDetail'][$key]);
+					}
+				}else{
+					if(empty($detail['answer'])){
+						$this->data['QuizDetail'][$key]['answer']='No Answer';
+					}
+				}
+			}
+
 			$this->Quiz->create();
-			if ($this->Quiz->save($this->data)) {
-				$this->Session->setFlash(__('The quiz has been saved', true));
-				$this->redirect(array('action' => 'index'));
+			$this->data['Key']['status'] = '1';
+			if ($this->Quiz->saveAll($this->data)) {
+				if($this->RequestHandler->isAjax()){
+					$response['status'] = 1;
+					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Form successfully submitted.";
+					$response['data'] = $this->data;
+					echo json_encode($response);
+					exit();
+				}
 			} else {
-				$this->Session->setFlash(__('The quiz could not be saved. Please, try again.', true));
+				if($this->RequestHandler->isAjax()){
+					$response['status'] = -1;
+					$response['msg'] = "<a><i class='icon-warning-sign'/></i></a> Form could not be submitted. Please, try again.";
+					$response['data'] = $this->data;
+					echo json_encode($response);
+					exit();
+				}
 			}
 		}
-		$forms = $this->Quiz->Form->find('list');
-		$keys = $this->Quiz->Key->find('list');
-		$this->set(compact('forms', 'keys'));
 	}
 
 	function edit($id = null) {
@@ -76,11 +97,33 @@ class QuizzesController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	
+	function form(){
+		if (isset($this->data['Form']['id'])) {
+			$form_id = $this->data['Form']['id'];
+			
+			$this->Form->recursive = 3;
+			$form = $this->Form->read(null, $form_id);
+
+			foreach($form['FormDomain'] as $domain){
+				foreach($form['Question'] as $question){
+					if($domain['domain_id'] == $question['domain_id']){
+						$form['DomainQuestion'][$question['Domain']['name']][$question['text']] = $question;
+					}
+				}
+			}
+		
+			$key = $this->data['Form']['object_id'];
+			$this->set(compact('form','key'));
+		}else{
+			$this->redirect(array('action'=>'../forms/login'));
+		}
+	}
+	
 	protected function api($params){
 		$schema = $this->Quiz->schema();
 		$conditions = array();
 		$fields = array();
-		$group = array('Quiz.form_id','Quiz.evaluatee');
+		$group = array('Quiz.form_id','Quiz.examinee');
 		$type = 'all';
 		$page = 1;
 		$limit = $this->Rest->limit;
