@@ -66,7 +66,7 @@ class DomainsController extends AppController {
 	function create(){
 		$form_id = $this->data['Form']['id'];
 		if(!empty($form_id)){
-			$forms = $this->Domain->Form->find('first',array('conditions'=>array('Form.id' => $form_id)));
+			$forms = $this->Domain->FormDomain->find('first',array('conditions'=>array('Form.id' => $form_id)));
 			$this->set(compact('forms'));
 		}else{
 			$this->redirect(array('action' => '../forms/index'));
