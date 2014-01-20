@@ -40,16 +40,13 @@ class EvaluationsController extends AppController {
 					}
 				}
 			}
-
-		
-		
+			
 			$this->Evaluation->create();
 			$this->data['Key']['status'] = '1';
-			
 			if ($this->Evaluation->saveAll($this->data)) {
 				if($this->RequestHandler->isAjax()){
 					$response['status'] = 1;
-					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Evaluation has been saved.";
+					$response['msg'] = "<a><i class='icon-ok-sign'/></i></a> Form successfully submitted.";
 					$response['data'] = $this->data;
 					echo json_encode($response);
 					exit();
@@ -57,7 +54,7 @@ class EvaluationsController extends AppController {
 			} else {
 				if($this->RequestHandler->isAjax()){
 					$response['status'] = -1;
-					$response['msg'] = "<a><i class='icon-warning-sign' /></i></a> Evaluation could not be saved. Please, try again.";
+					$response['msg'] = "<a><i class='icon-warning-sign' /></i></a> Form could not be submitted. Please, try again.";
 					$response['data'] = $this->data;
 					echo json_encode($response);
 					exit();
@@ -117,7 +114,7 @@ class EvaluationsController extends AppController {
 			$key = $this->data['Form']['object_id'];
 			$this->set(compact('form','key'));
 		}else{
-			$this->redirect(array('action'=>'login'));
+			$this->redirect(array('action'=>'../forms/login'));
 		}
 	}
 	
