@@ -69,9 +69,9 @@
 <?php echo $this->Form->end();?>
 
 <!--FORMACTION-->
-<?php echo $this->Form->create('Evalaution',array('id'=>'EvalautionResult'));?>
-	<? echo $this->Form->input('Evalaution.form_id',array('id'=>'EvalautionFormId','type'=>'hidden'));?>
-	<? echo $this->Form->input('Evalaution.evalautee',array('id'=>'EvalautionEvalautee','type'=>'hidden'));?>
+<?php echo $this->Form->create('Evaluation',array('id'=>'EvaluationResult'));?>
+	<? echo $this->Form->input('Evaluation.form_id',array('id'=>'EvaluationFormId','type'=>'hidden'));?>
+	<? echo $this->Form->input('Evaluation.evaluatee',array('id'=>'EvaluationEvaluatee','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 

@@ -27,10 +27,11 @@ $(document).ready(function(){
 		var row =$(this).parents('tr:first');
 		var form_id =row.find('.form-id').text();
 		var evaluatee =row.find('.evaluatee').text();
-		$('#EvalautionFormId').val(form_id);
-		$('#EvalautionEvalautee').val(evaluatee);
+		$('#EvaluationFormId').val(form_id);
+		$('#EvaluationEvaluatee').val(evaluatee);
 		
-		$('#EvalautionResult').attr('action',action);
-		$('#EvalautionResult').submit();
+		
+		$('#EvaluationResult').attr('action',action);
+		$('#EvaluationResult').submit();
 	});
 });
