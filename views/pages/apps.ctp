@@ -50,8 +50,8 @@
 			
 			
 			<li class="submodule">
-				<div class="submodule-icon"><a href="/formbuilder/evaluations/login"><i class="icon-lock icon-white"></i></a></div>
-				<span class="submodule-name">Evaluation Login</span>
+				<div class="submodule-icon"><a href="/formbuilder/forms/login"><i class="icon-lock icon-white"></i></a></div>
+				<span class="submodule-name">Form Login</span>
 			</li>
 			
 			<li class="submodule">
