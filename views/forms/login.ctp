@@ -6,7 +6,7 @@
 					<div class="span4 module">
 						<div class="module-wrap">
 							<div class="module-name evaluations">
-							<?php echo $this->Html->link( 'Evaluations',
+							<?php echo $this->Html->link( 'Form',
 														array('action' => 'index')
 													);  ?>							</div>
 						</div>
@@ -19,8 +19,9 @@
 
 <div class="row-fluid">
 <div class="evaluations form span6 offset3">
-	<?php echo $this->Form->create('Evaluation',array(	
+	<?php echo $this->Form->create('Form',array(	
 													'action'=>'login',
+													'id'=>'FormLogin',
 													'class'=>'form-horizontal',
 																		'inputDefaults' => array( 	'label'=>array('class'=>'control-label'),
 																									'div'=>array('class'=>'control-group')
@@ -47,5 +48,5 @@
 <?php echo $this->Form->end();?>
 
 <?php 
-	echo $this->Html->script(array('formbuilder/formevaluation'),array('inline'=>false));
+	echo $this->Html->script(array('formbuilder/formlogin'),array('inline'=>false));
 ?>
