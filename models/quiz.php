@@ -19,4 +19,21 @@ class Quiz extends AppModel {
 			'order' => ''
 		)
 	);
+
+	var $hasMany = array(
+		'QuizDetail' => array(
+			'className' => 'QuizDetail',
+			'foreignKey' => 'quiz_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+
 }
