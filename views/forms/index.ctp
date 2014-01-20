@@ -61,8 +61,14 @@
 										<a action="/formbuilder/forms/worksheet" class="fb-action">
 											<i class="icon-edit"></i> Worksheet
 										</a>
+									</li>
+									<!--
+									<li>
+										<a action="/formbuilder/forms/sortable_worksheet" class="fb-action">
+											<i class="icon-edit"></i> Sortable Worksheet
+										</a>
 									</li>		
-									<!--<li>
+									<li>
 										<a action="/formbuilder/forms/delete" class="fb-action">
 											<i class="icon-trash"></i> Delete
 										</a>
