@@ -37,9 +37,10 @@
 					)));?>
 		<fieldset>
 			<legend><?php __('Add Domain'); ?></legend>
-			<?php echo $this->Form->input('Form.id',array('between'=>'<div class="controls">','after'=>'</div>'));?>
+			<?php echo $this->Form->input('Form.id',array('type'=>'hidden','between'=>'<div class="controls">','after'=>'</div>'));?>
 			<?php echo $this->Form->input('name',array('required'=>'required','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 			<?php echo $this->Form->input('description',array('placeholder'=>'','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
+			<?php echo $this->Form->input('FormDomain.index_order',array('type'=>'hidden','between'=>'<div class="controls">','after'=>'</div>' ,'class'=>'span11'));?>
 		</fieldset>
 		<div class="control-group">
 			<div class="controls">
