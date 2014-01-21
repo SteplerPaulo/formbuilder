@@ -59,6 +59,11 @@
 				<span class="submodule-name">Evaluation</span>
 			</li>
 			
+			<li class="submodule">
+				<div class="submodule-icon"><a href="/formbuilder/quizzes/result"><i class="icon-folder-open icon-white"></i></a></div>
+				<span class="submodule-name">Quiz</span>
+			</li>
+			
 			<?php for($i=1;$i<0;$i++): ?>
 			<li class="submodule">
 				<div class="submodule-icon"><a href="#/"><i class="icon-check-empty"></i></a></div>
