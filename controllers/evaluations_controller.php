@@ -119,9 +119,9 @@ class EvaluationsController extends AppController {
 	}
 	
 	function result(){
-		if (isset($this->data['Evalaution']['form_id']) && isset($this->data['Evalaution']['evalautee'])) {
-			$form_id= $this->data['Evalaution']['form_id'];
-			$evaluatee = $this->data['Evalaution']['evalautee'];
+		if (isset($this->data['Evaluation']['form_id']) && isset($this->data['Evaluation']['evaluatee'])) {
+			$form_id= $this->data['Evaluation']['form_id'];
+			$evaluatee = $this->data['Evaluation']['evaluatee'];
 			$form = $this->Form->read(null, $form_id);
 			$respondent_count = $this->Evaluation->EvaluationDetail->respondent_count($form_id,$evaluatee);
 			$mean = $this->Evaluation->EvaluationDetail-> getMean($form_id,$evaluatee);
@@ -129,7 +129,7 @@ class EvaluationsController extends AppController {
 			//SUMMARY
 			$summary = $this->Evaluation->EvaluationDetail->getWeightedMean($form_id,$evaluatee);
 			//END
-		
+			
 			//DIVERGENT QUESTIONS(COMMENT & SUGGESTION)
 			$conditions = array('Evaluation.form_id'=>$form_id,'Evaluation.evaluatee'=>$evaluatee,
 								'EvaluationDetail.answer Not'=>'Null','Question.option_type_id'=>3
