@@ -119,6 +119,18 @@ class QuizzesController extends AppController {
 		}
 	}
 	
+	function result(){
+		if(isset($this->data['Quiz']['form_id']) && isset($this->data['Quiz']['examinee'])) {
+			$form_id = $this->data['Quiz']['form_id'];
+			$examinee = $this->data['Quiz']['examinee'];
+
+			$result = $this->Quiz->result($form_id,$examinee);
+			$this->set(compact('result'));
+		}else{
+			$this->redirect(array('action'=>'index'));
+		}
+	}
+	
 	protected function api($params){
 		$schema = $this->Quiz->schema();
 		$conditions = array();
