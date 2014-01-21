@@ -7,8 +7,9 @@
 						<div class="module-wrap">
 							<div class="module-name evaluations">
 							<?php echo $this->Html->link( 'Form',
-														array('action' => 'index')
-													);  ?>							</div>
+														'javascript:void()'
+													);  ?>							
+							</div>
 						</div>
 					</div>
 				</div>
