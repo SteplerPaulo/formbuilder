@@ -132,7 +132,7 @@
 					</tbody>
 				</table>
 				<? endforeach;?>
-				<? }else{ ?> No Data Available  <? } ?>
+				<? }else{ ?>Not Applicable  <? } ?>
 			</div>
 		</div>
 	</div>
