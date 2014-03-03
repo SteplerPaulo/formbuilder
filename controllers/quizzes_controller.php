@@ -124,7 +124,9 @@ class QuizzesController extends AppController {
 			$form_id = $this->data['Quiz']['form_id'];
 			$examinee = $this->data['Quiz']['examinee'];
 
-			$result = $this->Quiz->result($form_id,$examinee);
+			$result = $this->Quiz->find('first',array('recursive'=>3,'conditions'=>array('Quiz.form_id'=>$form_id,'Quiz.examinee'=>$examinee )));
+
+			
 			$this->set(compact('result'));
 		}else{
 			$this->redirect(array('action'=>'index'));
