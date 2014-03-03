@@ -32,7 +32,9 @@ class EvaluationsController extends AppController {
 			foreach($this->data['EvaluationDetail'] as $key => $detail){
 				if($detail['option_type']=='checkbox' || $detail['option_type']=='radio'){
 					if(!isset($detail['option_id'])){
-							unset($this->data['EvaluationDetail'][$key]);
+						//unset($this->data['EvaluationDetail'][$key]);\
+						$this->data['EvaluationDetail'][$key]['option_id']='1';
+	
 					}
 				}else{
 					if(empty($detail['answer'])){
@@ -167,7 +169,7 @@ class EvaluationsController extends AppController {
 				$index = pow(($weighted_mean-$mean), 2);
 				$index_summation += $index;
 			}
-			$spread_index = round($index_summation/($item_count-1),2);
+			$spread_index = ($item_count!=1)?round($index_summation/($item_count-1),2):'1';
 			//END
 			
 			$this->set(compact('evaluatee','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
