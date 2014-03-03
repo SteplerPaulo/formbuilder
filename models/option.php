@@ -1,6 +1,13 @@
 <?php
 class Option extends AppModel {
 	var $name = 'Option';
+	var $virtualFields = array('remarks'=>"CASE is_correct
+									WHEN '1' THEN 'Correct'
+									WHEN '0' THEN 'Incorrect'
+								END ");
+	
+	
+	
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasAndBelongsToMany = array(
