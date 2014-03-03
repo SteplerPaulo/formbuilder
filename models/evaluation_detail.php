@@ -61,8 +61,7 @@ class EvaluationDetail extends AppModel {
 									  ON (
 										`domains`.`id` = `questions`.`domain_id`
 									  ) 
-								  WHERE `options`.`value` > 0 
-								  AND `evaluations`.`form_id`= '$form_id'
+								  WHERE `evaluations`.`form_id`= '$form_id'
 								  AND `evaluations`.`evaluatee`= '$evaluatee'
 								  GROUP BY 
 									`evaluation_details`.`question_id`,
@@ -72,7 +71,7 @@ class EvaluationDetail extends AppModel {
 	}
 
 	public function getFrequency($form_id,$evaluatee){
-		$conditions = array('Option.value >'=>0,'Evaluation.form_id'=>$form_id,'Evaluation.evaluatee'=>$evaluatee);
+		$conditions = array('Evaluation.form_id'=>$form_id,'Evaluation.evaluatee'=>$evaluatee);
 		
 		$fields = array('EvaluationDetail.question_id','COUNT(*) as frequency','Option.value','COUNT(*) * Option.value as weight','Question.text');
 		$group =array('EvaluationDetail.question_id','EvaluationDetail.option_id');
