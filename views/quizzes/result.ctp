@@ -24,8 +24,8 @@
 	<div class="w90 center">
 		
 		
-		<? echo '<b> Examinee Name: </b>'.$result[0]['quizzes']['examinee'].'<br/>'; ?>
-		<? echo '<b>Form Title: </b>'.$result[0]['forms']['title'].'<hr/>'; ?>
+		<? echo '<b> Examinee Name: </b>'.$result['Quiz']['examinee'].'<br/>'; ?>
+		<? echo '<b>Form Title: </b>'.$result['Form']['title'].'<hr/>'; ?>
 			
 			
 		<table class="table table table-striped table-bordered" id="EvaluationTable">
@@ -34,7 +34,6 @@
 				<tr>
 					<th class="w40"><a >Quiz Item</a></th>
 					<th class="w20 text-center"><a >Examinee Answer</a></th>
-					<th class="w20 text-center"><a >Correct Answer</a></th>
 					<th class="w10 text-center"><a >Remarks</a></th>
 					<th class="w10 text-center"><a >Point(s)</a></th>
 				</tr>
@@ -42,20 +41,19 @@
 			<tbody>
 				<? $CurrDomainId = ''; ?>
 				<? $score = 0; ?>
-				<? foreach($result as $r):?>
-				<? if($r['domains']['id'] != $CurrDomainId){; ?>
-					<? $CurrDomainId = $r['domains']['id']; ?>
+				<? foreach($result['QuizDetail'] as $r):?>
+				<? if($r['Question']['domain_id'] != $CurrDomainId){; ?>
+					<? $CurrDomainId = $r['Question']['domain_id']; ?>
 					<tr class="error">
-						<td colspan='5'><? echo '<b>'.$r['domains']['name'].'</b>'; ?></td>
+						<td colspan='5'><? echo '<b>'.$r['Question']['Domain']['name'].'</b>'; ?></td>
 					</tr>
 				<? };?>
 					<tr>
-						<td><? echo $r['questions']['text']; ?></td>
-						<td><? echo $r['options']['text']; ?></td>
-						<td><? echo $r['correct_answer']['text']; ?></td>
-						<td class="text-center"><? echo $r[0]['result']; ?></td>
-						<td class="text-center"><? echo ($r['options']['text']==$r['correct_answer']['text'])?$r['correct_answer']['value']:'0'; ?></td>
-						<?($r[0]['result'])?$score+= $r['options']['value']:$score+=0; ?>
+						<td><? echo $r['Question']['text']; ?></td>
+						<td><? echo $r['Option']['text']; ?></td>
+						<td class="text-center"><? echo $r['Option']['remarks']; ?></td>
+						<td class="text-center"><? echo $r['Option']['value']; ?></td>
+						<?($r['Option']['value'])?$score+= $r['Option']['value']:$score+=0; ?>
 					</tr>
 				<? endforeach;?>
 			</tbody>
