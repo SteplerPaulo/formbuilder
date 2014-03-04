@@ -32,7 +32,8 @@ class QuizzesController extends AppController {
 			foreach($this->data['QuizDetail'] as $key => $detail){
 				if($detail['option_type']=='checkbox' || $detail['option_type']=='radio'){
 					if(!isset($detail['option_id'])){
-							unset($this->data['QuizDetail'][$key]);
+						//unset($this->data['QuizDetail'][$key]);
+						$this->data['QuizDetail'][$key]['option_id']='1';
 					}
 				}else{
 					if(empty($detail['answer'])){
@@ -40,7 +41,6 @@ class QuizzesController extends AppController {
 					}
 				}
 			}
-
 			$this->Quiz->create();
 			$this->data['Key']['status'] = '1';
 			if ($this->Quiz->saveAll($this->data)) {
