@@ -55,13 +55,18 @@
 			</li>
 			
 			<li class="submodule">
-				<div class="submodule-icon"><a href="/formbuilder/evaluations/result"><i class="icon-hdd icon-white"></i></a></div>
-				<span class="submodule-name">Evaluation</span>
+				<div class="submodule-icon"><a href="/formbuilder/quizzes/result"><i class="icon-folder-open icon-white"></i></a></div>
+				<span class="submodule-name">Quiz Results</span>
 			</li>
 			
 			<li class="submodule">
-				<div class="submodule-icon"><a href="/formbuilder/quizzes/result"><i class="icon-folder-open icon-white"></i></a></div>
-				<span class="submodule-name">Quiz</span>
+				<div class="submodule-icon"><a href="/formbuilder/evaluations/result"><i class="icon-folder-close icon-white"></i></a></div>
+				<span class="submodule-name">Evaluation Results</span>
+			</li>
+			
+			<li class="submodule">
+				<div class="submodule-icon"><a href="/formbuilder/election_report/result"><i class="icon-hdd icon-white"></i></a></div>
+				<span class="submodule-name">Election Results</span>
 			</li>
 			
 			<?php for($i=1;$i<0;$i++): ?>
@@ -70,7 +75,6 @@
 				<span class="submodule-name">Empty App</span>
 			</li>
 			<?php endfor; ?>
-
 		</ul>
 	</div>
  </div>
