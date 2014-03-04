@@ -37,6 +37,9 @@
 				<? $vote = isset($votes[$ballot['options']['id']])?$votes[$ballot['options']['id']]:0; ?>
 				
 				<? if($ballot['questions']['id'] != $CurrPosition){?>
+					<tr class="info">
+						<td colspan='3'> &nbsp; </td>
+					</tr>
 					<? $CurrPosition = $ballot['questions']['id'];?>
 					<? $OptionCount = $result['OptionCount'][$CurrPositionIndex][0]['option_count'];?>
 					<? $CurrPositionIndex++;?>
