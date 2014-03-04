@@ -33,7 +33,6 @@ class ElectionReportsController extends AppController {
 			foreach($this->data['ElectionReportDetail'] as $key => $detail){
 				if($detail['option_type']=='checkbox' || $detail['option_type']=='radio'){
 					if(!isset($detail['option_id'])){
-						
 						unset($this->data['ElectionReportDetail'][$key]);
 					}
 				}else{
@@ -124,13 +123,28 @@ class ElectionReportsController extends AppController {
 		
 		if(isset($this->data['ElectionReport']['form_id'])) {
 			$form_id = $this->data['ElectionReport']['form_id'];
+			
+			$result = $this->ElectionReport->result($form_id);
+		
+	
+
+			$votes = array();
+			foreach($result['Return'] as $return){
+				$votes[$return['options']['id']]=$return['options']['value'];
+			}
+			
+			$this->set(compact('result','votes'));
+		}else{
+			$this->redirect(array('action'=>'index'));
+		}
+	}
+	
+	function dave_result(){
+		$this->data['ElectionReport']['form_id']=3;
+		if(isset($this->data['ElectionReport']['form_id'])) {
+			$form_id = $this->data['ElectionReport']['form_id'];
 
 			$result = $this->ElectionReport->result($form_id);
-			$ballot = $this->Form->find('first',array('recursive'=>2,'conditions'=>array('Form.id'=>$form_id)));
-			
-			
-			
-			//pr($ballot);exit;
 			$this->set(compact('result'));
 		}else{
 			$this->redirect(array('action'=>'index'));
