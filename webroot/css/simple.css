@@ -198,3 +198,7 @@ table{
 	height: 3.5em !important;
 	min-height: 3.5em !important;
 }
+
+input[type="radio"], input[type="checkbox"] {
+	margin: 0 0 0 !important; 	
+}
