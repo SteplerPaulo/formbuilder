@@ -22,55 +22,37 @@
  </div>
 <div class="sub-content-container">
 	<div class="w90 center">
-		<? echo ''.'<hr/>'; ?>
-				
-		<table class="table table table-striped table-bordered" id="EvaluationTable">
-			
+		<table class="table table table-striped table-bordered" id="ElectionReportTable">
+			<? echo '<caption>'.$result['Ballot'][0]['forms']['title'].'</caption>'; ?><thead>
 			<thead>
 				<tr>
 					<th class="w20 text-center"><a >Position</a></th>
 					<th class="w50"><a >Candidate Name</a></th>
 					<th class="w20 text-center"><a >Vote Count</a></th>
-					<th class="w10 text-center"><a >Remarks</a></th>
-					
 				</tr>
 			</thead>
 			<tbody>
-				<!--
-				<? $CurrPosition = ''; ?>
+				<? $CurrPosition = ''; $CurrPositionIndex = 0; ?>
 				<? foreach($result['Ballot'] as $ballot):?>
-				<? if($ballot['questions']['id'] != $CurrPosition){; ?>
-					<? $CurrPosition = $ballot['questions']['id']; ?>
+				<? $vote = isset($votes[$ballot['options']['id']])?$votes[$ballot['options']['id']]:0; ?>
+				
+				<? if($ballot['questions']['id'] != $CurrPosition){?>
+					<? $CurrPosition = $ballot['questions']['id'];?>
+					<? $OptionCount = $result['OptionCount'][$CurrPositionIndex][0]['option_count'];?>
+					<? $CurrPositionIndex++;?>
 					<tr>
-						<td rowspan="2" class="text-center"><? echo '<b>'.$ballot['questions']['text'].'</b>'; ?></td>
+						<td rowspan="<? echo $OptionCount; ?>" class="text-center"><? echo '<b>'.$ballot['questions']['text'].'</b>'; ?></td>
 						<td><? echo $ballot['options']['text']; ?></td>
-						<td class="text-center"><? echo ''; ?></td>
-						<td></td>
+						<td class="text-center"><? echo $vote; ?></td>
 					</tr>
-
 				<? }else{;?>
 					<tr>
 						<td><? echo $ballot['options']['text']; ?></td>
-						<td class="text-center"><? echo ''; ?></td>
-						<td></td>
+						<td class="text-center"><? echo $vote; ?></td>
 					</tr>
-					
 				<? };?>
 				<? endforeach;?>
-				-->
-					<tr>
-						<td rowspan="2" class="text-center">President</td>
-						<td>Binay</td>
-						<td class="text-center">100</td>
-						<td class="text-center">Winner</td>
-					</tr>
-					<tr>
-						<td>Bong</td>
-						<td class="text-center">50</td>
-						<td class="text-center"></td>
-					</tr>
 			</tbody>
 		</table>
-
 	</div>
 </div>
