@@ -62,7 +62,9 @@ class ElectionReport extends AppModel {
 		
 		$ballot =  $this->query( 
 			"SELECT
-				`options`.`text`
+				`forms`.`title`
+				, `options`.`id`
+				,`options`.`text`
 				, `questions`.`id`
 				, `questions`.`text`
 			FROM
@@ -73,13 +75,34 @@ class ElectionReport extends AppModel {
 					ON (`question_options`.`question_id` = `questions`.`id`)
 				INNER JOIN `formbuilder_c`.`forms` 
 					ON (`questions`.`form_id` = `forms`.`id`)
-			WHERE (`forms`.`id` = '7')
+			WHERE (`forms`.`id` = '$form_id')
 			"
 		);
 		
+		$option_count =  $this->query( 
+			"SELECT 
+			  `questions`.`id`,
+			  `questions`.`text`, 
+			  COUNT(`questions`.`id`) AS option_count
+			FROM
+			  `options` 
+			  INNER JOIN `question_options` 
+				ON (
+				  `options`.`id` = `question_options`.`option_id`
+				) 
+			  INNER JOIN `questions` 
+				ON (
+				  `question_options`.`question_id` = `questions`.`id`
+				) 
+			  INNER JOIN `forms` 
+				ON (
+				  `questions`.`form_id` = `forms`.`id`
+				) 
+			WHERE (`forms`.`id` = '3')
+			GROUP BY `questions`.`id`
+			"
+		);
 
-		
-		
-		return array('Return'=>$return,'Ballot'=>$ballot);
+		return array('Return'=>$return,'Ballot'=>$ballot,'OptionCount'=>$option_count);
 	}
 }
