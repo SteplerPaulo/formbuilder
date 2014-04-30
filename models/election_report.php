@@ -39,20 +39,20 @@ class ElectionReport extends AppModel {
 			  `options`.`value`,
 			  SUM(`options`.`value`) AS vote_count
 			FROM
-			  `formbuilder_c`.`election_reports` 
-			  INNER JOIN `formbuilder_c`.`election_report_details` 
+			  `election_reports` 
+			  INNER JOIN `election_report_details` 
 				ON (
 				  `election_reports`.`id` = `election_report_details`.`election_report_id`
 				) 
-			  INNER JOIN `formbuilder_c`.`forms` 
+			  INNER JOIN `forms` 
 				ON (
 				  `election_reports`.`form_id` = `forms`.`id`
 				) 
-			  INNER JOIN `formbuilder_c`.`questions` 
+			  INNER JOIN `questions` 
 				ON (
 				  `election_report_details`.`question_id` = `questions`.`id`
 				) 
-			  INNER JOIN `formbuilder_c`.`options` 
+			  INNER JOIN `options` 
 				ON (
 				  `election_report_details`.`option_id` = `options`.`id`
 				) 
@@ -68,12 +68,12 @@ class ElectionReport extends AppModel {
 				, `questions`.`id`
 				, `questions`.`text`
 			FROM
-				`formbuilder_c`.`options`
-				INNER JOIN `formbuilder_c`.`question_options` 
+				`options`
+				INNER JOIN `question_options` 
 					ON (`options`.`id` = `question_options`.`option_id`)
-				INNER JOIN `formbuilder_c`.`questions` 
+				INNER JOIN `questions` 
 					ON (`question_options`.`question_id` = `questions`.`id`)
-				INNER JOIN `formbuilder_c`.`forms` 
+				INNER JOIN `forms` 
 					ON (`questions`.`form_id` = `forms`.`id`)
 			WHERE (`forms`.`id` = '$form_id')
 			"

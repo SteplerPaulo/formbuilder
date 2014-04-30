@@ -46,10 +46,23 @@
 			<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-th-large')).' '.
 											$this->Html->tag('span', 'Apps', array('class' => 'module-label')),
 											array('controller'=>'pages','plugin'=>null,'action'=>'apps'), array('escape' => false)
-											);  ?>	
+											);  ?>
+			<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-wrench')).' '.
+								$this->Html->tag('span', 'Access Control', array('class' => 'module-label')),
+								array('controller'=>'pages','plugin'=>null,'action'=>'access_control'), array('escape' => false)
+								);  ?>
+			<?php echo ($this->Access->check('User','create','read','update','delete'))? $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-user')).' '.
+											$this->Html->tag('span', 'Users', array('class' => 'module-label')),
+											array('controller'=>'users','plugin'=>null,'action'=>'index'), array('escape' => false)
+											):''; ?>	
+											
+			<?php echo ($this->Access->isLoggedIn())? $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-cog')).' '.
+											$this->Html->tag('span', 'Account Setting', array('class' => 'module-label')),
+											array('controller'=>'users','plugin'=>null,'action'=>'account_setting'), array('escape' => false)
+											):''; ?>	
 		</nav>
 		<div class="page-wrap animate">
-			<!--Header-->
+			<!--HEADER-->
 			<div class="header-container">
 				<header class="main-header animate">
 					<a href="#main-nav" class="open-menu " ><i class=" icon-reorder "></i></a>
@@ -69,9 +82,7 @@
 					echo $this->Html->script(array('ui/uiInputNumeric','utils/server','ui/uiDatePicker'));
 					echo $this->Html->script(array('media-query'));
 					echo $this->Html->script(array('utils/advancedtable'));
-
 					echo $scripts_for_layout;
-					
 					// echo $this->Html->script('simplyconnect',array('id'=>'smplycnnct')); 
 				?>
 				</div>

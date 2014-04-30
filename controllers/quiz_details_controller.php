@@ -2,6 +2,7 @@
 class QuizDetailsController extends AppController {
 
 	var $name = 'QuizDetails';
+	var $helpers = array('Access');
 
 	function index() {
 		$this->QuizDetail->recursive = 0;

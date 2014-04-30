@@ -2,6 +2,7 @@
 class OptionTypesController extends AppController {
 
 	var $name = 'OptionTypes';
+	var $helpers = array('Access');
 
 	function index() {
 		$this->OptionType->recursive = 0;

@@ -23,14 +23,18 @@
 					  </a>
 					  <ul class="dropdown-menu">
 						<!-- dropdown menu links -->
-								<li><?php echo $this->Html->link(__('Forms', true), array('controller' => 'forms', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Keys', true), array('controller' => 'keys', 'action' => 'index')); ?> </li>
+							<li><?php echo $this->Html->link(__('Forms', true), array('controller' => 'forms', 'action' => 'index')); ?> </li>
+							<li><?php echo $this->Html->link(__('Keys', true), array('controller' => 'keys', 'action' => 'index')); ?> </li>
 					  </ul>
 					</div>
 				</div>
 			</div>
-			<div class="span6 text-right">
-				 <input class="span6 m-t-5 p" type="text" placeholder="Search">
+			<div class="span3 pull-right">
+				<div id="simple-root"></div> 
+				<div class="btn-group pull-right">
+					<?php echo $access->isLoggedIn() ? '<button class="btn" disabled="disabled"><i class="icon-user"></i> '.ucfirst($access->getmy('username')).'</button>': ''; ?>
+					<?php echo $access->isLoggedIn() ? '<button class="btn">'.$this->Html->link( $this->Html->tag('span', 'Logout'),'/users/logout',array('escape' => false)).'</button>' : '<button class="btn">'.$this->Html->link( $this->Html->tag('span', 'Login'),'/users/login',array('escape' => false)).'</button>'; ?>
+				</div>
 			</div>
 		</div>
 	</div>

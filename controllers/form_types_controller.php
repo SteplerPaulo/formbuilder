@@ -2,6 +2,7 @@
 class FormTypesController extends AppController {
 
 	var $name = 'FormTypes';
+	var $helpers = array('Access');
 
 	function index() {
 		$this->FormType->recursive = 0;

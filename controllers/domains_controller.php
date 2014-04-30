@@ -2,6 +2,7 @@
 class DomainsController extends AppController {
 
 	var $name = 'Domains';
+	var $helpers = array('Access');
 
 	function index() {
 		if ($this->Rest->isActive()) {	

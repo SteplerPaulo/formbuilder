@@ -30,20 +30,41 @@
  * @package       cake
  * @subpackage    cake.app
  */
-class AppController extends Controller {
-	var $components = array(
-            'Session',
-			'RequestHandler',
-            'Rest.Rest' => array(
-				'catchredir' => true,
-                'debug' => 1,
-                'index' => array(
-                    'extract' => array('data'),
-                ),
-				'view' => array(
-                    'extract' => array('data'),
-                ),
-				'version'=>'1.0.0'
+class AppController extends Controller {	
+	public $components = array(
+		'RequestHandler',
+        'Session',
+		'Acl',
+		'Access',
+        'Auth' => array(
+            'loginRedirect' => array(
+                'controller' => 'pages',
+                'action' => 'apps'
             ),
-        );
+            'logoutRedirect' => array(
+                'controller' => 'pages',
+                'action' => 'home'
+            ),
+			'authorize '=>'controller'
+        ), 
+		'Rest.Rest' => array(
+			'catchredir' => true,
+			'debug' => 1,
+			'index' => array(
+				'extract' => array('data'),
+			),
+			'view' => array(
+				'extract' => array('data'),
+			),
+			'version'=>'1.0.0'
+		),
+    );
+	
+	
+	function beforeFilter() {
+		if ($this->params['controller'] == 'pages') {
+			$this->Auth->allow('*'); 
+			return;
+		}
+	}
 }

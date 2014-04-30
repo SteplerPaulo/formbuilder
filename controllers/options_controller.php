@@ -2,6 +2,7 @@
 class OptionsController extends AppController {
 
 	var $name = 'Options';
+	var $helpers = array('Access');
 	var $uses = array('Option','QuestionOption');
 
 	function index() {

@@ -2,6 +2,7 @@
 class QuizzesController extends AppController {
 
 	var $name = 'Quizzes';
+	var $helpers = array('Access');
 	var $uses = array('Quiz','Form');
 
 	function index() {

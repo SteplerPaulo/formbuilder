@@ -1,6 +1,7 @@
 <?php
 class KeysController extends AppController {
 	var $name = 'Keys';
+	var $helpers = array('Access');
 
 	function index() {
 		if ($this->Rest->isActive()) {	

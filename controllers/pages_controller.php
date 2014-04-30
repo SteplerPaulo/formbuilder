@@ -44,7 +44,7 @@ class PagesController extends AppController {
  * @var array
  * @access public
  */
-	var $helpers = array('Html');
+	var $helpers = array('Html','Access');
 
 /**
  * This controller does not use a model

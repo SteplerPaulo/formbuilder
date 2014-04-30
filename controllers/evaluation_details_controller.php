@@ -2,6 +2,7 @@
 class EvaluationDetailsController extends AppController {
 
 	var $name = 'EvaluationDetails';
+	var $helpers = array('Access');
 
 	function index() {
 		$this->EvaluationDetail->recursive = 0;

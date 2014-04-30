@@ -1,6 +1,7 @@
 <?php
 class QuestionsController extends AppController {
 	var $name = 'Questions';
+	var $helpers = array('Access');
 	var $uses = array('Question','FormDomain');
 
 	function index() {

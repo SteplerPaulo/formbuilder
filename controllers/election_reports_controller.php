@@ -3,6 +3,7 @@ class ElectionReportsController extends AppController {
 
 	var $name = 'ElectionReports';
 	var $uses = array('ElectionReport','Form');
+	var $helpers = array('Access');
 
 
 	function index() {
@@ -120,7 +121,6 @@ class ElectionReportsController extends AppController {
 	}
 	
 	function result(){
-		
 		if(isset($this->data['ElectionReport']['form_id'])) {
 			$form_id = $this->data['ElectionReport']['form_id'];
 			

@@ -2,6 +2,7 @@
 class EvaluationsController extends AppController {
 
 	var $name = 'Evaluations';
+	var $helpers = array('Access');
 	var $uses = array('Evaluation','Key','Form','Question');
 
 	function index() {

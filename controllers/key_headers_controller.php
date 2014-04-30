@@ -2,6 +2,7 @@
 class KeyHeadersController extends AppController {
 
 	var $name = 'KeyHeaders';
+	var $helpers = array('Access');
 
 	function index() {
 		if ($this->Rest->isActive()) {	

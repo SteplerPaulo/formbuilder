@@ -2,6 +2,7 @@
 class FormsController extends AppController {
 
 	var $name = 'Forms';
+	var $helpers = array('Access');
 	var $uses = array('Form','Question','Key');
 
 	function index() {
