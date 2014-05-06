@@ -45,7 +45,7 @@
 					<th><?php echo $this->Paginator->sort('username');?></th>
 					<th><?php echo $this->Paginator->sort('created');?></th>
 					<th><?php echo $this->Paginator->sort('modified');?></th>
-					<?php if($access->check('User')): ?>
+					<?php if($access->check('User')  || $access->check('User','delete')): ?>
 					<th class="actions"><?php __('Actions');?></th>
 					<?php endif; ?>
 				</tr>
@@ -61,18 +61,18 @@
 					<td><?php echo $user['User']['username']; ?>&nbsp;</td>
 					<td><?php echo $user['User']['created']; ?>&nbsp;</td>
 					<td><?php echo $user['User']['modified']; ?>&nbsp;</td>
-					<?php if($access->check('User')): ?>
-					<td class="actions">
-						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' =>'icon-eye-open')),array('action' => 'view', $user['User']['id']),array('escape' => false)); ?> 	
+					<?php if($access->check('User') || $access->check('User','delete')): ?>
+					<td class="actions w5 text-center">
+						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' =>'icon-eye-open')),array('action' => 'view', $user['User']['username']),array('escape' => false)); ?> 	
+						<!--
 						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' =>'icon-edit')),array('action' => 'edit', $user['User']['id']),array('escape' => false)); ?> 		
-					
 						<?php echo $this->Html->link(
 							$this->Html->tag('i','',array('class' =>'icon-trash')),
 							array('action' => 'delete', $user['User']['id']), 
 							array('escape' => false), 
 							sprintf(__('Are you sure you want to delete user %s?', true), $user['User']['username'])
-							
 						); ?>
+						-->
 					</td>
 					<?php endif; ?>
 				</tr>
