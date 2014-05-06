@@ -52,7 +52,7 @@ class PagesController extends AppController {
  * @var array
  * @access public
  */
-	var $uses = array();
+	var $uses = array('User');
 
 /**
  * Displays a view
@@ -78,7 +78,9 @@ class PagesController extends AppController {
 		if (!empty($path[$count - 1])) {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);
 		}
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
+		$user = $this->User->findByUsername($this->Access->getmy('username'));
+		
+		$this->set(compact('page', 'subpage', 'title_for_layout','user'));
 		$this->render(implode('/', $path));
 	}
 }
