@@ -6,24 +6,19 @@
 					<div class="span4 module">
 						<div class="module-wrap">
 							<div class="module-name issueOuts">
-									 <?php echo $this->Html->link( 'Issue Outs',
+									 <?php echo $this->Html->link( 'User Profile',
 															'javascript:void()'
 														);  ?>								
 							</div>
 						</div>
 					</div>
-					<div class="span3 upAccount">
-					 <?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-chevron-left')).
-													$this->Html->tag('span', 'BACK', array('class' => 'action-label')),
-													'/pages/apps',array('escape' => false,'class'=>'btn btn-medium tree-back btn-block animate' ,'id'=>'intent-back')
-													); ?> 					
-					</div>
-					<div class="span3">
-					<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'icon-plus icon-white')).
-														$this->Html->tag('span', 'CREATE', array('class' => 'action-label')),
-														array('action' => 'add'), array('escape' => false,'class'=>'btn btn-medium btn-primary btn-block animate' ,'id'=>'intent-create')
-													);  ?>					
-					</div>
+				</div>
+			</div>
+			<div class="span3 pull-right">
+				<div id="simple-root"></div> 
+				<div class="btn-group pull-right">
+					<?php echo $access->isLoggedIn() ? '<button class="btn" disabled="disabled"><i class="icon-user"></i> '.ucfirst($access->getmy('username')).'</button>': ''; ?>
+					<?php echo $access->isLoggedIn() ? '<button class="btn">'.$this->Html->link( $this->Html->tag('span', 'Logout'),'/users/logout',array('escape' => false)).'</button>' : '<button class="btn">'.$this->Html->link( $this->Html->tag('span', 'Login'),'/users/login',array('escape' => false)).'</button>'; ?>
 				</div>
 			</div>
 		</div>
@@ -31,45 +26,71 @@
  </div>
 <div class="sub-content-container">
 	<div class="w90 center">
-
-			<div class="users view">
-			<h2><?php  __('User');?></h2>
-				<dl><?php $i = 0; $class = ' class="altrow"';?>
-					<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $user['User']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Username'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $user['User']['username']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Password'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $user['User']['password']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $user['User']['created']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $user['User']['modified']; ?>
-			&nbsp;
-		</dd>
-				</dl>
+				<div class="tab-content">	
+			<div class="row-fluid">
+				<div class="span10">
+					<div class="media span12">
+						<span class="span3 vertical-line">
+							<a class="pull-left thumbnail " href="#ProfilePictureModal"  role="button" data-toggle="modal">
+								<?php 
+									if(!empty($user['Document']['id'])){
+										echo $this->Html->image('/users/download/'.$user['Document']['id'],array('alt'=>'','class'=>'media-object','style'=>'width:167px;height:200px'));
+									}else{
+										echo $this->Html->image('/img/200x250.gif',array('alt'=>'','class'=>'media-object','style'=>'width:167px;height:200px'));
+									}
+								?>
+							</a>	
+							<?  
+								if($access->check('User') || $user['User']['id'] == $access->getmy('id') ):
+									echo $this->element('upload');
+								endif;
+							?>
+						</span>
+						<div class="media-body span9">
+							<section>
+								<dl>
+								
+									<dt><h4>Username: <?php echo $user['User']['username']; ?></h4></dt>
+									<dd><b>Last Name: </b><?php echo $user['User']['last_name']; ?></dd>
+									<dd><b>First Name: </b><?php echo $user['User']['first_name']; ?></dd>
+									<dd><b>Middle Name: </b><?php echo $user['User']['middle_name']; ?></dd>
+						
+								</dl>
+							</section><hr>
+							<section>
+								<?php echo $this->element('apps'); ?>
+							</section>
+							
+					
+						</div>
+					</div>
+				</div>	
+				<?php if($access->check('User') || $user['User']['id'] == $access->getmy('id') ):?>
+				<div class="actions span2 well">
+					<h3><?php __('Actions'); ?></h3>
+					<div class="text-center">
+						<button class="btn margin-bottom">
+							<?php echo $this->Html->link(
+									$this->Html->tag('i','',array('class' =>'icon-cog','data-toggle'=>'tooltip','title'=>'Account Setting','data-placement'=>'top')),
+									array('action' => 'account_setting'),
+									array('escape' => false)
+								);		
+							?> 
+						</button>
+						<!--
+						<button class="btn margin-bottom">
+							<?php echo $this->Html->link(
+								$this->Html->tag('i','',array('class' =>'icon-trash','data-toggle'=>'tooltip','title'=>'Delete','data-placement'=>'top')),
+								array('action' => 'delete', $user['User']['id']), 
+								array('escape' => false), 
+								sprintf(__('Are you sure you want to delete record of alumni %s?', true), $user['User']['username'])
+							); ?>
+						</button>
+						-->
+					</div>
+					<? endif; ?>
+				</div>
 			</div>
-			<div class="actions">
-				<h3><?php __('Actions'); ?></h3>
-				<ul>
-					<li><?php echo $this->Html->link(__('Edit User', true), array('action' => 'edit', $user['User']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete User', true), array('action' => 'delete', $user['User']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $user['User']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User', true), array('action' => 'add')); ?> </li>
-				</ul>
-			</div>
+		</div>	
 	</div>
 </div>
