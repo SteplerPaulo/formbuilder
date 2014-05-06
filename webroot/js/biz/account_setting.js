@@ -123,7 +123,7 @@ $(document).ready(function(){
 			success:function(formReturn){
 				$('#Notify').html(formReturn.msg).fadeIn().delay(2000).fadeOut(function(){
 					if(formReturn.status){
-						window.location.href = BASE_URL+"pages/apps";
+						window.location.href = BASE_URL+'users/view';
 					}
 				});
 			}
