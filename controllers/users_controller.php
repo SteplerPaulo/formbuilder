@@ -38,7 +38,7 @@ class UsersController extends AppController {
 					$aro->save(array( 
 						 'model'        => 'User', 
 						 'foreign_key'    => $this->User->id, 
-						 'parent_id'    =>1 ,//$parent['Aro']['id'], 
+						 'parent_id'    => $parent['Aro']['id'], 
 						 'alias'        => 'User::'.$this->User->id 
 					));
 				
@@ -224,6 +224,7 @@ class UsersController extends AppController {
 			$roles = $this->Acl->Aro->find('list',array('fields'=>array('Aro.id','Aro.Alias'),'conditions'=>array('Aro.parent_id' => null )));
 			$this->set(compact('users','roles'));
 		}else{
+			//$this->redirect(array('action' => '../pages/apps'));
 			die('You are not authorized to access that location.');
 		}
 	}
@@ -233,24 +234,23 @@ class UsersController extends AppController {
 		if($this->Access->check('User','create','read','update','delete')){
 			$this->User->recursive = 0;
 			$this->set('users', $this->paginate());
+					
+		
+			$curr_user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
+			$this->set('curr_user', $curr_user);	
 		}else{
 			die('You are not authorized to access that location.');
 		}
 	}
 
-	function view($id = null) {
-		if($this->Access->check('User', 'read')){
-			if (!$id) {
-				$this->Session->setFlash(__('Invalid user', true));
-				$this->redirect(array('action' => 'index'));
-			}
-			$this->set('user', $this->User->read(null, $id));
-		}else{
-			die('You are not authorized to access that location.');
+	function view($username = null) {
+		if(empty($username)){
+			$username=$this->Access->getmy('username');
 		}
+		$this->set('user', $this->User->findByUsername($username));
 	}
 	
-	//Edit User Account
+	
 	function account_setting() {
 		if (!empty($this->data)) {
 			if(isset($this->data['User']['new_password'])){
@@ -370,7 +370,7 @@ class UsersController extends AppController {
 						echo '</script>';						
 						//exit;
 					}
-					//$this->redirect(array('action' => '../alumni/view/'.$this->data['User']['Document']['alumni_id']));
+					$this->redirect(array('action' => '../users/view'));
 					exit;
 				} else {
 					$this->Session->setFlash(__('The document could not be saved. Please, try again.', true));
