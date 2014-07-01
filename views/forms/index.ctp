@@ -98,7 +98,7 @@
 
 <!--FORMACTION-->
 <?php echo $this->Form->create('FormAction',array('id'=>'FormAction'));?>
-	<? echo $this->Form->input('Form.id',array('id'=>'FormId'));?>
+	<?php echo $this->Form->input('Form.id',array('id'=>'FormId'));?>
 <?php echo $this->Form->end();?>
 
 <?php 

@@ -26,7 +26,7 @@
  </div>
 <div class="sub-content-container">
 	<div class="w90 center">
-		<? echo ''.'<hr/>'; ?>
+		<?php echo ''.'<hr/>'; ?>
 				
 		<table class="table table table-striped table-bordered" id="ElectionReportTable">
 			<thead>
@@ -44,8 +44,8 @@
 						$votes[$return['options']['id']]=$return['options']['value'];
 					}
 				?>
-				<? $PrevTitle = $CurrTitle=$result['Ballot'][0]['questions']['text'];$PrevPosition = $CurrPosition = $result['Ballot'][0]['questions']['id']; $columns = array();?>
-				<? for($i=0;$i<count($result['Ballot']);$i++):?>
+				<?php $PrevTitle = $CurrTitle=$result['Ballot'][0]['questions']['text'];$PrevPosition = $CurrPosition = $result['Ballot'][0]['questions']['id']; $columns = array();?>
+				<?php for($i=0;$i<count($result['Ballot']);$i++):?>
 					<?php
 					
 						$ballot = $result['Ballot'][$i]; //Ballot entry
@@ -74,7 +74,7 @@
 						$PrevPosition = $CurrPosition; //Update PrevPosition
 						$PrevTitle = $CurrTitle; //Update PrevTitle
 					?>
-				<? endfor;?>
+				<?php endfor;?>
 			</tbody>
 		</table>
 	</div>

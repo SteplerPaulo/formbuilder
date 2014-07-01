@@ -46,45 +46,45 @@
 				<center><?php echo $form['FormType']['name']; ?></b></center>
 			</div>
 			
-			<? if(isset($form['FormDomain'])){ ;?>
-			<? foreach($form['FormDomain'] as $domain):?>
+			<?php if(isset($form['FormDomain'])){ ;?>
+			<?php foreach($form['FormDomain'] as $domain):?>
 				<dl class="well"> 
 					<dt>
-						<? echo $domain['Domain']['name']; ?>
+						<?php echo $domain['Domain']['name']; ?>
 					</dt><hr/>
-					<? if(isset($form['DomainQuestion'][''.$domain['Domain']['name'].''])){ ;?>
-						<? foreach($form['DomainQuestion'][''.$domain['Domain']['name'].''] as $question => $question_data):?>
+					<?php if(isset($form['DomainQuestion'][''.$domain['Domain']['name'].''])){ ;?>
+						<?php foreach($form['DomainQuestion'][''.$domain['Domain']['name'].''] as $question => $question_data):?>
 						
-						<? if($question_data['OptionType']['name'] == "textarea"){; ?>
+						<?php if($question_data['OptionType']['name'] == "textarea"){; ?>
 						<dd>
 							<dl>
-								<? echo $question; ?>
+								<?php echo $question; ?>
 							</dl>
 							<textarea class="center w100" placeholder="Fill out this area..."></textarea>
 						</dd><br/>
 						
-						<? }else{; ?>
+						<?php }else{; ?>
 						<dd>
 							<dl>
-								<? echo $question; ?>
+								<?php echo $question; ?>
 							</dl>
 							<dl class="well">
-								<? if(isset($question_data['QuestionOption'])){ ;?>
-									<? foreach($question_data['QuestionOption'] as $option):?>
+								<?php if(isset($question_data['QuestionOption'])){ ;?>
+									<?php foreach($question_data['QuestionOption'] as $option):?>
 									<dd>	
-										<input type="<? echo $question_data['OptionType']['name'];?>" name="<? echo $question_data['id']; ?>" value="<? echo $option['Option']['value']; ?>">
-										<? echo $option['Option']['text']; ?>
+										<input type="<?php echo $question_data['OptionType']['name'];?>" name="<?php echo $question_data['id']; ?>" value="<?php echo $option['Option']['value']; ?>">
+										<?php echo $option['Option']['text']; ?>
 									</dd>
-									<? endforeach;?>
-								<? };?>
+									<?php endforeach;?>
+								<?php };?>
 							</dl>
 						</dd>
-						<? } ?>
-						<? endforeach;?>
-					<? };?>
+						<?php } ?>
+						<?php endforeach;?>
+					<?php };?>
 				</dl>
-			<? endforeach;?>
-			<? };?>
+			<?php endforeach;?>
+			<?php };?>
 		</div>
 	</div>
 </div>
@@ -92,8 +92,8 @@
 
 <!--FORMACTION-->
 <?php echo $this->Form->create('Form',array('id'=>'FormAction'));?>
-	<? echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'hidden'));?>
-	<? echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 

@@ -40,7 +40,7 @@
 									}
 								?>
 							</a>	
-							<?  
+							<?php
 								if($access->check('User') || $user['User']['id'] == $access->getmy('id') ):
 									echo $this->element('upload');
 								endif;
@@ -88,7 +88,7 @@
 						</button>
 						-->
 					</div>
-					<? endif; ?>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>	

@@ -45,71 +45,71 @@
 					<?php echo '<b>Form Type: </b>'.$form['FormType']['name']; ?>
 				</div>
 				<div class="pull-right">
-					<a action="../forms/edit" class="fb-worksheet-edit" object-id="<? echo $form['Form']['id']?>"><i class="icon-edit"> Form Edit</i></a> |
-					<a action="../forms/delete" class="fb-worksheet-delete" object-id="<? echo $form['Form']['id']?>" form="true"><i class="icon-trash"> Form Delete</i></a> |
-					<a action="../domains/create" class="fb-worksheet-add" object-id="<? echo $form['Form']['id']?>"><i class="icon-plus-sign"> Add Domain</i></a> 
+					<a action="../forms/edit" class="fb-worksheet-edit" object-id="<?php echo $form['Form']['id']?>"><i class="icon-edit"> Form Edit</i></a> |
+					<a action="../forms/delete" class="fb-worksheet-delete" object-id="<?php echo $form['Form']['id']?>" form="true"><i class="icon-trash"> Form Delete</i></a> |
+					<a action="../domains/create" class="fb-worksheet-add" object-id="<?php echo $form['Form']['id']?>"><i class="icon-plus-sign"> Add Domain</i></a> 
 				</div><hr/>
 				<?php echo '<center><b>'.$form['Form']['title'].'</b></center>'; ?>
 				<?php echo '<center><b>'.$form['Form']['description'].'</b></center>'; ?>
 			</div>
 			
-			<? if(isset($form['FormDomain'])){ ;?>
-			<? foreach($form['FormDomain'] as $domain):?>
+			<?php if(isset($form['FormDomain'])){ ;?>
+			<?php foreach($form['FormDomain'] as $domain):?>
 				<dl class="well"> 
 					<dt>
-						<? echo $domain['Domain']['name']; ?>
+						<?php echo $domain['Domain']['name']; ?>
 						<span class="pull-right">
-							<a action="../domains/edit/" class="fb-worksheet-edit"  object-id="<? echo $domain['Domain']['id'];?>"><i class="icon-edit"> Edit</i></a> |
-							<a action="../domains/delete/" class="fb-worksheet-delete" object-id="<? echo $domain['Domain']['id'];?>"><i class="icon-trash"> Delete</i></a> |
-							<a action="../questions/create" class="fb-worksheet-add" object-id="<? echo $domain['Domain']['id']?>"><i class="icon-plus-sign"> Add Question</i></a> 
+							<a action="../domains/edit/" class="fb-worksheet-edit"  object-id="<?php echo $domain['Domain']['id'];?>"><i class="icon-edit"> Edit</i></a> |
+							<a action="../domains/delete/" class="fb-worksheet-delete" object-id="<?php echo $domain['Domain']['id'];?>"><i class="icon-trash"> Delete</i></a> |
+							<a action="../questions/create" class="fb-worksheet-add" object-id="<?php echo $domain['Domain']['id']?>"><i class="icon-plus-sign"> Add Question</i></a> 
 						</span>
 					</dt><hr/>
-					<? if(isset($form['DomainQuestion'][''.$domain['Domain']['name'].''])){ ;?>
-						<? foreach($form['DomainQuestion'][''.$domain['Domain']['name'].''] as $question => $question_data):?>
+					<?php if(isset($form['DomainQuestion'][''.$domain['Domain']['name'].''])){ ;?>
+						<?php foreach($form['DomainQuestion'][''.$domain['Domain']['name'].''] as $question => $question_data):?>
 						
-						<? if($question_data['OptionType']['name'] == "textarea"){; ?>
+						<?php if($question_data['OptionType']['name'] == "textarea"){; ?>
 						<dd>
 							<dl>
-								<? echo $question; ?>
+								<?php echo $question; ?>
 								<span class="pull-right">
-									<a action="../questions/edit" class="fb-worksheet-edit" object-id="<? echo $question_data['id'];?>"><i class="icon-edit"> Edit</i></a> |
-									<a action="../questions/delete" class="fb-worksheet-delete" object-id="<? echo $question_data['id'];?>"><i class="icon-trash"> Delete</i></a>
+									<a action="../questions/edit" class="fb-worksheet-edit" object-id="<?php echo $question_data['id'];?>"><i class="icon-edit"> Edit</i></a> |
+									<a action="../questions/delete" class="fb-worksheet-delete" object-id="<?php echo $question_data['id'];?>"><i class="icon-trash"> Delete</i></a>
 								</span><br/>	
 							</dl>
 							<textarea class="center w100" placeholder="Fill out this area..."></textarea>
 						</dd><br/>
 						
-						<? }else{; ?>
+						<?php }else{; ?>
 						<dd>
 							<dl>
-								<? echo $question; ?>
+								<?php echo $question; ?>
 								<span class="pull-right">
-									<a action="../questions/edit" class="fb-worksheet-edit" object-id="<? echo $question_data['id'];?>"><i class="icon-edit"> Edit</i></a> |
-									<a action="../questions/delete" class="fb-worksheet-delete" object-id="<? echo $question_data['id'];?>"><i class="icon-trash"> Delete</i></a> |
-									<a action="../options/create" class="fb-worksheet-add" object-id="<? echo $question_data['id'];?>"><i class="icon-plus-sign"> Add Option</i></a> 
+									<a action="../questions/edit" class="fb-worksheet-edit" object-id="<?php echo $question_data['id'];?>"><i class="icon-edit"> Edit</i></a> |
+									<a action="../questions/delete" class="fb-worksheet-delete" object-id="<?php echo $question_data['id'];?>"><i class="icon-trash"> Delete</i></a> |
+									<a action="../options/create" class="fb-worksheet-add" object-id="<?php echo $question_data['id'];?>"><i class="icon-plus-sign"> Add Option</i></a> 
 								</span><br/>	
 							</dl>
 							<dl class="well">
-								<? if(isset($question_data['QuestionOption'])){ ;?>
-									<? foreach($question_data['QuestionOption'] as $option):?>
+								<?php if(isset($question_data['QuestionOption'])){ ;?>
+									<?php foreach($question_data['QuestionOption'] as $option):?>
 									<dd>	
-										<input type="<? echo $question_data['OptionType']['name'];?>" name="<? echo $question_data['id']; ?>" value="<? echo $option['Option']['value']; ?>">
-										<? echo $option['Option']['text']; ?>
+										<input type="<?php echo $question_data['OptionType']['name'];?>" name="<?php echo $question_data['id']; ?>" value="<?php echo $option['Option']['value']; ?>">
+										<?php echo $option['Option']['text']; ?>
 										<span class="pull-right">
-											<a action="../options/edit" class="fb-worksheet-edit"  object-id="<? echo $option['Option']['id'];?>"><i class="icon-edit"> Edit</i></a>
-											<a action="../options/delete" class="fb-worksheet-delete" option="true" object-id="<? echo $option['Option']['id'];?>" question-option-id="<? echo $option['id'] ?>"><i class="icon-trash"> Delete</i></a>
+											<a action="../options/edit" class="fb-worksheet-edit"  object-id="<?php echo $option['Option']['id'];?>"><i class="icon-edit"> Edit</i></a>
+											<a action="../options/delete" class="fb-worksheet-delete" option="true" object-id="<?php echo $option['Option']['id'];?>" question-option-id="<?php echo $option['id'] ?>"><i class="icon-trash"> Delete</i></a>
 										</span>
 									</dd>
-									<? endforeach;?>
-								<? };?>
+									<?php endforeach;?>
+								<?php };?>
 							</dl>
 						</dd>
-						<? } ?>
-						<? endforeach;?>
-					<? };?>
+						<?php } ?>
+						<?php endforeach;?>
+					<?php };?>
 				</dl>
-			<? endforeach;?>
-			<? };?>
+			<?php endforeach;?>
+			<?php };?>
 		</div>
 	</div>
 </div>
@@ -141,10 +141,10 @@
 
 <!--FORMACTION-->
 <?php echo $this->Form->create('Form',array('id'=>'FormAction'));?>
-	<? echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'hidden'));?>
-	<? echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'hidden'));?>
-	<? echo $this->Form->input('delete_type',array('id'=>'DeleteType','type'=>'hidden'));?>
-	<? echo $this->Form->input('question_option_id',array('id'=>'QuestionOptionId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('delete_type',array('id'=>'DeleteType','type'=>'hidden'));?>
+	<?php echo $this->Form->input('question_option_id',array('id'=>'QuestionOptionId','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 

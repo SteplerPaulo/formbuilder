@@ -41,7 +41,7 @@
 		<nav class="main-nav animate" id="main-nav">
 			<?php 
 			if($access->isLoggedIn()):
-				echo $this->Html->link( $this->Html->tag('img', '', array('style'=>'width:40px;height:40px','class' => 'media-object','alt'=>'','src'=>(!empty($user['Document']['id']))?'formbuilder/users/download/'.$user['Document']['id']:'/formbuilder/img/200x250.gif')).' '.
+				echo $this->Html->link( $this->Html->tag('img', '', array('style'=>'width:40px;height:40px','class' => 'media-object','alt'=>'','src'=>(!empty($user['Document']['id']))?'/formbuilder/users/download/'.$user['Document']['id']:'/formbuilder/img/200x250.gif')).' '.
 										$this->Html->tag('span', $access->getmy('username'), array('class' => 'module-label')),
 										array('controller'=>'users','plugin'=>null,'action'=>'view'), array('escape' => false)
 										);  

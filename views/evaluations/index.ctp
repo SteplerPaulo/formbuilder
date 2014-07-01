@@ -74,8 +74,8 @@
 
 <!--FORMACTION-->
 <?php echo $this->Form->create('Evaluation',array('id'=>'EvaluationResult'));?>
-	<? echo $this->Form->input('Evaluation.form_id',array('id'=>'EvaluationFormId','type'=>'hidden'));?>
-	<? echo $this->Form->input('Evaluation.evaluatee',array('id'=>'EvaluationEvaluatee','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Evaluation.form_id',array('id'=>'EvaluationFormId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Evaluation.evaluatee',array('id'=>'EvaluationEvaluatee','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 

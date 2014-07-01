@@ -72,7 +72,7 @@
 
 <!--FORMACTION-->
 <?php echo $this->Form->create('ElectionReport',array('id'=>'ElectionReportResult'));?>
-	<? echo $this->Form->input('ElectionReport.form_id',array('id'=>'ElectionReportFormId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('ElectionReport.form_id',array('id'=>'ElectionReportFormId','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 <?php echo $this->Html->script(array('ui/uiTable1.1','utils/canvasTable'),array('inline'=>false));?>

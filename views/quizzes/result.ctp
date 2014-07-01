@@ -28,8 +28,8 @@
 	<div class="w90 center">
 		
 		
-		<? echo '<b> Examinee Name: </b>'.$result['Quiz']['examinee'].'<br/>'; ?>
-		<? echo '<b>Form Title: </b>'.$result['Form']['title'].'<hr/>'; ?>
+		<?php echo '<b> Examinee Name: </b>'.$result['Quiz']['examinee'].'<br/>'; ?>
+		<?php echo '<b>Form Title: </b>'.$result['Form']['title'].'<hr/>'; ?>
 			
 			
 		<table class="table table table-striped table-bordered" id="EvaluationTable">
@@ -43,27 +43,27 @@
 				</tr>
 			</thead>
 			<tbody>
-				<? $CurrDomainId = ''; ?>
-				<? $score = 0; ?>
-				<? foreach($result['QuizDetail'] as $r):?>
-				<? if($r['Question']['domain_id'] != $CurrDomainId){; ?>
-					<? $CurrDomainId = $r['Question']['domain_id']; ?>
+				<?php $CurrDomainId = ''; ?>
+				<?php $score = 0; ?>
+				<?php foreach($result['QuizDetail'] as $r):?>
+				<?php if($r['Question']['domain_id'] != $CurrDomainId){; ?>
+					<?php $CurrDomainId = $r['Question']['domain_id']; ?>
 					<tr class="error">
-						<td colspan='5'><? echo '<b>'.$r['Question']['Domain']['name'].'</b>'; ?></td>
+						<td colspan='5'><?php echo '<b>'.$r['Question']['Domain']['name'].'</b>'; ?></td>
 					</tr>
-				<? };?>
+				<?php };?>
 					<tr>
-						<td><? echo $r['Question']['text']; ?></td>
-						<td><? echo $r['Option']['text']; ?></td>
-						<td class="text-center"><? echo $r['Option']['remarks']; ?></td>
-						<td class="text-center"><? echo $r['Option']['value']; ?></td>
-						<?($r['Option']['value'])?$score+= $r['Option']['value']:$score+=0; ?>
+						<td><?php echo $r['Question']['text']; ?></td>
+						<td><?php echo $r['Option']['text']; ?></td>
+						<td class="text-center"><?php echo $r['Option']['remarks']; ?></td>
+						<td class="text-center"><?php echo $r['Option']['value']; ?></td>
+						<?php ($r['Option']['value'])?$score+= $r['Option']['value']:$score+=0; ?>
 					</tr>
-				<? endforeach;?>
+				<?php endforeach;?>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan='5'><? echo '<b> SCORE : '.$score.'</b>'; ?></td>
+					<td colspan='5'><?php echo '<b> SCORE : '.$score.'</b>'; ?></td>
 				</tr>
 			</tfoot>
 		</table>

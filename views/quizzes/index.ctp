@@ -75,8 +75,8 @@
 
 <!--FORMACTION-->
 <?php echo $this->Form->create('Quiz',array('id'=>'QuizResult'));?>
-	<? echo $this->Form->input('Quiz.form_id',array('id'=>'QuizFormId','type'=>'hidden'));?>
-	<? echo $this->Form->input('Quiz.examinee',array('id'=>'QuizExaminee','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Quiz.form_id',array('id'=>'QuizFormId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Quiz.examinee',array('id'=>'QuizExaminee','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 

@@ -72,8 +72,8 @@
 
 <!--FORMACTION-->
 <?php echo $this->Form->create('Form',array('id'=>'FormAction'));?>
-	<? echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'hidden'));?>
-	<? echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Form.id',array('id'=>'FormId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('object_id',array('id'=>'ObjectId','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 <?php 

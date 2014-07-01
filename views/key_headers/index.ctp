@@ -86,7 +86,7 @@
 
 <!--FORMACTION-->
 <?php echo $this->Form->create('KeyHeaderAction',array('id'=>'KeyHeaderAction'));?>
-	<? echo $this->Form->input('KeyHeader.id',array('id'=>'KeyHeader'));?>
+	<?php echo $this->Form->input('KeyHeader.id',array('id'=>'KeyHeader'));?>
 <?php echo $this->Form->end();?>
 
 <?php 

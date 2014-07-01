@@ -27,7 +27,7 @@
 <div class="sub-content-container">
 	<div class="w90 center">
 		<table class="table table table-striped table-bordered" id="ElectionReportTable">
-			<? echo '<caption>'.$result['Ballot'][0]['forms']['title'].'</caption>'; ?><thead>
+			<?php echo '<caption>'.$result['Ballot'][0]['forms']['title'].'</caption>'; ?><thead>
 			<thead>
 				<tr>
 					<th class="w20 text-center"><a >Position</a></th>
@@ -36,29 +36,29 @@
 				</tr>
 			</thead>
 			<tbody>
-				<? $CurrPosition = ''; $CurrPositionIndex = 0; ?>
-				<? foreach($result['Ballot'] as $ballot):?>
-				<? $vote = isset($votes[$ballot['options']['id']])?$votes[$ballot['options']['id']]:0; ?>
+				<?php $CurrPosition = ''; $CurrPositionIndex = 0; ?>
+				<?php foreach($result['Ballot'] as $ballot):?>
+				<?php $vote = isset($votes[$ballot['options']['id']])?$votes[$ballot['options']['id']]:0; ?>
 				
-				<? if($ballot['questions']['id'] != $CurrPosition){?>
+				<?php if($ballot['questions']['id'] != $CurrPosition){?>
 					<tr class="info">
 						<td colspan='3'> &nbsp; </td>
 					</tr>
-					<? $CurrPosition = $ballot['questions']['id'];?>
-					<? $OptionCount = $result['OptionCount'][$CurrPositionIndex][0]['option_count'];?>
-					<? $CurrPositionIndex++;?>
+					<?php $CurrPosition = $ballot['questions']['id'];?>
+					<?php $OptionCount = $result['OptionCount'][$CurrPositionIndex][0]['option_count'];?>
+					<?php $CurrPositionIndex++;?>
 					<tr>
-						<td rowspan="<? echo $OptionCount; ?>" class="text-center"><? echo '<b>'.$ballot['questions']['text'].'</b>'; ?></td>
-						<td><? echo $ballot['options']['text']; ?></td>
-						<td class="text-center"><? echo $vote; ?></td>
+						<td rowspan="<?php echo $OptionCount; ?>" class="text-center"><?php echo '<b>'.$ballot['questions']['text'].'</b>'; ?></td>
+						<td><?php echo $ballot['options']['text']; ?></td>
+						<td class="text-center"><?php echo $vote; ?></td>
 					</tr>
-				<? }else{;?>
+				<?php }else{;?>
 					<tr>
-						<td><? echo $ballot['options']['text']; ?></td>
-						<td class="text-center"><? echo $vote; ?></td>
+						<td><?php echo $ballot['options']['text']; ?></td>
+						<td class="text-center"><?php echo $vote; ?></td>
 					</tr>
-				<? };?>
-				<? endforeach;?>
+				<?php };?>
+				<?php endforeach;?>
 			</tbody>
 		</table>
 	</div>
