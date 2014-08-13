@@ -37,10 +37,10 @@ $('document').ready(function(){
 						$.each(json, function(ctr,obj){
 							if(ctr%2 == 0){
 								row +='<tr>';
-								row += '<td class="text-right">'+(ctr+1)+'</td><td>'+obj+'</td>';
+								row += '<td class="">'+(ctr+1)+'.</td><td>'+obj+'</td>';
 								row += '<td class="hide"><input value="'+obj+'" name="data[Key]['+ctr+'][value]"></input></td>';
 							}else{
-								row += '<td class="text-right">'+(ctr+1)+'</td><td>'+obj+'</td>';
+								row += '<td class="">'+(ctr+1)+'.</td><td>'+obj+'</td>';
 								row += '<td class="hide"><input value="'+obj+'" name="data[Key]['+ctr+'][value]"></input></td>';
 								row +='</tr>';
 							}

@@ -56,8 +56,8 @@
 </div>
 <!--FORMACTION-->
 <?php echo $this->Form->create('Form',array('id'=>'FormAction'));?>
-	<? echo $this->Form->input('Form.id',array('id'=>'FormId','value'=>$form_id,'type'=>'hidden'));?>
-	<? echo $this->Form->input('Form.object_id',array('id'=>'ObjectId','value'=>$id,'type'=>'hidden'));?>
+	<?php echo $this->Form->input('Form.id',array('id'=>'FormId','value'=>$form_id,'type'=>'hidden'));?>
+	<?php echo $this->Form->input('Form.object_id',array('id'=>'ObjectId','value'=>$id,'type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 <?php 

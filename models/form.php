@@ -20,7 +20,7 @@ class Form extends AppModel {
 			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
-			'order' => 'FormDomain.index_order ASC',
+			'order' => 'FormDomain.index_order,FormDomain.id ASC',
 			'limit' => '',
 			'offset' => '',
 			'exclusive' => '',

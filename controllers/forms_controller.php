@@ -73,7 +73,10 @@ class FormsController extends AppController {
 		if (!empty($this->data['Form']['id'])) {
 			$form_id = $this->data['Form']['id'];
 			$this->Form->recursive = 3;
+
 			$data = $this->Form->read(null, $form_id);
+			
+			//pr($data);exit;
 			
 			unset($data['FormType']['Form']);
 			
