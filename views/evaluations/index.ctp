@@ -31,6 +31,7 @@
 				<thead>
 					<tr>
 						<th class="w5 text-center hide"><a >Form Id</a></th>
+						<th class="w5 text-center hide"><a >Evaluatee Id</a></th>
 						<th class="w40 text-center"><a >Evaluatee</a></th>
 						<th class="w50 text-center"><a >Form Title</a></th>
 						<th class="actions w5"><a >Actions</a></th>
@@ -39,7 +40,8 @@
 				<tbody>
 					<tr>
 						<td class="hide"><span data-field="Form.id" class="form-id"></span></td>
-						<td><span data-field='Evaluation.evaluatee' class="evaluatee"></span></td>
+						<td class="hide"><span data-field='Evaluatee.id' class="evaluatee_id"></span></td>
+						<td><span data-field='Evaluatee.name' class="evaluatee"></span></td>
 						<td><span data-field='Form.title'></span></td>
 						<td class="actions">
 							<div class="btn-group">
@@ -75,7 +77,7 @@
 <!--FORMACTION-->
 <?php echo $this->Form->create('Evaluation',array('id'=>'EvaluationResult'));?>
 	<?php echo $this->Form->input('Evaluation.form_id',array('id'=>'EvaluationFormId','type'=>'hidden'));?>
-	<?php echo $this->Form->input('Evaluation.evaluatee',array('id'=>'EvaluationEvaluatee','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Evaluation.evaluatee_id',array('id'=>'EvaluationEvaluateeId','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 

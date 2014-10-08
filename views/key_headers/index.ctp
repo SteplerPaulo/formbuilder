@@ -37,7 +37,8 @@
 				<thead>
 					<tr>
 						<th class="hide"><a >Key Header Id</a></th>
-						<th class="w70 text-center"><a >Form Title</a></th>	 
+						<th class="w50 text-center"><a >Form Title</a></th>	 
+						<th class="w20 text-center"><a >Evaluatee</a></th>	
 						<th class="w10 text-center"><a >Key Count</a></th>	
 						<th class="w15 text-center"><a >Date Created</a></th>	 
 						<th class="actions w5"><a >Actions</a></th>
@@ -47,6 +48,7 @@
 					<tr>
 						<td class="hide"><span data-field="KeyHeader.id" class="keyheader-id"></span></td>
 						<td><span data-field="Form.title"></span></td>
+						<td><span data-field="Evaluatee.name"></span></td>
 						<td  class="text-center"><span data-field="Key.count"></span></td>
 						<td><span data-field="KeyHeader.created"></span></td>
 						<td class="actions">

@@ -31,14 +31,16 @@
 		<?php echo $this->Form->create('Evaluation',array('id'=>'EvaluationForm','action'=>'add'));?>
 		<div class="well"><br/>
 			<dl class="well">
-				<?php echo '<b><center>'.$form['Form']['title']. '<center/><center>'.$form['Form']['description'].'<center/><center>'.$form['FormType']['name'].'</center></b>'; ?>
+				<div class="row-fluid"><b><?php echo $form['Form']['alias']; ?></div>
+				<?php echo '<center>'.$form['Form']['title']. '<center/><center>'.$form['Form']['description'].'<center/><center>'.$form['FormType']['name'].'</center></b>'; ?>
 				<?php echo $this->Form->input('Evaluation.form_id',array('type'=>'hidden','value'=>$form['Form']['id'])); ?>	
 				<?php echo $this->Form->input('Key.id',array('type'=>'hidden','value'=>$key)); ?>	
 			</dl>
 			
 			<dl class="well">	
-				<?php echo $this->Form->input('Evaluation.evaluator',array('class'=>'w100'));?>	
-				<?php echo $this->Form->input('Evaluation.evaluatee',array('class'=>'w100','required'=>'required'));?>
+				<?php echo $this->Form->input('evaluator_type_id',array('options'=>$evaluatorTypes,'empty'=>'Select','required'=>'required'));?>	
+				<?php echo $this->Form->input('evaluator',array('class'=>'w100'));?>	
+				<?php echo $this->Form->input('evaluatee_id',array('options'=>$evaluatee,'class'=>'w100'));?>
 			</dl>
 			
 			<!--DOMAIN FOREACH--->

@@ -25,6 +25,13 @@ class KeyHeader extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Evaluatee' => array(
+			'className' => 'Evaluatee',
+			'foreignKey' => 'evaluatee_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 }

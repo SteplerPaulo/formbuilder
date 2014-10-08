@@ -21,7 +21,17 @@ $('document').ready(function(){
 	$('#GoEncryptButton').click(function(){
 		var form_id = $('#KeyHeaderFormId').val();
 		var count= $('#KeyHeaderIntentKeyCount').val();
-		if(form_id && count){
+		var evaluatee_id= $('#KeyHeaderEvaluateeId').val();
+		if(!form_id){
+			$('#KeyHeaderFormId').focus();
+			return;
+		}else if(!evaluatee_id && $('#KeyHeaderEvaluateeId').is(':visible')){
+			$('#KeyHeaderEvaluateeId').focus();
+			return;
+		}else if(!count){
+			$('#KeyHeaderIntentKeyCount').focus();
+			return;
+		}else{
 			$.ajax({
 				url:BASE_URL+'key_headers/login_key_encryption',
 				type:'post',
@@ -48,12 +58,6 @@ $('document').ready(function(){
 						$('#GeneratedKeyTable tbody').html(row).show();
 					}
 			});
-		}else if(!form_id){
-			$('#KeyHeaderFormId').focus();
-			return;
-		}else if(!count){
-			$('#KeyHeaderIntentKeyCount').focus();
-			return;
 		}
 	});
 	
@@ -69,6 +73,24 @@ $('document').ready(function(){
 				
 			}
 		});
+	});
+	
+	$('#KeyHeaderFormId').change(function(){
+		var formId  = $(this).val();
+		$.ajax({
+			url:BASE_URL+'forms.json?id='+formId,
+			dataType:'json',
+			success:function(json){
+				if(json.data.length){
+					if(json.data[0].Form.form_type_id == 3){
+						$('#EvaluateeInputWrapper').show();
+						return;
+					}
+				}
+				$('#EvaluateeInputWrapper').hide();
+			}
+		});
+	
 	});
 });
 	 

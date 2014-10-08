@@ -34,7 +34,6 @@ class FormsController extends AppController {
 			
 			$this->Form->recursive = 3;
 			$data = $this->Form->read(null, $form_id);
-
 			foreach($data['FormDomain'] as $domain){
 				foreach($data['Question'] as $question){
 					if($domain['domain_id'] == $question['domain_id']){

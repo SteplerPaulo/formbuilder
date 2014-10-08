@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	//FORM SUBMIT EVENT
 	$(document).on('click','#EvaluationFormSubmitButton',function(){
-		if($('#EvaluationEvaluatee').val() !=''){
+		if($('#EvaluationEvaluatorTypeId').val() !=''){
 			$('#EvaluationForm').ajaxSubmit({
 				dataType:'json',
 				success:function(formReturn){
@@ -18,7 +18,7 @@ $(document).ready(function(){
 			});
 			return;
 		}
-		$('#EvaluationEvaluatee').focus();
+		$('#EvaluationEvaluatorTypeId').focus();
 	});
 	
 	//VIEW EVALUATION RESULT
@@ -26,9 +26,9 @@ $(document).ready(function(){
 		var action =$(this).attr('action');
 		var row =$(this).parents('tr:first');
 		var form_id =row.find('.form-id').text();
-		var evaluatee =row.find('.evaluatee').text();
+		var evaluatee_id =row.find('.evaluatee_id').text();
 		$('#EvaluationFormId').val(form_id);
-		$('#EvaluationEvaluatee').val(evaluatee);
+		$('#EvaluationEvaluateeId').val(evaluatee_id);
 		
 		
 		$('#EvaluationResult').attr('action',action);

@@ -41,7 +41,8 @@
 	<div class="w90 center">
 		<div class="well">
 			<div class="well">
-				<center><b><?php echo $form['Form']['title']; ?></center>
+				<div class="row-fluid"><b><?php echo $form['Form']['alias']; ?></div>
+				<center><?php echo $form['Form']['title']; ?></center>
 				<center><?php echo $form['Form']['description']; ?></center>
 				<center><?php echo $form['FormType']['name']; ?></b></center>
 			</div>

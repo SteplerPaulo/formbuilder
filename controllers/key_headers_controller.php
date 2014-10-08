@@ -2,6 +2,7 @@
 class KeyHeadersController extends AppController {
 
 	var $name = 'KeyHeaders';
+	var $uses = array('KeyHeader','Evaluatee');
 	var $helpers = array('Access');
 
 	function index() {
@@ -96,6 +97,7 @@ class KeyHeadersController extends AppController {
 	function generate_keys(){
 		
 		$this->set('forms', $this->KeyHeader->Form->find('list'));
+		$this->set('evaluatees', $this->Evaluatee->find('list'));
 	}
 	
 	function login_key_encryption(){
