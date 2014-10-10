@@ -36,7 +36,12 @@
 			<li class="active"><a href="#SummaryResult" data-toggle="tab">Summary</a></li>
 			<li><a href="#DistributionResult" data-toggle="tab">Distribution</a></li>
 			<li><a href="#OpenEndedResult" data-toggle="tab">Open-Ended</a></li>
+			<li class="pull-right">
+				<?php echo $this->Form->input('evaluator',array('options'=>$evaluatorTypes,'empty'=>'All','label'=>false,'disabled'=>'disabled'));?>	
+				<!--YET NO EVENT FUNCTION CREATED-->
+			</li>
 		</ul>
+	
 		<div class="tab-content">
 			<!--SUMMARY-->
 			<div class="tab-pane fade in active" id="SummaryResult">

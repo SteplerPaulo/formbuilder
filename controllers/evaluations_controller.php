@@ -178,9 +178,10 @@ class EvaluationsController extends AppController {
 			$spread_index = ($item_count!=1)?round($index_summation/($item_count-1),2):'1';
 			//END
 			$evaluatee = $this->Evaluatee->findByid($evaluatee_id);
+			$evaluatorTypes = $this->EvaluatorType->find('list');
 			
 			
-			$this->set(compact('evaluatee','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
+			$this->set(compact('evaluatee','evaluatorTypes','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
 		}else{
 			$this->redirect(array('action'=>'index'));
 		}
