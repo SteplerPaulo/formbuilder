@@ -33,4 +33,5 @@ App::import('Helper', 'Helper', false);
  * @subpackage    cake.cake
  */
 class AppHelper extends Helper {
+	var $helpers = array('Access');
 }
