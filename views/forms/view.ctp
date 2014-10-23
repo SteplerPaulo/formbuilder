@@ -45,6 +45,8 @@
 				<center><?php echo $form['Form']['title']; ?></center>
 				<center><?php echo $form['Form']['description']; ?></center>
 				<center><?php echo $form['FormType']['name']; ?></b></center>
+				
+				<?php echo$this->Form->input('test'); ?>
 			</div>
 			
 			<?php if(isset($form['FormDomain'])){ ;?>
@@ -61,7 +63,7 @@
 							<dl>
 								<?php echo $question; ?>
 							</dl>
-							<textarea class="center w100" placeholder="Fill out this area..."></textarea>
+							<textarea class="center w100" placeholder="Input here..."></textarea>
 						</dd><br/>
 						
 						<?php }else{; ?>

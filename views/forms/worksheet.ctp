@@ -76,7 +76,7 @@
 									<a action="../questions/delete" class="fb-worksheet-delete" object-id="<?php echo $question_data['id'];?>"><i class="icon-trash"> Delete</i></a>
 								</span><br/>	
 							</dl>
-							<textarea class="center w100" placeholder="Fill out this area..."></textarea>
+							<textarea class="center w100" placeholder="Input here..."></textarea>
 						</dd><br/>
 						
 						<?php }else{; ?>

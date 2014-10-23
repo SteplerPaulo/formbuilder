@@ -58,7 +58,7 @@
 					<?php if($question_data['OptionType']['name'] == "textarea"){; ?>
 						<dl class="textarea">
 							<dd>
-							<?php echo $this->Form->input('EvaluationDetail.'. $index.'.answer',array('type'=>'textarea','class'=>'center w100','placeholder'=>'Fill out this area...','label'=>false)); ?>
+							<?php echo $this->Form->input('EvaluationDetail.'. $index.'.answer',array('type'=>'textarea','class'=>'center w100','placeholder'=>'Input here...','rows'=>2,'label'=>false)); ?>
 							<?php echo $this->Form->input('EvaluationDetail.'. $index.'.question_id',array('type'=>'hidden','value'=>$question_data['id'],'label'=>false)); ?>
 							<?php echo $this->Form->input('EvaluationDetail.'. $index++ .'.option_type',array('type'=>'hidden','value'=>'textarea','label'=>false)); ?>
 							</dd>
