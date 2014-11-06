@@ -54,18 +54,36 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php $previous_domain_id = ''; ?>
-						<?php foreach($summary as $smry):?>
-						<?php if($smry['Question']['domain_id'] != $previous_domain_id){; ?>
+						<?php $previous_domain_id = ''; $ctr=0; $sum=0;?>
+						<?php foreach($summary as $key => $smry):?>
+						<?php if($smry['Question']['domain_id'] != $previous_domain_id): ?>
+							<?php if($previous_domain_id!=''): ?>
+								<tr class="">
+									<td class='text-right' style="border-right:none;"><b></b></td>
+									<td class='text-center' style="border-left:none;"><b><?php echo number_format($sum/$ctr, 2, '.', ',') ?></b></td>
+								</tr>
+								<?php $ctr=0; $sum=0; ?>
+							<?php endif; ?>
+							
 							<?php $previous_domain_id = $smry['Question']['domain_id']; ?>
 							<tr class="error">
 								<td colspan='2'><?php echo '<center><b>'.$smry['Question']['domain_name'].'</b></center>'; ?></td>
 							</tr>
-						<?php }; ?>
+						<?php endif; ?>
 						<tr>
 							<td><?php echo $smry['Question']['text']; ?></td>
 							<td class="w10 text-center"><?php echo $smry[0]['weighted_mean']; ?></td>
 						</tr>
+						<?php $ctr++;?>
+						<?php $sum+=$smry[0]['weighted_mean'];?>
+						
+						<?php if(($key+1) == count($summary)):?>
+							<tr class="">
+								<td class='text-right' style="border-right:none;"><b></b></td>
+								<td class='text-center' style="border-left:none;"><b><?php echo number_format($sum/$ctr, 2, '.', ',') ?></b></td>
+							</tr>
+						<?php endif; ?>
+						
 						<?php endforeach;?>
 					</tbody>
 				</table>
@@ -141,7 +159,7 @@
 					</tbody>
 				</table>
 				<?php endforeach;?>
-				<?php }else{ ?>Not Applicable  <?php } ?>
+				<?php }else{ ?>No Data Available  <?php } ?>
 			</div>
 		</div>
 	</div>
