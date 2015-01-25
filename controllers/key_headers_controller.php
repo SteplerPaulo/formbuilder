@@ -101,22 +101,23 @@ class KeyHeadersController extends AppController {
 	}
 	
 	function login_key_encryption(){
-		$no_of_requested_key = $this->data['no_of_requested_key'];
 		if ($this->RequestHandler->isAjax()) {
+			$no_of_requested_key = $this->data['no_of_requested_key'];
 			$loginKey = array();
-	
 			for($ctr=0;$ctr<$no_of_requested_key;$ctr++){
+				
 				do{
 					do{
 						$key = substr(md5(microtime() +rand()),0,11);
+						
 					}while(in_array($key,$loginKey));
-					$hasDuplicate = $this->KeyHeader->Key->find('count',array('conditions'=>array('Key.value'=>$loginKey)));
+					$hasDuplicate = $this->KeyHeader->Key->find('count',array('conditions'=>array('Key.value'=>$key)));
 				}while($hasDuplicate);
 				array_push($loginKey,$key); 
 			}
-		}
-		echo json_encode($loginKey);
-		exit;
+			echo json_encode($loginKey);
+			exit;
+		}		
 	}
 	
 	function print_keys() {
