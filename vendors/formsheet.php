@@ -1,5 +1,6 @@
 <?php
-require('fpdf17/fpdf.php');
+	define('FPDF_FONTPATH','/vendors/fpdf17/font');
+	require('fpdf17/fpdf.php');
 	class FormSheet extends FPDF{
 		private $FONT_CONST = 0.50;
 		public $GRID = array();
@@ -36,13 +37,13 @@ require('fpdf17/fpdf.php');
 				$this->Rect($metrics['base_x'],$metrics['base_y'],$metrics['width'],$metrics['height']);
 			}
 		}
-		public function putText($x,$y,$txt,$style=''){
-			$this->SetFont('Arial',$style,$this->GRID['font_size']);
+		public function putText($x,$y,$txt,$style='',$fontstyle='Arial'){
+			$this->SetFont($fontstyle,$style,$this->GRID['font_size']);
 			$this->Text($this->GRID['base_x']+($this->GRID['cell_width']*$x),$this->GRID['base_y']+($this->GRID['cell_height']*$y),$txt);			
 		}
 		
-		public function leftText($x,$y,$txt,$w,$style=''){
-			$this->putText($x,$y,$txt,$style);
+		public function leftText($x,$y,$txt,$w,$style='',$fontstyle='Arial'){
+			$this->putText($x,$y,$txt,$style,$fontstyle);
 		}
 		
 		public function fitText($x,$y,$txt,$w,$style=''){
@@ -102,20 +103,20 @@ require('fpdf17/fpdf.php');
 			$this->SetXY($disp_x,$disp_y);
 			$this->MultiCell($disp_w, $disp_h, $txt,0,$align);
 		}
-		public function centerText($x,$y,$txt,$w,$style=''){
-			$this->SetFont('Arial',$style,$this->GRID['font_size']);
+		public function centerText($x,$y,$txt,$w,$style='',$fontstyle="Arial"){
+			$this->SetFont($fontstyle,$style,$this->GRID['font_size']);
 			$disp_x = $this->GRID['base_x']+($this->GRID['cell_width']*$x);
 			$disp_x += ($this->GRID['cell_width']*$w)/2;
 			$disp_y = $this->GRID['base_y']+($this->GRID['cell_height']*$y);
 			$disp_x = $disp_x - $this->GetStringWidth($txt)*0.5;
 			$this->Text($disp_x,$disp_y,$txt);
 		}
-		public function rightText($x,$y,$txt,$w,$style=''){
+		public function rightText($x,$y,$txt,$w,$style='',$fontstyle='Arial'){
 			$disp_x = $this->GRID['base_x']+($this->GRID['cell_width']*$x);
 			$disp_y = $this->GRID['base_y']+($this->GRID['cell_height']*$y);
 			$disp_x = $disp_x - $this->GetStringWidth($txt);
 			$disp_x = $disp_x +($this->GRID['cell_width']*$w);
-			$this->SetFont('Arial',$style,$this->GRID['font_size']);
+			$this->SetFont($fontstyle,$style,$this->GRID['font_size']);
 			$this->Text($disp_x,$disp_y,$txt);
 		}
 		public function DrawLine($pt,$ort,$plot=null) {
