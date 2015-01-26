@@ -9,6 +9,7 @@ class EvaluationsController extends AppController {
 		if ($this->Rest->isActive()) {	
 			$curr_data = $this->api($_GET);
 			$this->set('data',$curr_data);
+			
 		}
 		else if($this->RequestHandler->isAjax()){	
 			$data = $this->Evaluation->find('all');
@@ -129,19 +130,24 @@ class EvaluationsController extends AppController {
 	}
 	
 	function result(){
-		if (isset($this->data['Evaluation']['form_id']) && isset($this->data['Evaluation']['evaluatee_id'])) {
+		if (isset($this->data['Evaluation']['form_id']) && isset($this->data['Evaluation']['evaluatee_id']) && isset($this->data['Evaluation']['school_year_id']) && isset($this->data['Evaluation']['period_id'])) {
 			$form_id= $this->data['Evaluation']['form_id'];
 			$evaluatee_id = $this->data['Evaluation']['evaluatee_id'];
+			$sy = $this->data['Evaluation']['school_year_id'];
+			$period = $this->data['Evaluation']['period_id'];
+			$syText = $this->data['Evaluation']['sy_text'];
+			$periodText = $this->data['Evaluation']['period_text'];
 			$form = $this->Form->read(null, $form_id);
-			$respondent_count = $this->Evaluation->EvaluationDetail->respondent_count($form_id,$evaluatee_id);
-			$mean = $this->Evaluation->EvaluationDetail-> getMean($form_id,$evaluatee_id);
+			$respondent_count = $this->Evaluation->EvaluationDetail->respondent_count($form_id,$evaluatee_id,$sy,$period);
+			$mean = $this->Evaluation->EvaluationDetail-> getMean($form_id,$evaluatee_id,$sy,$period);
 			
 			//SUMMARY
-			$summary = $this->Evaluation->EvaluationDetail->getWeightedMean($form_id,$evaluatee_id);
+			$summary = $this->Evaluation->EvaluationDetail->getWeightedMean($form_id,$evaluatee_id,$sy,$period);
 			//END
 			
 			//DIVERGENT QUESTIONS(COMMENT & SUGGESTION)
 			$conditions = array('Evaluation.form_id'=>$form_id,'Evaluation.evaluatee_id'=>$evaluatee_id,
+								'Evaluation.school_year_id'=>$sy,'Evaluation.period_id'=>$period,
 								'EvaluationDetail.answer Not'=>'Null','Question.option_type_id'=>3
 							);
 			$fields	= array('Question.id','Question.text','EvaluationDetail.answer',
@@ -158,7 +164,7 @@ class EvaluationsController extends AppController {
 			//END
 			
 			//DISTRIBUTION & SPREAD INDEX
-			$frequency = $this->Evaluation->EvaluationDetail-> getFrequency($form_id,$evaluatee_id);
+			$frequency = $this->Evaluation->EvaluationDetail-> getFrequency($form_id,$evaluatee_id,$sy,$period);
 			$distribution = array();
 			$index_summation = 0.00;
 			$item_count = count($summary);
@@ -179,11 +185,12 @@ class EvaluationsController extends AppController {
 			}
 			$spread_index = ($item_count!=1)?round($index_summation/($item_count-1),2):'1';
 			//END
+			
 			$evaluatee = $this->Evaluatee->findByid($evaluatee_id);
-			$evaluatorTypes = $this->EvaluatorType->find('list');
-			
-			
+			$evaluatorTypes = $this->EvaluatorType->find('list');			
 			$this->set(compact('evaluatee','evaluatorTypes','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
+			$this->set(compact('syText','periodText'));
+
 		}else{
 			$this->redirect(array('action'=>'index'));
 		}
@@ -193,7 +200,7 @@ class EvaluationsController extends AppController {
 		$schema = $this->Evaluation->schema();
 		$conditions = array();
 		$fields = array();
-		$group = array('Evaluation.form_id','Evaluation.evaluatee_id');
+		$group = array('Evaluation.form_id','Evaluation.evaluatee_id','Evaluation.school_year_id','Evaluation.period_id');
 		$type = 'all';
 		$page = 1;
 		$limit = $this->Rest->limit;

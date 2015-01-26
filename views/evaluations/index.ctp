@@ -27,11 +27,15 @@
 <div class="sub-content-container">
 	<div class="row-fluid">
 		<div class="w90 center">
-			<table class="table table table-striped table-bordered  table-condensed RECORD tablesorter canvasTable advancedTable" id="EvaluationTable" model="Evaluation">
+			<table class="table table table-striped table-bordered table-condensed RECORD tablesorter canvasTable advancedTable" id="EvaluationTable" model="Evaluation">
 				<thead>
 					<tr>
 						<th class="w5 text-center hide"><a >Form Id</a></th>
 						<th class="w5 text-center hide"><a >Evaluatee Id</a></th>
+						<th class="w5 text-center hide"><a >S.Y.</a></th>
+						<th class="w5 text-center hide"><a >Period</a></th>
+						<th class="w5 text-center"><a >S.Y.</a></th>
+						<th class="w5 text-center"><a >Period</a></th>
 						<th class="w40 text-center"><a >Evaluatee</a></th>
 						<th class="w50 text-center"><a >Form Title</a></th>
 						<th class="actions w5"><a >Actions</a></th>
@@ -41,6 +45,10 @@
 					<tr>
 						<td class="hide"><span data-field="Form.id" class="form-id"></span></td>
 						<td class="hide"><span data-field='Evaluatee.id' class="evaluatee_id"></span></td>
+						<td class="hide"><span data-field='Evaluation.school_year_id' class="school_year_id"></span></td>
+						<td class="hide"><span data-field='Evaluation.period_id' class="period_id"></span></td>
+						<td><span data-field='SchoolYear.name' class="sy_text"></span></td>
+						<td><span data-field='Period.name' class="period_text"></span></td>
 						<td><span data-field='Evaluatee.name' class="evaluatee"></span></td>
 						<td><span data-field='Form.title'></span></td>
 						<td class="actions">
@@ -78,6 +86,10 @@
 <?php echo $this->Form->create('Evaluation',array('id'=>'EvaluationResult'));?>
 	<?php echo $this->Form->input('Evaluation.form_id',array('id'=>'EvaluationFormId','type'=>'hidden'));?>
 	<?php echo $this->Form->input('Evaluation.evaluatee_id',array('id'=>'EvaluationEvaluateeId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Evaluation.school_year_id',array('id'=>'EvaluationSchoolYearId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Evaluation.period_id',array('id'=>'EvaluationPeriodId','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Evaluation.sy_text',array('id'=>'EvaluationSyText','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Evaluation.period_text',array('id'=>'EvaluationPeriodText','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 

@@ -25,12 +25,19 @@
 	</div>
  </div>
 <div class="sub-content-container">
-	<div class="w90 center">	
+	<div class="w90 center">
+	
+			
+		
+		<?php echo '<div class="pull-left"><div><b>S.Y:</b> '.$syText.'</div>'; ?>
+		<?php echo '<div><b>Period:</b> '.$periodText.'</div></div><div class="clear"></div>'; ?>
 		<?php echo '<div class="pull-left"><div><b>Evaluatee Name:</b> '.$evaluatee['Evaluatee']['name'].'</div>'; ?>
 		<?php echo '<div><b>Form Title:</b> '.$form['Form']['title'].'</div>'; ?>
 		<?php echo '<div><b>Respondent Count:</b> '.$respondent_count['0']['0']['respondent_count'].'</div></div>'; ?>	
+		
 		<?php echo '<div class="pull-right"><div><b>Mean:</b> '.$mean.'</div>'; ?>
 		<?php echo '<div ><b>Spread Index:</b> '.$spread_index.'</div></div><div class="clear"></div>'; ?>
+		
 		<hr/>
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#SummaryResult" data-toggle="tab">Summary</a></li>
@@ -38,7 +45,7 @@
 			<li><a href="#OpenEndedResult" data-toggle="tab">Open-Ended</a></li>
 			<li class="pull-right">
 				<?php echo $this->Form->input('evaluator',array('options'=>$evaluatorTypes,'empty'=>'All','label'=>false,'disabled'=>'disabled'));?>	
-				<!--YET NO EVENT FUNCTION CREATED-->
+				<!--EVENT FUNCTION NOT YET CREATED-->
 			</li>
 		</ul>
 	

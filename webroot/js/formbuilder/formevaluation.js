@@ -27,10 +27,16 @@ $(document).ready(function(){
 		var row =$(this).parents('tr:first');
 		var form_id =row.find('.form-id').text();
 		var evaluatee_id =row.find('.evaluatee_id').text();
+		var syid =row.find('.school_year_id').text();
+		var pid =row.find('.period_id').text();
+		var sytext =row.find('.sy_text').text();
+		var ptext =row.find('.period_text').text();
 		$('#EvaluationFormId').val(form_id);
 		$('#EvaluationEvaluateeId').val(evaluatee_id);
-		
-		
+		$('#EvaluationSchoolYearId').val(syid);
+		$('#EvaluationPeriodId').val(pid);
+		$('#EvaluationSyText').val(sytext);
+		$('#EvaluationPeriodText').val(ptext);
 		$('#EvaluationResult').attr('action',action);
 		$('#EvaluationResult').submit();
 	});
