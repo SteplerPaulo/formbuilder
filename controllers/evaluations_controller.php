@@ -3,7 +3,7 @@ class EvaluationsController extends AppController {
 
 	var $name = 'Evaluations';
 	var $helpers = array('Access');
-	var $uses = array('Evaluation','Key','Form','Question','Evaluatee','EvaluatorType');
+	var $uses = array('Evaluation','Key','Form','Question','Evaluatee','EvaluatorType','SchoolYear','Period');
 
 	function index() {
 		if ($this->Rest->isActive()) {	
@@ -120,7 +120,9 @@ class EvaluationsController extends AppController {
 			$results = $this->Key->findById($this->data['Form']['object_id']);
 			$evaluatee = $this->Evaluatee->find('list',array('conditions'=>array('Evaluatee.id'=>$results['KeyHeader']['form_id'])));
 			$evaluatorTypes = $this->EvaluatorType->find('list');
-			$this->set(compact('evaluatee','evaluatorTypes'));
+			$schoolYears = $this->SchoolYear->find('list',array('conditions'=>array('SchoolYear.is_default'=>1)));
+			$periods = $this->Period->find('list',array('conditions'=>array('Period.type'=>2)));
+			$this->set(compact('evaluatee','evaluatorTypes','schoolYears','periods'));
 		}else{
 			$this->redirect(array('action'=>'../forms/login'));
 		}

@@ -38,9 +38,32 @@
 			</dl>
 			
 			<dl class="well">	
-				<?php echo $this->Form->input('evaluator_type_id',array('options'=>$evaluatorTypes,'empty'=>'Select','required'=>'required'));?>	
-				<?php echo $this->Form->input('evaluator',array('class'=>'w100'));?>	
-				<?php echo $this->Form->input('evaluatee_id',array('options'=>$evaluatee,'class'=>'w100'));?>
+				<div class="row">
+					<div class="span3">
+						<?php echo $this->Form->input('school_year_id',array('label'=>'S.Y.'));?>
+					</div>
+					<div class="span3">						
+						<label>Period</label>						
+						<?php foreach($periods as $key=>$value):?>
+							<input type="radio" name="data[Evaluation][period_id]" value="<?php echo $key;?>" <?php echo ($key==5)?'checked':''?>></input>
+							&nbsp;<?php echo $value; ?> &nbsp;&nbsp;
+						<?php endforeach;?>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="span3">				
+						<?php echo $this->Form->input('evaluator_type_id',array('options'=>$evaluatorTypes,'empty'=>'Select','required'=>'required'));?>		
+					</div>
+				</div>
+				<div class="row">
+					<div class="span12">
+						<?php echo $this->Form->input('evaluator',array('class'=>'w97'));?>	
+					</div>
+					<div class="span12">
+						<?php echo $this->Form->input('evaluatee_id',array('options'=>$evaluatee,'class'=>'w98'));?>
+					</div>
+				</div>
 			</dl>
 			
 			<!--DOMAIN FOREACH--->
