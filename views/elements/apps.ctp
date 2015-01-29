@@ -42,6 +42,11 @@
 			</li>
 			
 			<li class="submodule">
+				<div class="submodule-icon"><a href="/formbuilder/evaluator_types"><i class="icon-user icon-white"></i></a></div>
+				<span class="submodule-name">Create New Evaluator Type</span>
+			</li>
+			
+			<li class="submodule">
 				<div class="submodule-icon"><a href="/formbuilder/evaluations/result"><i class="icon-folder-close icon-white"></i></a></div>
 				<span class="submodule-name">Evaluation Results</span>
 			</li>
