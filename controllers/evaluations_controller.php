@@ -122,19 +122,19 @@ class EvaluationsController extends AppController {
 	}
 	
 	function result(){
-		if (isset($this->data['Evaluation']['form_id']) && isset($this->data['Evaluation']['evaluatee'])) {
+		if (isset($this->data['Evaluation']['form_id']) && isset($this->data['Evaluation']['evaluatee_id'])) {
 			$form_id= $this->data['Evaluation']['form_id'];
-			$evaluatee = $this->data['Evaluation']['evaluatee'];
+			$evaluatee_id = $this->data['Evaluation']['evaluatee_id'];
 			$form = $this->Form->read(null, $form_id);
-			$respondent_count = $this->Evaluation->EvaluationDetail->respondent_count($form_id,$evaluatee);
-			$mean = $this->Evaluation->EvaluationDetail-> getMean($form_id,$evaluatee);
+			$respondent_count = $this->Evaluation->EvaluationDetail->respondent_count($form_id,$evaluatee_id);
+			$mean = $this->Evaluation->EvaluationDetail-> getMean($form_id,$evaluatee_id);
 			
 			//SUMMARY
-			$summary = $this->Evaluation->EvaluationDetail->getWeightedMean($form_id,$evaluatee);
+			$summary = $this->Evaluation->EvaluationDetail->getWeightedMean($form_id,$evaluatee_id);
 			//END
 			
 			//DIVERGENT QUESTIONS(COMMENT & SUGGESTION)
-			$conditions = array('Evaluation.form_id'=>$form_id,'Evaluation.evaluatee'=>$evaluatee,
+			$conditions = array('Evaluation.form_id'=>$form_id,'Evaluation.evaluatee_id'=>$evaluatee_id,
 								'EvaluationDetail.answer Not'=>'Null','Question.option_type_id'=>3
 							);
 			$fields	= array('Question.id','Question.text','EvaluationDetail.answer',
@@ -151,7 +151,7 @@ class EvaluationsController extends AppController {
 			//END
 			
 			//DISTRIBUTION & SPREAD INDEX
-			$frequency = $this->Evaluation->EvaluationDetail-> getFrequency($form_id,$evaluatee);
+			$frequency = $this->Evaluation->EvaluationDetail-> getFrequency($form_id,$evaluatee_id);
 			$distribution = array();
 			$index_summation = 0.00;
 			$item_count = count($summary);
@@ -173,7 +173,7 @@ class EvaluationsController extends AppController {
 			$spread_index = ($item_count!=1)?round($index_summation/($item_count-1),2):'1';
 			//END
 			
-			$this->set(compact('evaluatee','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
+			$this->set(compact('evaluatee_id','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
 		}else{
 			$this->redirect(array('action'=>'index'));
 		}
@@ -183,7 +183,7 @@ class EvaluationsController extends AppController {
 		$schema = $this->Evaluation->schema();
 		$conditions = array();
 		$fields = array();
-		$group = array('Evaluation.form_id','Evaluation.evaluatee');
+		$group = array('Evaluation.form_id','Evaluation.evaluatee_id');
 		$type = 'all';
 		$page = 1;
 		$limit = $this->Rest->limit;
