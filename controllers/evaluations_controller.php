@@ -3,7 +3,7 @@ class EvaluationsController extends AppController {
 
 	var $name = 'Evaluations';
 	var $helpers = array('Access');
-	var $uses = array('Evaluation','Key','Form','Question');
+	var $uses = array('Evaluation','Key','Form','Question','Evaluatee');
 
 	function index() {
 		if ($this->Rest->isActive()) {	
@@ -105,7 +105,8 @@ class EvaluationsController extends AppController {
 			
 			$this->Form->recursive = 3;
 			$form = $this->Form->read(null, $form_id);
-
+			$evaluatees = $this->Evaluatee->find('list');
+		
 			foreach($form['FormDomain'] as $domain){
 				foreach($form['Question'] as $question){
 					if($domain['domain_id'] == $question['domain_id']){
@@ -115,13 +116,14 @@ class EvaluationsController extends AppController {
 			}
 		
 			$key = $this->data['Form']['object_id'];
-			$this->set(compact('form','key'));
+			$this->set(compact('form','key','evaluatees'));
 		}else{
 			$this->redirect(array('action'=>'../forms/login'));
 		}
 	}
 	
 	function result(){
+		//pr($this->data);exit;
 		if (isset($this->data['Evaluation']['form_id']) && isset($this->data['Evaluation']['evaluatee_id'])) {
 			$form_id= $this->data['Evaluation']['form_id'];
 			$evaluatee_id = $this->data['Evaluation']['evaluatee_id'];
@@ -216,6 +218,7 @@ class EvaluationsController extends AppController {
 		}
 		$this->Evaluation->recursive = 1;
 		$config =  array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy ASC'=>'id');
+		//pr($config);exit;
 		$data = $this->Evaluation->find($type,$config);
 		$data['count']=count($data);
 		return $data;

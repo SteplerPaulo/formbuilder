@@ -38,7 +38,7 @@
 			
 			<dl class="well">	
 				<?php echo $this->Form->input('Evaluation.evaluator',array('class'=>'w100'));?>	
-				<?php echo $this->Form->input('Evaluation.evaluatee',array('class'=>'w100','required'=>'required'));?>
+				<?php echo $this->Form->input('Evaluation.evaluatee_id',array('empty'=>'Select','class'=>'w100','required'=>'required'));?>
 			</dl>
 			
 			<!--DOMAIN FOREACH--->

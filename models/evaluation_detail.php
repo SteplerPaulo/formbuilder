@@ -28,7 +28,7 @@ class EvaluationDetail extends AppModel {
 		)
 	);
 	
-	public function getWeightedMean($form_id,$evaluatee){
+	public function getWeightedMean($form_id,$evaluatee_id){
 		return $this->query("SELECT 
 								text,
 								ROUND(SUM(mul) / SUM(frequency),2) AS weighted_mean,
@@ -62,7 +62,7 @@ class EvaluationDetail extends AppModel {
 										`domains`.`id` = `questions`.`domain_id`
 									  ) 
 								  WHERE `evaluations`.`form_id`= '$form_id'
-								  AND `evaluations`.`evaluatee`= '$evaluatee'
+								  AND `evaluations`.`evaluatee_id`= '$evaluatee_id'
 								  GROUP BY 
 									`evaluation_details`.`question_id`,
 									`evaluation_details`.`option_id`) AS Question 
@@ -70,8 +70,8 @@ class EvaluationDetail extends AppModel {
 			);
 	}
 
-	public function getFrequency($form_id,$evaluatee){
-		$conditions = array('Evaluation.form_id'=>$form_id,'Evaluation.evaluatee'=>$evaluatee);
+	public function getFrequency($form_id,$evaluatee_id){
+		$conditions = array('Evaluation.form_id'=>$form_id,'Evaluation.evaluatee_id'=>$evaluatee_id);
 		
 		$fields = array('EvaluationDetail.question_id','COUNT(*) as frequency','Option.value','COUNT(*) * Option.value as weight','Question.text');
 		$group =array('EvaluationDetail.question_id','EvaluationDetail.option_id');
@@ -79,16 +79,16 @@ class EvaluationDetail extends AppModel {
 		return $this->find('all',compact('conditions','fields','group'));
 	}
 	
-	public function respondent_count($form_id,$evaluatee){
+	public function respondent_count($form_id,$evaluatee_id){
 		return $this->query("SELECT
 			COUNT(*) AS respondent_count
 		FROM
 			`evaluations`
-		WHERE `evaluations`.`form_id`='$form_id' AND `evaluations`.`evaluatee`='$evaluatee'"
+		WHERE `evaluations`.`form_id`='$form_id' AND `evaluations`.`evaluatee_id`='$evaluatee_id'"
 		);
 	}
 
-	public function getMean($form_id,$evaluatee){
+	public function getMean($form_id,$evaluatee_id){
 		return $this->query("SELECT 
 								  SUM(wgt_mean) / COUNT(question_id) AS mean 
 								FROM
@@ -114,7 +114,7 @@ class EvaluationDetail extends AppModel {
 										) 
 									WHERE `options`.`value` > 0 
 											AND `evaluations`.`form_id`= '$form_id'
-											AND `evaluations`.`evaluatee`= '$evaluatee'
+											AND `evaluations`.`evaluatee_id`= '$evaluatee_id'
 									GROUP BY 
 									  `evaluation_details`.`question_id`,
 									  `evaluation_details`.`option_id`) AS f_tbl 

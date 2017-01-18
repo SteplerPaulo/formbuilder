@@ -13,7 +13,8 @@ class KeyHeadersController extends AppController {
 			$this->set('data',$curr_data);
 			
 		}else if($this->RequestHandler->isAjax()){	
-			$curr_data = $this->KeyHeader->find('all');
+			$curr_data = $this->KeyHeader->find('all',array('orderBy DSC'=>'ASC'));
+			
 			
 			foreach($curr_data as $key=>$val){
 				$curr_data[$key]['Key']['count'] = count($val['Key']);
@@ -100,18 +101,23 @@ class KeyHeadersController extends AppController {
 	
 	function login_key_encryption(){
 		$no_of_requested_key = $this->data['no_of_requested_key'];
+		
 		if ($this->RequestHandler->isAjax()) {
 			$loginKey = array();
-	
+			$key= 0;
 			for($ctr=0;$ctr<$no_of_requested_key;$ctr++){
 				do{
 					do{
 						$key = substr(md5(microtime() +rand()),0,11);
+						
 					}while(in_array($key,$loginKey));
-					$hasDuplicate = $this->KeyHeader->Key->find('count',array('conditions'=>array('Key.value'=>$loginKey)));
+					$hasDuplicate = $this->KeyHeader->Key->find('count',array('conditions'=>array('Key.value'=>$loginKey,'Key.status'=>0)));
+					//pr($key);exit;
 				}while($hasDuplicate);
 				array_push($loginKey,$key); 
+				
 			}
+
 		}
 		echo json_encode($loginKey);
 		exit;
@@ -166,7 +172,7 @@ class KeyHeadersController extends AppController {
 			}
 		}
 		$this->KeyHeader->recursive = 1;
-		return $this->KeyHeader->find($type,array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy ASC'=>'id'));
+		return $this->KeyHeader->find($type,array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy DSC'=>'id'));
 	}
 	
 }

@@ -30,8 +30,9 @@
 			<table class="table table table-striped table-bordered  table-condensed RECORD tablesorter canvasTable advancedTable" id="EvaluationTable" model="Evaluation">
 				<thead>
 					<tr>
-						<th class="w5 text-center hide"><a >Form Id</a></th>
-						<th class="w40 text-center"><a >Evaluatee</a></th>
+						<th class="w5 text-center hide"><a >Form ID</a></th>
+						<th class="w5 text-center hide"><a >Evaluatee ID</a></th>
+						<th class="w45 text-center"><a >Evaluatee</a></th>
 						<th class="w50 text-center"><a >Form Title</a></th>
 						<th class="actions w5"><a >Actions</a></th>
 					</tr>
@@ -39,7 +40,8 @@
 				<tbody>
 					<tr>
 						<td class="hide"><span data-field="Form.id" class="form-id"></span></td>
-						<td><span data-field='Evaluation.evaluatee' class="evaluatee"></span></td>
+						<td class="hide"><span data-field='Evaluation.evaluatee_id' class="evaluatee"></span></td>
+						<td><span data-field='Evaluatee.name'></span></td>
 						<td><span data-field='Form.title'></span></td>
 						<td class="actions">
 							<div class="btn-group">
@@ -75,7 +77,7 @@
 <!--FORMACTION-->
 <?php echo $this->Form->create('Evaluation',array('id'=>'EvaluationResult'));?>
 	<?php echo $this->Form->input('Evaluation.form_id',array('id'=>'EvaluationFormId','type'=>'hidden'));?>
-	<?php echo $this->Form->input('Evaluation.evaluatee',array('id'=>'EvaluationEvaluatee','type'=>'hidden'));?>
+	<?php echo $this->Form->input('Evaluation.evaluatee_id',array('id'=>'EvaluationEvaluatee','type'=>'hidden'));?>
 <?php echo $this->Form->end();?>
 
 
