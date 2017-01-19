@@ -24,6 +24,13 @@ class Evaluation extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'SchoolYear' => array(
+			'className' => 'SchoolYear',
+			'foreignKey' => 'school_year_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

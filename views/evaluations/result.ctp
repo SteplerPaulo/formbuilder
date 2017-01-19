@@ -26,8 +26,10 @@
  </div>
 <div class="sub-content-container">
 	<div class="w90 center">	
-		<?php echo '<div class="pull-left"><div><b>Evaluatee Name:</b> '.$evaluatee_id.'</div>'; ?>
+		<?php echo '<div class="pull-left"><div><b>Evaluatee Name:</b> '.$evalutee['Evaluatee']['name'].'</div>'; ?>
 		<?php echo '<div><b>Form Title:</b> '.$form['Form']['title'].'</div>'; ?>
+		<?php echo '<div><b>School Year:</b> '.$school_year.'</div>'; ?>
+		
 		<?php echo '<div><b>Respondent Count:</b> '.$respondent_count['0']['0']['respondent_count'].'</div></div>'; ?>	
 		<?php echo '<div class="pull-right"><div><b>Mean:</b> '.$mean.'</div>'; ?>
 		<?php echo '<div ><b>Spread Index:</b> '.$spread_index.'</div></div><div class="clear"></div>'; ?>

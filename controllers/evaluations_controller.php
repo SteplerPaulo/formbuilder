@@ -3,7 +3,7 @@ class EvaluationsController extends AppController {
 
 	var $name = 'Evaluations';
 	var $helpers = array('Access');
-	var $uses = array('Evaluation','Key','Form','Question','Evaluatee');
+	var $uses = array('Evaluation','Key','Form','Question','Evaluatee','SchoolYear');
 
 	function index() {
 		if ($this->Rest->isActive()) {	
@@ -30,6 +30,9 @@ class EvaluationsController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
+			$sy = $this->SchoolYear->findByIsDefault(1);
+			$this->data['Evaluation']['school_year_id'] = $sy['SchoolYear']['id'];
+			
 			foreach($this->data['EvaluationDetail'] as $key => $detail){
 				if($detail['option_type']=='checkbox' || $detail['option_type']=='radio'){
 					if(!isset($detail['option_id'])){
@@ -124,9 +127,11 @@ class EvaluationsController extends AppController {
 	
 	function result(){
 		//pr($this->data);exit;
-		if (isset($this->data['Evaluation']['form_id']) && isset($this->data['Evaluation']['evaluatee_id'])) {
+		if (isset($this->data['Evaluation']['form_id']) && isset($this->data['Evaluation']['evaluatee_id']) && isset($this->data['Evaluation']['school_year'])) {
 			$form_id= $this->data['Evaluation']['form_id'];
 			$evaluatee_id = $this->data['Evaluation']['evaluatee_id'];
+			$school_year = $this->data['Evaluation']['school_year'];
+			$evalutee =  $this->Evaluatee->findById($evaluatee_id);
 			$form = $this->Form->read(null, $form_id);
 			$respondent_count = $this->Evaluation->EvaluationDetail->respondent_count($form_id,$evaluatee_id);
 			$mean = $this->Evaluation->EvaluationDetail-> getMean($form_id,$evaluatee_id);
@@ -175,7 +180,7 @@ class EvaluationsController extends AppController {
 			$spread_index = ($item_count!=1)?round($index_summation/($item_count-1),2):'1';
 			//END
 			
-			$this->set(compact('evaluatee_id','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
+			$this->set(compact('evalutee','evaluatee_id','school_year','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
 		}else{
 			$this->redirect(array('action'=>'index'));
 		}
@@ -185,7 +190,7 @@ class EvaluationsController extends AppController {
 		$schema = $this->Evaluation->schema();
 		$conditions = array();
 		$fields = array();
-		$group = array('Evaluation.form_id','Evaluation.evaluatee_id');
+		$group = array('Evaluation.form_id','Evaluation.evaluatee_id','Evaluation.school_year_id');
 		$type = 'all';
 		$page = 1;
 		$limit = $this->Rest->limit;
@@ -217,7 +222,7 @@ class EvaluationsController extends AppController {
 			}
 		}
 		$this->Evaluation->recursive = 1;
-		$config =  array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy ASC'=>'id');
+		$config =  array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy DESC'=>'id');
 		//pr($config);exit;
 		$data = $this->Evaluation->find($type,$config);
 		$data['count']=count($data);

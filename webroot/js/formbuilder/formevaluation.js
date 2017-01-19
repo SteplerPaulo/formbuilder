@@ -27,8 +27,10 @@ $(document).ready(function(){
 		var row =$(this).parents('tr:first');
 		var form_id =row.find('.form-id').text();
 		var evaluatee =row.find('.evaluatee').text();
+		var school_year =row.find('.school_year').text();
 		$('#EvaluationFormId').val(form_id);
 		$('#EvaluationEvaluatee').val(evaluatee);
+		$('#EvaluationSchoolYear').val(school_year);
 		
 		
 		$('#EvaluationResult').attr('action',action);
