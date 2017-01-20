@@ -3,7 +3,7 @@ class EvaluationsController extends AppController {
 
 	var $name = 'Evaluations';
 	var $helpers = array('Access');
-	var $uses = array('Evaluation','Key','Form','Question','Evaluatee','SchoolYear');
+	var $uses = array('Evaluation','Key','Form','Question','Evaluatee','SchoolYear','Period','EducLevel');
 
 	function index() {
 		if ($this->Rest->isActive()) {	
@@ -103,6 +103,8 @@ class EvaluationsController extends AppController {
 	}
 
 	function form(){
+		//$educLevels = $this->EducLevel->find('list');
+		//pr($educLevels);exit;
 		if (isset($this->data['Form']['id'])) {
 			$form_id = $this->data['Form']['id'];
 			
@@ -119,7 +121,15 @@ class EvaluationsController extends AppController {
 			}
 		
 			$key = $this->data['Form']['object_id'];
-			$this->set(compact('form','key','evaluatees'));
+			
+			if($this->data['Form']['id'] == 1 || $this->data['Form']['id'] == 10){
+				$periods = $this->Period->find('list',array('conditions'=>array('Period.type'=>2)));
+				$educLevels = $this->EducLevel->find('list');
+				$this->set(compact('form','key','evaluatees','periods','educLevels'));
+			
+			}else{
+				$this->set(compact('form','key','evaluatees'));
+			}
 		}else{
 			$this->redirect(array('action'=>'../forms/login'));
 		}
@@ -127,23 +137,40 @@ class EvaluationsController extends AppController {
 	
 	function result(){
 		//pr($this->data);exit;
-		if (isset($this->data['Evaluation']['form_id']) && isset($this->data['Evaluation']['evaluatee_id']) && isset($this->data['Evaluation']['school_year'])) {
+		if (isset($this->data['Evaluation']['form_id']) && isset($this->data['Evaluation']['evaluatee_id']) && isset($this->data['Evaluation']['school_year_id'])) {
 			$form_id= $this->data['Evaluation']['form_id'];
 			$evaluatee_id = $this->data['Evaluation']['evaluatee_id'];
-			$school_year = $this->data['Evaluation']['school_year'];
-			$evalutee =  $this->Evaluatee->findById($evaluatee_id);
+			$evalutee =  $this->data['Evaluation']['evaluatee'];
+			$school_year_id = $this->data['Evaluation']['school_year_id'];
+			$school_year =  $this->data['Evaluation']['school_year'];
+			$period_id = $this->data['Evaluation']['period_id'];
+			$period = $this->data['Evaluation']['period'];
+			$educ_level_id = $this->data['Evaluation']['educ_level_id'];
+			$educ_level = $this->data['Evaluation']['educ_level'];
 			$form = $this->Form->read(null, $form_id);
-			$respondent_count = $this->Evaluation->EvaluationDetail->respondent_count($form_id,$evaluatee_id);
-			$mean = $this->Evaluation->EvaluationDetail-> getMean($form_id,$evaluatee_id);
+			
+			$respondent_count = $this->Evaluation->EvaluationDetail->respondent_count($form_id,$evaluatee_id,$school_year_id,$period_id,$educ_level_id);
+			//pr($respondent_count);exit;
+			$mean = $this->Evaluation->EvaluationDetail-> getMean($form_id,$evaluatee_id,$school_year_id,$period_id,$educ_level_id);
+			//pr($mean);exit;
 			
 			//SUMMARY
-			$summary = $this->Evaluation->EvaluationDetail->getWeightedMean($form_id,$evaluatee_id);
+			$summary = $this->Evaluation->EvaluationDetail->getWeightedMean($form_id,$evaluatee_id,$school_year_id,$period_id,$educ_level_id);
+			//pr($summary);
 			//END
 			
 			//DIVERGENT QUESTIONS(COMMENT & SUGGESTION)
 			$conditions = array('Evaluation.form_id'=>$form_id,'Evaluation.evaluatee_id'=>$evaluatee_id,
-								'EvaluationDetail.answer Not'=>'Null','Question.option_type_id'=>3
-							);
+								'Evaluation.school_year_id'=>$school_year_id,
+								'EvaluationDetail.answer Not'=>'Null','Question.option_type_id'=>3,
+								array('OR' => array(
+									array('Evaluation.period_id' => $period_id),
+									array('Evaluation.period_id'=> Null)
+								)),
+								array('OR' => array(
+									array('Evaluation.educ_level_id' => $educ_level_id),
+									array('Evaluation.educ_level_id'=> Null)
+								)));
 			$fields	= array('Question.id','Question.text','EvaluationDetail.answer',
 							'COUNT(EvaluationDetail.id) AS count'
 							);
@@ -151,6 +178,8 @@ class EvaluationsController extends AppController {
 													'conditions'=>$conditions,'fields'=>$fields,
 													'group'=>array('EvaluationDetail.answer','EvaluationDetail.question_id')
 												));		
+			//pr($divergent_answer);exit;									
+												
 			$divergent_question  = array();
 			foreach($divergent_answer as $key => $answer){
 				$divergent_question[$answer['Question']['text']][$key]= $answer;
@@ -158,7 +187,8 @@ class EvaluationsController extends AppController {
 			//END
 			
 			//DISTRIBUTION & SPREAD INDEX
-			$frequency = $this->Evaluation->EvaluationDetail-> getFrequency($form_id,$evaluatee_id);
+			$frequency = $this->Evaluation->EvaluationDetail-> getFrequency($form_id,$evaluatee_id,$school_year_id,$period_id,$educ_level_id);
+			//pr($frequency);exit;
 			$distribution = array();
 			$index_summation = 0.00;
 			$item_count = count($summary);
@@ -174,13 +204,17 @@ class EvaluationsController extends AppController {
 					}
 				}
 				$weighted_mean = round($s[0]['weighted_mean'],2);
+				//pr($weighted_mean);
 				$index = pow(($weighted_mean-$mean), 2);
+				//pr($weighted_mean-$mean);
 				$index_summation += $index;
 			}
+			//pr($index_summation);
+			//pr($item_count);
 			$spread_index = ($item_count!=1)?round($index_summation/($item_count-1),2):'1';
 			//END
 			
-			$this->set(compact('evalutee','evaluatee_id','school_year','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
+			$this->set(compact('evalutee','period','educ_level','school_year','form','respondent_count','summary','divergent_question','distribution','mean','spread_index'));
 		}else{
 			$this->redirect(array('action'=>'index'));
 		}
@@ -190,7 +224,7 @@ class EvaluationsController extends AppController {
 		$schema = $this->Evaluation->schema();
 		$conditions = array();
 		$fields = array();
-		$group = array('Evaluation.form_id','Evaluation.evaluatee_id','Evaluation.school_year_id');
+		$group = array('Evaluation.form_id','Evaluation.evaluatee_id','Evaluation.school_year_id','Evaluation.period_id','Evaluation.educ_level_id');
 		$type = 'all';
 		$page = 1;
 		$limit = $this->Rest->limit;

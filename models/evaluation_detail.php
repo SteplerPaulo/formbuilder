@@ -28,7 +28,8 @@ class EvaluationDetail extends AppModel {
 		)
 	);
 	
-	public function getWeightedMean($form_id,$evaluatee_id){
+	public function getWeightedMean($form_id,$evaluatee_id,$school_year_id,$period_id,$educ_level_id){
+		//pr($period_id);exit;
 		return $this->query("SELECT 
 								text,
 								ROUND(SUM(mul) / SUM(frequency),2) AS weighted_mean,
@@ -63,6 +64,9 @@ class EvaluationDetail extends AppModel {
 									  ) 
 								  WHERE `evaluations`.`form_id`= '$form_id'
 								  AND `evaluations`.`evaluatee_id`= '$evaluatee_id'
+								  AND `evaluations`.`school_year_id`= '$school_year_id'
+								  AND (`evaluations`.`period_id` = @period_id OR @period_id IS NULL)
+								  AND (`evaluations`.`educ_level_id` = @educ_level_id OR @educ_level_id IS NULL)
 								  GROUP BY 
 									`evaluation_details`.`question_id`,
 									`evaluation_details`.`option_id`) AS Question 
@@ -70,8 +74,19 @@ class EvaluationDetail extends AppModel {
 			);
 	}
 
-	public function getFrequency($form_id,$evaluatee_id){
-		$conditions = array('Evaluation.form_id'=>$form_id,'Evaluation.evaluatee_id'=>$evaluatee_id);
+	public function getFrequency($form_id,$evaluatee_id,$school_year_id,$period_id,$educ_level_id){
+		$conditions = array('Evaluation.form_id'=>$form_id,
+							'Evaluation.evaluatee_id'=>$evaluatee_id,
+							'Evaluation.school_year_id'=>$school_year_id,
+							array('OR' => array(
+								array('Evaluation.period_id' => $period_id),
+								array('Evaluation.period_id'=> Null)
+							)),
+							array('OR' => array(
+								array('Evaluation.educ_level_id' => $educ_level_id),
+								array('Evaluation.educ_level_id'=> Null)
+							)));
+			
 		
 		$fields = array('EvaluationDetail.question_id','COUNT(*) as frequency','Option.value','COUNT(*) * Option.value as weight','Question.text');
 		$group =array('EvaluationDetail.question_id','EvaluationDetail.option_id');
@@ -79,16 +94,22 @@ class EvaluationDetail extends AppModel {
 		return $this->find('all',compact('conditions','fields','group'));
 	}
 	
-	public function respondent_count($form_id,$evaluatee_id){
+	public function respondent_count($form_id,$evaluatee_id,$school_year_id,$period_id,$educ_level_id){
 		return $this->query("SELECT
 			COUNT(*) AS respondent_count
 		FROM
 			`evaluations`
-		WHERE `evaluations`.`form_id`='$form_id' AND `evaluations`.`evaluatee_id`='$evaluatee_id'"
+		WHERE `evaluations`.`form_id`='$form_id'
+			AND `evaluations`.`evaluatee_id`='$evaluatee_id'
+			AND `evaluations`.`school_year_id`='$school_year_id'
+			AND (`evaluations`.`period_id` = @period_id OR @period_id IS NULL)
+			AND (`evaluations`.`educ_level_id` = @educ_level_id OR @educ_level_id IS NULL)
+		
+		"
 		);
 	}
 
-	public function getMean($form_id,$evaluatee_id){
+	public function getMean($form_id,$evaluatee_id,$school_year_id,$period_id,$educ_level_id){
 		return $this->query("SELECT 
 								  SUM(wgt_mean) / COUNT(question_id) AS mean 
 								FROM
@@ -115,6 +136,9 @@ class EvaluationDetail extends AppModel {
 									WHERE `options`.`value` > 0 
 											AND `evaluations`.`form_id`= '$form_id'
 											AND `evaluations`.`evaluatee_id`= '$evaluatee_id'
+											AND `evaluations`.`school_year_id`= '$school_year_id'
+											AND (`evaluations`.`period_id` = @period_id OR @period_id IS NULL)
+											AND (`evaluations`.`educ_level_id` = @educ_level_id OR @educ_level_id IS NULL)
 									GROUP BY 
 									  `evaluation_details`.`question_id`,
 									  `evaluation_details`.`option_id`) AS f_tbl 

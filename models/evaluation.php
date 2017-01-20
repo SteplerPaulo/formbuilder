@@ -31,6 +31,20 @@ class Evaluation extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Period' => array(
+			'className' => 'Period',
+			'foreignKey' => 'period_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'EducLevel' => array(
+			'className' => 'EducLevel',
+			'foreignKey' => 'educ_level_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 
