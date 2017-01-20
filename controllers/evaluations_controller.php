@@ -4,7 +4,13 @@ class EvaluationsController extends AppController {
 	var $name = 'Evaluations';
 	var $helpers = array('Access');
 	var $uses = array('Evaluation','Key','Form','Question','Evaluatee','SchoolYear','Period','EducLevel');
-
+	
+	function beforeFilter(){ 
+		parent::beforeFilter();
+		$this->Auth->userModel = 'User'; 
+		$this->Auth->allow(array('form'));	
+    } 
+	
 	function index() {
 		if ($this->Rest->isActive()) {	
 			$curr_data = $this->api($_GET);

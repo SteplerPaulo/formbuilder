@@ -5,6 +5,12 @@ class FormsController extends AppController {
 	var $helpers = array('Access');
 	var $uses = array('Form','Question','Key');
 
+	function beforeFilter(){ 
+		parent::beforeFilter();
+		$this->Auth->userModel = 'User'; 
+		$this->Auth->allow(array('login'));	
+    } 
+	
 	function index() {
 		if ($this->Rest->isActive()) {	
 			$data = $this->api($_GET);
