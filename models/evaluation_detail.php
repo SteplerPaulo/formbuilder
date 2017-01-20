@@ -65,8 +65,8 @@ class EvaluationDetail extends AppModel {
 								  WHERE `evaluations`.`form_id`= '$form_id'
 								  AND `evaluations`.`evaluatee_id`= '$evaluatee_id'
 								  AND `evaluations`.`school_year_id`= '$school_year_id'
-								  AND (`evaluations`.`period_id` = @period_id OR @period_id IS NULL)
-								  AND (`evaluations`.`educ_level_id` = @educ_level_id OR @educ_level_id IS NULL)
+								  AND (`evaluations`.`period_id` = $period_id OR $period_id IS NULL)
+								  AND (`evaluations`.`educ_level_id` = $educ_level_id OR $educ_level_id IS NULL)
 								  GROUP BY 
 									`evaluation_details`.`question_id`,
 									`evaluation_details`.`option_id`) AS Question 
@@ -95,6 +95,7 @@ class EvaluationDetail extends AppModel {
 	}
 	
 	public function respondent_count($form_id,$evaluatee_id,$school_year_id,$period_id,$educ_level_id){
+		//pr($educ_level_id);exit;
 		return $this->query("SELECT
 			COUNT(*) AS respondent_count
 		FROM
@@ -102,10 +103,8 @@ class EvaluationDetail extends AppModel {
 		WHERE `evaluations`.`form_id`='$form_id'
 			AND `evaluations`.`evaluatee_id`='$evaluatee_id'
 			AND `evaluations`.`school_year_id`='$school_year_id'
-			AND (`evaluations`.`period_id` = @period_id OR @period_id IS NULL)
-			AND (`evaluations`.`educ_level_id` = @educ_level_id OR @educ_level_id IS NULL)
-		
-		"
+			AND (`evaluations`.`period_id` = $period_id OR $period_id IS NULL)
+			AND (`evaluations`.`educ_level_id` = $educ_level_id OR $educ_level_id IS NULL)"
 		);
 	}
 
@@ -137,8 +136,8 @@ class EvaluationDetail extends AppModel {
 											AND `evaluations`.`form_id`= '$form_id'
 											AND `evaluations`.`evaluatee_id`= '$evaluatee_id'
 											AND `evaluations`.`school_year_id`= '$school_year_id'
-											AND (`evaluations`.`period_id` = @period_id OR @period_id IS NULL)
-											AND (`evaluations`.`educ_level_id` = @educ_level_id OR @educ_level_id IS NULL)
+											AND (`evaluations`.`period_id` = $period_id OR $period_id IS NULL)
+											AND (`evaluations`.`educ_level_id` = $educ_level_id OR $educ_level_id IS NULL)
 									GROUP BY 
 									  `evaluation_details`.`question_id`,
 									  `evaluation_details`.`option_id`) AS f_tbl 
