@@ -1,7 +1,12 @@
 $(document).ready(function(){
 	//FORM SUBMIT EVENT
 	$(document).on('click','#EvaluationFormSubmitButton',function(){
-		if($('#EvaluationEvaluatee').val() !=''){
+		
+		if(	$('#EvaluationEvaluateeId').val() !='' &&
+			$('#EvaluationPeriodId').val() !='' &&
+			$('#EvaluationEducLevelId').val() !=''
+		){
+			
 			$('#EvaluationForm').ajaxSubmit({
 				dataType:'json',
 				success:function(formReturn){
