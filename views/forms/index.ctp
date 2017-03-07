@@ -38,9 +38,9 @@
 				<tr>
 					<th class="w5 text-center"><a >Id</a></th>
 					<th class="w30 text-center"><a >Title</a></th>
-					<th class="w45 text-center"><a >Description</a></th>
-					<th class="w5 text-center"><a >Questions Count</a></th>
-					<th class="w10 text-center"><a >Type</a></th>
+					<th class="w45 text-center hide"><a >Description</a></th>
+					<th class="w5 text-center hide"><a >Questions Count</a></th>
+					<th class="w10 text-center hide"><a >Type</a></th>
 					<th class="actions w5"><a >Actions</a></th>
 				</tr>
 			</thead>
@@ -48,9 +48,9 @@
 				<tr>
 					<td><span data-field="Form.id" class="form-id"></span></td>
 					<td><span data-field='Form.title'></span></td>
-					<td><span data-field='Form.description'></span></td>
-					<td class="text-center"><span data-field='QuestionCount.count'></span></td>
-					<td><span data-field='FormType.name'></span></td>
+					<td class="hide"><span data-field='Form.description'></span></td>
+					<td class="text-center hide"><span data-field='QuestionCount.count'></span></td>
+					<td class="hide><span data-field='FormType.name'></span></td>
 					<td class="actions">
 						<div class="btn-group">
 							<div class="btn-group btn-center">
