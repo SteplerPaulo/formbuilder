@@ -12,11 +12,9 @@ class EvaluationsController extends AppController {
     } 
 	
 	function index() {
-		if ($this->Rest->isActive()) {	
+		if ($this->Rest->isActive()) {
 			$curr_data = $this->api($_GET);
 			$this->set('data',$curr_data);
-			
-			//pr($curr_data);exit;
 		}
 		else if($this->RequestHandler->isAjax()){	
 			$data = $this->Evaluation->find('all');
@@ -229,6 +227,7 @@ class EvaluationsController extends AppController {
 	}
 	
 	protected function api($params){
+	
 		$schema = $this->Evaluation->schema();
 		$conditions = array();
 		$fields = array();
@@ -236,6 +235,7 @@ class EvaluationsController extends AppController {
 		$type = 'all';
 		$page = 1;
 		$limit = $this->Rest->limit;
+		
 		foreach($params as $key => $val){
 			switch($key){
 				case 'fields':
@@ -263,16 +263,23 @@ class EvaluationsController extends AppController {
 				break;
 			}
 		}
-		$this->Evaluation->recursive = 1;
-		$config =  array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy DESC'=>'id');
-		//pr($config);exit;
-		$data = $this->Evaluation->find($type,$config);
-		//$data['count']=count($data);
 		
-		//echo json_encode($data);exit;
+
+		$this->Evaluation->recursive = 0;
+		$config =  array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy DESC'=>'id');
+		$data = $this->Evaluation->find($type,$config);
+
+		$result = $this->Evaluation->find('all',array('group'=>$group));
+		$data['count'] = count($result);
 		return $data;
 	}
 	
+	function test(){
+		$group = array('Evaluation.form_id','Evaluation.evaluatee_id','Evaluation.school_year_id','Evaluation.period_id','Evaluation.educ_level_id');
+		$this->Evaluation->recursive = 0;
+		$result = $this->Evaluation->find('all',array('group'=>$group));
+		pr(count($result));
+		pr($result);exit;
+	}
 
 }
-
