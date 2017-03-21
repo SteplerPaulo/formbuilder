@@ -36,10 +36,10 @@
 						<th class="hide"><a >Period ID</a></th>
 						<th class="hide"><a >Educ Level ID</a></th>
 						<th class="w10 text-center"><a >School Year</a></th>
+						<th class="w35 text-center"><a >Form Title</a></th>
 						<th class="w10 text-center"><a >Period</a></th>
 						<th class="w10 text-center"><a >Educ Level</a></th>
 						<th class="w30 text-center"><a >Evaluatee</a></th>
-						<th class="w35 text-center"><a >Form Title</a></th>
 						<th class="actions w5"><a >Actions</a></th>
 					</tr>
 				</thead>
@@ -51,17 +51,17 @@
 						<td class="hide"><span data-field='Period.id' class="period_id"></span></td>
 						<td class="hide"><span data-field='EducLevel.id' class="educ_level_id"></span></td>
 						<td><span data-field='SchoolYear.name' class="school_year"></span></td>
+						<td><span data-field='Form.title'></span></td>
 						<td><span data-field='Period.name' class="period"></span></td>
 						<td><span data-field='EducLevel.name' class="educ_level"></span></td>
 						<td><span data-field='Evaluatee.name' class="evaluatee"></span></td>
-						<td><span data-field='Form.title'></span></td>
 						<td class="actions">
 							<div class="btn-group">
 								<div class="btn-group btn-center">
 									<button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i><span class="caret"></span></button>
 									<ul class="dropdown-menu pull-right">
 										<li>
-											<a action="/formbuilder/evaluations/result" class="fe-result">
+											<a target="_blank" action="/formbuilder/evaluations/result" class="fe-result">
 												<i class="icon-eye-open"></i> View Result
 											</a>
 										</li>
