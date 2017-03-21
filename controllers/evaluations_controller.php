@@ -128,7 +128,7 @@ class EvaluationsController extends AppController {
 		
 			$key = $this->data['Form']['object_id'];
 			
-			if($this->data['Form']['id'] == 1 || $this->data['Form']['id'] == 10 || $this->data['Form']['id'] == 13 ){
+			if($this->data['Form']['id'] == 1 || $this->data['Form']['id'] == 10 || $this->data['Form']['id'] == 13 || $this->data['Form']['id'] == 15){
 				$periods = $this->Period->find('list',array('conditions'=>array('Period.type'=>2)));
 				$educLevels = $this->EducLevel->find('list');
 				$this->set(compact('form','key','evaluatees','periods','educLevels'));

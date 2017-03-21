@@ -40,7 +40,7 @@
 				<?php echo $this->Form->input('Evaluation.evaluator',array('class'=>'w100'));?>	
 				<?php echo $this->Form->input('Evaluation.evaluatee_id',array('empty'=>'Select','class'=>'w100','required'=>'required'));?>
 				
-				<?php if($this->data['Form']['id'] == 1 || $this->data['Form']['id'] == 10 || $this->data['Form']['id'] == 13):?>
+				<?php if($this->data['Form']['id'] == 1 || $this->data['Form']['id'] == 10 || $this->data['Form']['id'] == 13|| $this->data['Form']['id'] == 15):?>
 					<div class="row">
 						<div class="span3">
 							<?php echo $this->Form->input('Evaluation.period_id',array('empty'=>'Select','class'=>'w100','required'=>'required','div'=>false));?>
