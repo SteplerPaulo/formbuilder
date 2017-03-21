@@ -15,6 +15,8 @@ class EvaluationsController extends AppController {
 		if ($this->Rest->isActive()) {	
 			$curr_data = $this->api($_GET);
 			$this->set('data',$curr_data);
+			
+			//pr($curr_data);exit;
 		}
 		else if($this->RequestHandler->isAjax()){	
 			$data = $this->Evaluation->find('all');
@@ -265,7 +267,9 @@ class EvaluationsController extends AppController {
 		$config =  array('conditions'=>$conditions,'group'=>$group,'fields'=>$fields,'offset'=>($page-1)*$limit,'limit'=>$limit,'orderBy DESC'=>'id');
 		//pr($config);exit;
 		$data = $this->Evaluation->find($type,$config);
-		$data['count']=count($data);
+		//$data['count']=count($data);
+		
+		//echo json_encode($data);exit;
 		return $data;
 	}
 	
