@@ -152,10 +152,10 @@
 				
 			// Count table rows that match the search term
 			tableRows = table.find('tbody tr:not(.searchhide)').length;
-			
+						
 			// Calculate the number of pages
 			pages = Math.ceil(tableRows / settings.rowsPerPage);
-				
+		
 			// Remove old footer
 			table.find("tfoot").remove();
 			
@@ -196,7 +196,7 @@
 					var meta = settings.meta||{'prev':null,'next':null,'page':null,'count':null,'last':null};
 					blockNavigation += '<ul>';
 					if(pages>settings.maxDisplay||settings.meta.prev){
-						blockNavigation += '<li class="page-prev" ><a href="javascript:void();" data-prev="'+meta.prev+'"><i class="icon icon-chevron-left"></i></a></li>';
+						blockNavigation += '<li class="page-prev" ><a href="javascript:void(0);" data-prev="'+meta.prev+'"><i class="icon icon-chevron-left"></i></a></li>';
 					}
 					for(var i = 0;i < pages; i++){
 						var elem_class =  ['page-number'];
@@ -207,10 +207,10 @@
 						
 								elem_class.push('hide');
 						}
-						blockNavigation += '<li class="'+elem_class.join(" ")+'" ><a href="javascript:void();">' + (i+1) + '</a></li>';
+						blockNavigation += '<li class="'+elem_class.join(" ")+'" ><a href="javascript:void(0);">' + (i+1) + '</a></li>';
 					}
 					if(pages>settings.maxDisplay||settings.meta.next){
-						blockNavigation += '<li class="page-next" data-next="'+meta.next+'" ><a href="javascript:void();"><i class="icon icon-chevron-right"></i></a></li>';
+						blockNavigation += '<li class="page-next" data-next="'+meta.next+'" ><a href="javascript:void(0);"><i class="icon icon-chevron-right"></i></a></li>';
 					}
 					blockNavigation += '</ul>';
 				}else{
@@ -312,7 +312,7 @@
 							sort_mrkup +='<span id="sortdeschandle' + sorthandle + '" class="sortshowhandle"><i class="icon icon-chevron-up icon-mini"></i></span>';
 							sort_mrkup +='<span id="sorttypehandle" class="allsorttypehandle" style="display:none">';
 							sort_mrkup +='</span></div>';
-						$(this).html('<a href="javascript:void();" id="sorthandle' + sorthandle + '">' + $(this).text() + '</a>'+sort_mrkup);
+						$(this).html('<a href="javascript:void(0);" id="sorthandle' + sorthandle + '">' + $(this).text() + '</a>'+sort_mrkup);
 						$(this).bind('click', sortTable);
 						sorthandle++;
 					});
