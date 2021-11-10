@@ -4,22 +4,14 @@ class KeyHeadersController extends AppController {
 	var $name = 'KeyHeaders';
 	var $helpers = array('Access');
 
-	function index() {
-		if ($this->Rest->isActive()) {	
-			$curr_data = $this->api($_GET);
-			foreach($curr_data as $key=>$val){
-				$curr_data[$key]['Key']['count'] = count($val['Key']);
-			}
-			$this->set('data',$curr_data);
-			
-		}else if($this->RequestHandler->isAjax()){	
+	function index() { 
+		if($this->RequestHandler->isAjax()){	
 			$curr_data = $this->KeyHeader->find('all',array('orderBy DSC'=>'ASC'));
-			
-			
 			foreach($curr_data as $key=>$val){
+				$curr_data[$key]['Key'] = ['count'];
 				$curr_data[$key]['Key']['count'] = count($val['Key']);
 			}
-			echo json_encode($data);
+			echo json_encode($curr_data);
 			exit;
 		}else{
 			$this->KeyHeader->recursive = 0;
