@@ -6,11 +6,7 @@ class QuizzesController extends AppController {
 	var $uses = array('Quiz','Form');
 
 	function index() {
-		if ($this->Rest->isActive()) {	
-			$curr_data = $this->api($_GET);
-			$this->set('data',$curr_data);
-		}
-		else if($this->RequestHandler->isAjax()){	
+		if($this->RequestHandler->isAjax()){	
 			$data = $this->Quiz->find('all');
 			echo json_encode($data);
 			exit;
