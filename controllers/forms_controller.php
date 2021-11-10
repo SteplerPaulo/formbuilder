@@ -12,6 +12,7 @@ class FormsController extends AppController {
     } 
 	
 	function index() {
+		/*
 		if ($this->Rest->isActive()) {	
 			$data = $this->api($_GET);
 			foreach($data as $key=>$val){
@@ -19,7 +20,8 @@ class FormsController extends AppController {
 			}
 			$this->set('data',$data);
 		}
-		else if($this->RequestHandler->isAjax()){	
+		else */
+		if($this->RequestHandler->isAjax()){	
 			$data = $this->Form->find('all');
 			
 			foreach($data as $key=>$val){
