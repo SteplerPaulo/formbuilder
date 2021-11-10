@@ -36,20 +36,28 @@
 		<h4 class="text-center lead"><?php echo $SCHOOL['name']; ?></h4>
 		<div class="school_logo">
 			<?php 
-			// echo $this->Html->image('trademarks/school_logo.png?a', array('alt' =>  $SCHOOL['name'])); 
+			echo $this->Html->image('trademarks/school_logo.png', array('alt' =>  $SCHOOL['name'])); 
 			?>               
 		</div>
-		<!--<h4 class="text-left">Core Values</h4>
-			<p class=" text-left">
+		<h4 class="text-left">Core Values</h4>
+		<p class=" text-left">
 			Integrity. Leadership. Excellence. Accountability. Discipline.
-			</p>-->
+		</p>
 	</div>
 	<div class="span6 offset1 " id="register-user">
 		<form class="form-horizontal">
 			<div class="control-group">
 				<div class="controls">
-					<h4 class=" text-right lead " id="product">Form Builder</h4>
-					<p class="lead  text-right" id="tag-line">....</p>				 
+					<h4 class="lead " id="product">Form Builder</h4>
+					<p class="lead  text-right" id="tag-line">
+						<ul>
+							<li>Exams</li>
+							<li>Quizzes</li>
+							<li>Evaluation</li>
+							<li>Election</li>
+						</ul>
+						in one software solutions
+					</p>				 
 				</div>
 			</div>
 		</form>
